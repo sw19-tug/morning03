@@ -5,7 +5,5 @@ import android.graphics.PointF;
 import java.util.List;
 
 public abstract class Tools {
-    public boolean draw(List<PointF> points){
-        return true;
-    }
+    public abstract boolean draw(List<PointF> points);
 }
