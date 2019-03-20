@@ -32,7 +32,7 @@ public class PathTest {
 
     @Test
     public void testInvalidPath() {
-        List<PointF> points = new ArrayList<>();         
+        List<PointF> points = new ArrayList<>();
         points.add(new PointF(10, 10));
 
         PathTool tool = new PathTool();
