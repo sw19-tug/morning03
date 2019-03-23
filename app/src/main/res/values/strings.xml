@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">paint</string>
+    <string name="app_name">Paint</string>
+    <string name="toolChooserButton">Choose Drawing Tool</string>
 </resources>
