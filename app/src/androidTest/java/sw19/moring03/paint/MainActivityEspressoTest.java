@@ -26,8 +26,18 @@ public class MainActivityEspressoTest {
 
     @Test
     public void testToolChooserBottomSheetVisibility() {
-        // after the user clicked on the tool chooser-button a new bottom-sheet menu must appear
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.toolChooserMenu)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testToolChooserMenuButtons() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawPointButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawLineButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawFillButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawEraserButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawCircleButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawRectangleButton)).check(matches(isDisplayed()));
     }
 }
