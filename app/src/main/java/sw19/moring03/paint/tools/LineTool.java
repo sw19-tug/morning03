@@ -1,23 +1,21 @@
 package sw19.moring03.paint.tools;
 
-import android.graphics.PointF;
 
-import java.util.List;
-
-public class LineTool {
+import android.graphics.Canvas;
+import android.graphics.Paint;
 
 
-    public boolean draw(List<PointF> points)
-    {
+public class LineTool extends Tools {
 
-        if(points.size() != 4)
-        {
+
+    public boolean draw(Canvas canvas, Paint paint) {
+
+        if (points != null && points.size() != 4) {
             return false;
         }
-        else
-        {
-            return true;
 
+        for (int i = 1; i < points.size(); i++) {
+            canvas.drawLine(points.get(i - 1).x, points.get(i - 1).y, points.get(i).x, points.get(i).y, paint);
         }
 
     }
