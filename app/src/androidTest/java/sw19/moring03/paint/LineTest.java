@@ -46,7 +46,7 @@ public class LineTest {
         @Test
         public void testDrawLine()
         {
-            int expectedLines = 4;
+            int expectedLines = 1;
 
             LineTool tools = new LineTool();
 
@@ -102,8 +102,6 @@ public class LineTest {
 
             List<PointF> lineList2 = new ArrayList<>();
 
-            lineList2.add(new PointF(30, 30));
-            lineList2.add(new PointF(40, 40));
             lineList2.add(new PointF(50, 50));
             lineList2.add(new PointF(60, 60));
 
@@ -123,10 +121,10 @@ public class LineTest {
 
                 List<PointF> lineList2 = new ArrayList<>();
 
-                lineList2.add(new PointF(20, 20));
-                lineList2.add(new PointF(35, 35));
-                lineList2.add(new PointF(45, 45));
-                lineList2.add(new PointF(55, 55));
+            lineList2.add(new PointF(30, 30));
+            lineList2.add(new PointF(40, 40));
+            lineList2.add(new PointF(50, 50));
+            lineList2.add(new PointF(60, 60));
 
                 assertArrayEquals(lineList.toArray(), lineList2.toArray());
         }

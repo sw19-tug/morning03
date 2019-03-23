@@ -1,22 +1,39 @@
 package sw19.moring03.paint.tools;
 
-
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PointF;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class LineTool extends Tools {
+    public LineTool() {
+        points = new ArrayList<>();
+    }
 
-
+    @Override
     public boolean draw(Canvas canvas, Paint paint) {
 
-        if (points != null && points.size() != 4) {
+        float x_start = points.get(0).x;
+        float y_start = points.get(0).y;
+
+        float x_end = points.get(points.size() - 1).x;
+        float y_end = points.get(points.size() - 1).y;
+
+        canvas.drawLine(x_start, y_start, x_end, y_end, paint);
+
+        return true;
+    }
+
+    public boolean draw(List<PointF> points)
+    {
+        if(points.size() != 4)
+        {
             return false;
         }
 
-        for (int i = 1; i < points.size(); i++) {
-            canvas.drawLine(points.get(i - 1).x, points.get(i - 1).y, points.get(i).x, points.get(i).y, paint);
-        }
-
+        return true;
     }
 }
