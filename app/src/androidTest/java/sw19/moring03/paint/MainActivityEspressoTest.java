@@ -36,7 +36,7 @@ public class MainActivityEspressoTest {
         onView(withId(R.id.drawPointButton)).check(matches(isDisplayed()));
         onView(withId(R.id.drawLineButton)).check(matches(isDisplayed()));
         onView(withId(R.id.drawFillButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.drawEraserButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.eraserButton)).check(matches(isDisplayed()));
         onView(withId(R.id.drawCircleButton)).check(matches(isDisplayed()));
         onView(withId(R.id.drawRectangleButton)).check(matches(isDisplayed()));
     }
