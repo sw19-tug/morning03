@@ -13,7 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.PointTool;
 
-import static org.junit.Assert.assertTrue;
+import static junit.framework.TestCase.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PointToolTest {
@@ -31,7 +31,6 @@ public class PointToolTest {
         PointTool ptool = new PointTool();
         ptool.addPoint(new PointF(5, 5));
         ptool.addPoint(new PointF(30, 30));
-
         assertTrue(ptool.draw(canvas, paint));
     }
 
@@ -49,7 +48,7 @@ public class PointToolTest {
 
         tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedPints)).drawLine(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(expectedPints)).drawPoint(Mockito.anyFloat(),
+                Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 }

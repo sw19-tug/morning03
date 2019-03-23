@@ -13,10 +13,13 @@ public class PointTool extends Tools {
         if(points != null && points.size() < 1)
             return false;
 
-        float xCoord = points.get(0).x;
-        float yCoord = points.get(0).y;
+        for(int i=0; i< points.size(); i++)
+        {
+            float xCoord = points.get(i).x;
+            float yCoord = points.get(i).y;
+            canvas.drawPoint(xCoord, yCoord, paint);
+        }
 
-        canvas.drawPoint(xCoord, yCoord, paint);
         return true;
     }
 }
