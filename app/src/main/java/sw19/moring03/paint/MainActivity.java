@@ -38,4 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void showToolChooserMenu(MenuItem item) {
+        ToolChooserMenuBottomSheetDialog toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
+        toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
+    }
 }
