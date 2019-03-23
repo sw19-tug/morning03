@@ -12,7 +12,7 @@ public class PointTool extends Tools {
     public boolean draw(Canvas canvas, Paint paint) {
         if(points != null && points.size() < 1)
             return false;
-        
+
         float xCoord = points.get(0).x;
         float yCoord = points.get(0).y;
 
