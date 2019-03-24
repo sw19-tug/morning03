@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+check.dependsOn('checkstyle')
 
 android {
     compileSdkVersion 28
@@ -16,6 +18,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -25,4 +30,24 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+task checkstyle(type: Checkstyle) {
+    group = 'Code Quality'
+
+    configFile = file('/config/checkstyle.xml')
+
+    ignoreFailures true
+    showViolations true
+
+    source '.'
+    include '**/*.java', '**/*.xml', '**/*.gradle'
+    exclude '**/gen/**', '**/build/**', 'libraryProjects/**', '**/.idea/**'
+
+    classpath = files()
+
+    reports {
+        xml.enabled = true
+        xml.destination "build/reports/checkstyle.xml"
+    }
 }
