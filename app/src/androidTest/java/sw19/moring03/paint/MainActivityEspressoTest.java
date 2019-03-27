@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.junit.Assert.assertEquals;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -39,5 +40,29 @@ public class MainActivityEspressoTest {
         onView(withId(R.id.eraserButton)).check(matches(isDisplayed()));
         onView(withId(R.id.drawCircleButton)).check(matches(isDisplayed()));
         onView(withId(R.id.drawRectangleButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testPointToolSelected() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawPointButton)).perform(click());
+
+        assertEquals(activityTestRule.getActivity().getChosenTool(), Tool.DRAW_POINT);
+    }
+
+    @Test
+    public void testLineToolSelected() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawLineButton)).perform(click());
+
+        assertEquals(activityTestRule.getActivity().getChosenTool(), Tool.DRAW_LINE);
+    }
+
+    @Test
+    public void testPathToolSelected() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawPathButton)).perform(click());
+
+        assertEquals(activityTestRule.getActivity().getChosenTool(), Tool.DRAW_PATH);
     }
 }
