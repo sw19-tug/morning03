@@ -40,7 +40,7 @@ public class LineTest {
             tool.addPoint(new PointF(60, 60));
             tool.addPoint(new PointF(90, 90));
 
-            assertTrue(tool.draw(canvas, paint));
+            Assert.assertTrue(tool.draw(canvas, paint));
         }
 
         @Test
@@ -81,7 +81,7 @@ public class LineTest {
                 tool.addPoint(expectedPoints.get(3));
 
                 List<PointF> points = tool.getPoints();
-                assertArrayEquals(expectedPoints.toArray(), points.toArray());
+                Assert.assertArrayEquals(expectedPoints.toArray(), points.toArray());
 
         }
 
@@ -105,7 +105,7 @@ public class LineTest {
             lineList2.add(new PointF(50, 50));
             lineList2.add(new PointF(60, 60));
 
-            assertArrayEquals(lineList.toArray(), lineList2.toArray());
+            Assert.assertArrayEquals(lineList.toArray(), lineList2.toArray());
 
         }
 
@@ -126,6 +126,6 @@ public class LineTest {
             lineList2.add(new PointF(50, 50));
             lineList2.add(new PointF(60, 60));
 
-                assertArrayEquals(lineList.toArray(), lineList2.toArray());
+                Assert.assertArrayEquals(lineList.toArray(), lineList2.toArray());
         }
 }
