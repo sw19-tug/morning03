@@ -7,4 +7,5 @@
     <string name="eraserButton">Eraser</string>
     <string name="drawCircleButton">Circle</string>
     <string name="drawRectangleButton">Rectangle</string>
+    <string name="path">Path</string>
 </resources>

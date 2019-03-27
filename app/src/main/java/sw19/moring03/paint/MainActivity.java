@@ -5,8 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Tool chosenTool = Tool.DRAW_POINT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +48,39 @@ public class MainActivity extends AppCompatActivity {
     public void showToolChooserMenu(MenuItem item) {
         ToolChooserMenuBottomSheetDialog toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
         toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
+    }
+
+    public Tool getChosenTool() {
+        return chosenTool;
+    }
+
+    public void setChosenTool(Tool chosenTool) {
+        this.chosenTool = chosenTool;
+    }
+
+    public void chooseNewTool(View view) {
+        switch (view.getId()) {
+            case R.id.drawPointButton:
+                setChosenTool(Tool.DRAW_POINT);
+                break;
+            case R.id.drawLineButton:
+                setChosenTool(Tool.DRAW_LINE);
+                break;
+            case R.id.drawFillButton:
+                setChosenTool(Tool.FILL);
+                break;
+            case R.id.drawRectangleButton:
+                setChosenTool(Tool.DRAW_RECTANGLE);
+                break;
+            case R.id.eraserButton:
+                setChosenTool(Tool.ERASER);
+                break;
+            case R.id.drawCircleButton:
+                setChosenTool(Tool.DRAW_CIRCLE);
+                break;
+            case R.id.drawPathButton:
+                setChosenTool(Tool.DRAW_PATH);
+                break;
+        }
     }
 }
