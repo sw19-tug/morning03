@@ -2,13 +2,10 @@ package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PathTool extends Tools {
-
 
     public PathTool() {
         points = new ArrayList<>();
@@ -17,7 +14,7 @@ public class PathTool extends Tools {
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
 
-        if(points != null && points.size() < 2) {
+        if(points == null || points.size() < 2) {
             return false;
         }
 
