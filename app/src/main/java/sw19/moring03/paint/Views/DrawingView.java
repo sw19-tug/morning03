@@ -62,7 +62,6 @@ public class DrawingView extends View {
                 if(tool instanceof PointTool) {
                     tool.draw(canvas, movePaint);
                 }
-                /// TODO: insert other tools(line, path)
             }
         }
     }
