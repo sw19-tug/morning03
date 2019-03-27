@@ -26,14 +26,4 @@ public class LineTool extends Tools {
 
         return true;
     }
-
-    public boolean draw(List<PointF> points)
-    {
-        if(points.size() != 4)
-        {
-            return false;
-        }
-
-        return true;
-    }
 }

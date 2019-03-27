@@ -1,7 +1,5 @@
 package sw19.moring03.paint.Views;
 
-import java.util.ArrayList;
-import java.util.List;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,8 +9,11 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import sw19.moring03.paint.tools.Tools;
+import java.util.ArrayList;
+import java.util.List;
+
 import sw19.moring03.paint.tools.LineTool;
+import sw19.moring03.paint.tools.Tools;
 
 public class DrawingView extends View {
     private Paint mPaint;

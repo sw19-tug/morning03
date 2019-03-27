@@ -17,11 +17,6 @@ public abstract class Tools {
         points.add(point);
     }
 
-    public void removePoint(PointF point)
-    {
-        points.remove(point);
-    }
-
     public List<PointF> getPoints()
     {
         return points;
