@@ -41,6 +41,12 @@ public class MainActivityEspressoTest {
     }
 
     @Test
+    public void testColorChooserBottomSheetVisibility() {
+        onView(withId(R.id.colorChooserButton)).perform(click());
+        onView(withId(R.id.colorChooserMenu)).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void testToolChooserMenuButtons() {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).check(matches(isDisplayed()));
