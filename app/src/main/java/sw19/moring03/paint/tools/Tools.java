@@ -3,8 +3,6 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Paint;
-import android.graphics.Canvas;
 
 import java.util.List;
 

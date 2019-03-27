@@ -17,6 +17,8 @@ import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
+import sw19.moring03.paint.tools.PathTool;
+
 
 public class DrawingView extends View {
     private Paint mPaint;
@@ -92,6 +94,7 @@ public class DrawingView extends View {
                 objectsToPaint.add(new LineTool());
                 break;
             case DRAW_PATH:
+                objectsToPaint.add(new PathTool());
                 break;
             case DRAW_POINT:
                 objectsToPaint.add(new PointTool());
