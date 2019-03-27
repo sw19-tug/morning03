@@ -6,7 +6,12 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 
 public class PointTool extends Tools {
-    public PointTool() {points = new ArrayList<>();};
+    public PointTool() {points = new ArrayList<>();}
+
+
+    public int getPointCount() {
+        return points.size();
+    }
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {

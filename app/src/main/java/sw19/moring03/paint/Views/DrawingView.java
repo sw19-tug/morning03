@@ -60,6 +60,9 @@ public class DrawingView extends View {
             for(Tools tool : objectsToPaint) {
 
                 if(tool instanceof PointTool) {
+                    if(((PointTool) tool).getPointCount() > 0) {
+                        return;
+                    }
                     tool.draw(canvas, movePaint);
                 }
             }
