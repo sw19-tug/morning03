@@ -12,6 +12,7 @@ import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
 
     @Override
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.toolChooserButton) {
-            ToolChooserMenuBottomSheetDialog toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
+            toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
             toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
             return true;
         }
@@ -79,5 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(Tool.DRAW_PATH);
                 break;
         }
+
+        toolChooserMenu.dismiss();
     }
 }
