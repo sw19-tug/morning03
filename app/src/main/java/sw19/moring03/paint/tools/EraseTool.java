@@ -5,7 +5,7 @@ import android.graphics.Paint;
 
 import java.util.ArrayList;
 
-public class EraseTool extends PathTool {
+public class EraseTool extends Tools {
 
     public EraseTool() {
         points = new ArrayList<>();
@@ -19,7 +19,8 @@ public class EraseTool extends PathTool {
         }
 
         Paint erasePaint = paint;
-        erasePaint.setColor(backgroundColor);
+
+        //erasePaint.setColor(backgroundColor);
         for(int i = 1; i < points.size(); i++) {
             canvas.drawLine(points.get(i-1).x, points.get(i-1).y, points.get(i).x, points.get(i).y, erasePaint);
         }
