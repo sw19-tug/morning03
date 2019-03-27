@@ -39,15 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.toolChooserButton) {
+            ToolChooserMenuBottomSheetDialog toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
+            toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showToolChooserMenu(MenuItem item) {
-        ToolChooserMenuBottomSheetDialog toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
-        toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
     }
 
     public Tool getChosenTool() {

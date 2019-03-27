@@ -8,7 +8,6 @@
         android:orderInCategory="100"
         android:icon="@drawable/ic_brush_black_24dp"
         android:title="@string/toolChooserButton"
-        android:onClick="showToolChooserMenu"
         app:showAsAction="ifRoom" />
 
 </menu>
