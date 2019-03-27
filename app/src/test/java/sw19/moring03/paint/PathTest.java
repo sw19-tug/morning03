@@ -26,7 +26,7 @@ public class PathTest {
     private Paint paint;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         canvas = new Canvas();
         paint = new Paint();
     }

@@ -43,9 +43,6 @@ public class DrawingView extends View {
                 if(tool instanceof PathTool) {
                     tool.draw(canvas, mPaint);
                 }
-                else {
-                    //TODO: same with point,line in other issues
-                }
             }
         }
     }
@@ -75,7 +72,6 @@ public class DrawingView extends View {
     }
 
     private void createUsedTool() {
-        //TODO: depending on chosen Tool in toolbar create correct object
         objectsToPaint.add(new PathTool());
     }
 
