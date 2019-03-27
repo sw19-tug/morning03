@@ -12,21 +12,25 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import sw19.moring03.paint.MainActivity;
+import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.Tools;
+import sw19.moring03.paint.utils.Tool;
 
 public class DrawingView extends View {
+    private Paint mPaint;
     private List<Tools> objectsToPaint;
-    private Paint movePaint;
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
 
-        movePaint = new Paint();
-        movePaint.setAntiAlias(true);
-        movePaint.setColor(Color.BLACK);
-        movePaint.setStyle(Paint.Style.STROKE);
-        movePaint.setStrokeWidth(4.0f);
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setColor(Color.BLACK);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(4.0f);
+
         objectsToPaint = new ArrayList<>();
     }
 
@@ -58,10 +62,7 @@ public class DrawingView extends View {
 
         if(objectsToPaint != null) {
             for(Tools tool : objectsToPaint) {
-
-                if(tool instanceof PointTool) {
-                    tool.draw(canvas, movePaint);
-                }
+                tool.draw(canvas, mPaint);
             }
         }
     }
@@ -69,14 +70,36 @@ public class DrawingView extends View {
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
 
-        if(((PointTool)objectsToPaint.get(objectsToPaint.size()-1)).getPointCount() > 0)
+        Tools currentTool = objectsToPaint.get(objectsToPaint.size()-1);
+
+        if((currentTool instanceof PointTool) && ((PointTool)currentTool).getPointCount() > 0)
         {
             return;
         }
+
         objectsToPaint.get(objectsToPaint.size()-1).addPoint(point);
     }
 
     private void selectTool() {
-        objectsToPaint.add(new PointTool());
+        Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
+
+        switch (chosenTool) {
+            case FILL:
+                break;
+            case ERASER:
+                break;
+            case DRAW_LINE:
+                objectsToPaint.add(new LineTool());
+                break;
+            case DRAW_PATH:
+                break;
+            case DRAW_POINT:
+                objectsToPaint.add(new PointTool());
+                break;
+            case DRAW_CIRCLE:
+                break;
+            case DRAW_RECTANGLE:
+                break;
+        }
     }
 }
