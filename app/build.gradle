@@ -30,6 +30,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    checkstyle 'com.puppycrawl.tools:checkstyle:8.2'
 }
 
 task checkstyle(type: Checkstyle) {
@@ -50,4 +51,9 @@ task checkstyle(type: Checkstyle) {
         xml.enabled = true
         xml.destination "build/reports/checkstyle.xml"
     }
+}
+
+checkstyle {
+    toolVersion = "8.2"
+    configFile file("/config/checkstyle.xml'")
 }
