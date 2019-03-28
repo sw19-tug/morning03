@@ -72,14 +72,16 @@ public class DrawingView extends View {
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
 
-        Tools currentTool = objectsToPaint.get(objectsToPaint.size()-1);
+        if(objectsToPaint.size() != 0) {
+            Tools currentTool = objectsToPaint.get(objectsToPaint.size()-1);
 
-        if((currentTool instanceof PointTool) && ((PointTool)currentTool).getPointCount() > 0)
-        {
-            return;
+            if((currentTool instanceof PointTool) && ((PointTool)currentTool).getPointCount() > 0)
+            {
+                return;
+            }
+
+            objectsToPaint.get(objectsToPaint.size()-1).addPoint(point);
         }
-
-        objectsToPaint.get(objectsToPaint.size()-1).addPoint(point);
     }
 
     private void selectTool() {

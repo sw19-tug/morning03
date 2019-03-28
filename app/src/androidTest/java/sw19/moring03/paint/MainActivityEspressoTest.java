@@ -42,8 +42,7 @@ public class MainActivityEspressoTest {
         onView(withId(R.id.drawLineButton)).check(matches(isDisplayed()));
         onView(withId(R.id.drawFillButton)).check(matches(isDisplayed()));
         onView(withId(R.id.eraserButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.drawCircleButton)).check(matches(isDisplayed()));
-        onView(withId(R.id.drawRectangleButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawShapesButton)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -86,19 +85,6 @@ public class MainActivityEspressoTest {
     }
 
     @Test
-    public void testCircleToolSelected() {
-        onView(withId(R.id.toolChooserButton)).perform(click());
-        onView(withId(R.id.drawCircleButton)).perform(click());
-
-        assertEquals(activityTestRule.getActivity().getChosenTool(), Tool.DRAW_CIRCLE);
-        try {
-            onView(withId(R.id.toolChooserMenu)).check(matches(isDisplayed()));
-            fail("Expected exception not thrown");
-        } catch (NoMatchingViewException ignored) {
-        }
-    }
-
-    @Test
     public void testFillToolSelected() {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawFillButton)).perform(click());
@@ -125,9 +111,9 @@ public class MainActivityEspressoTest {
     }
 
     @Test
-    public void testRectangleToolSelected() {
+    public void testShapesToolSelected() {
         onView(withId(R.id.toolChooserButton)).perform(click());
-        onView(withId(R.id.drawRectangleButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
 
         assertEquals(activityTestRule.getActivity().getChosenTool(), Tool.DRAW_RECTANGLE);
         try {
