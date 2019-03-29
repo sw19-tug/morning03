@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
+import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
