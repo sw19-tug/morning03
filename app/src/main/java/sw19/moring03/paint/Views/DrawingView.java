@@ -15,6 +15,7 @@ import java.util.List;
 import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.tools.CircleTool;
 import sw19.moring03.paint.tools.LineTool;
+import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.Tools;
@@ -108,6 +109,9 @@ public class DrawingView extends View {
                 break;
             case DRAW_RECTANGLE:
                 objectsToPaint.add(new RectangleTool());
+                break;
+            case DRAW_OVAL:
+                objectsToPaint.add(new OvalTool());
                 break;
         }
     }
