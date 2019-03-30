@@ -17,7 +17,8 @@ import java.util.List;
 
 import sw19.moring03.paint.tools.LineTool;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -44,6 +45,14 @@ public class LineTest {
     }
 
     @Test
+    public void testInvalidLine() {
+        LineTool tool = new LineTool();
+        tool.addPoint(new PointF(10, 10));
+
+        assertFalse(tool.draw(canvas, paint));
+    }
+
+    @Test
     public void testDrawLine() {
         int expectedLines = 1;
 
@@ -64,23 +73,21 @@ public class LineTest {
 
     @Test
     public void testAddPoints() {
-        List<PointF> expectedPoints = new ArrayList<>();
+        List<PointF> addedPoints = new ArrayList<>();
 
-        expectedPoints.add(new PointF(10, 10));
-        expectedPoints.add(new PointF(20, 20));
-        expectedPoints.add(new PointF(30, 30));
-        expectedPoints.add(new PointF(30, 30));
+        addedPoints.add(new PointF(10, 10));
+        addedPoints.add(new PointF(20, 20));
+        addedPoints.add(new PointF(30, 30));
+        addedPoints.add(new PointF(40, 40));
 
         LineTool tool = new LineTool();
+        for (int i = 0; i < addedPoints.size(); i++) {
+            tool.addPoint(addedPoints.get(i));
+        }
 
-        tool.addPoint(expectedPoints.get(0));
-        tool.addPoint(expectedPoints.get(1));
-        tool.addPoint(expectedPoints.get(2));
-        tool.addPoint(expectedPoints.get(3));
-
-        List<PointF> points = tool.getPoints();
-        assertArrayEquals(expectedPoints.toArray(), points.toArray());
-
+        assertEquals(2, tool.getPoints().size());
+        assertEquals((int)addedPoints.get(0).x, (int)tool.getPoints().get(0).x);
+        assertEquals((int)addedPoints.get(3).x, (int)tool.getPoints().get(1).x);
     }
 
 }

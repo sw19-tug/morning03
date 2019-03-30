@@ -2,6 +2,7 @@ package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 
 import java.util.ArrayList;
 
@@ -26,5 +27,13 @@ public class PointTool extends Tools {
         }
 
         return true;
+    }
+
+    public void addPoint(PointF point) {
+        if (getPointCount() > 0) {
+            return;
+        }
+
+        super.addPoint(point);
     }
 }

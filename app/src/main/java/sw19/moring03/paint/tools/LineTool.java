@@ -2,11 +2,9 @@ package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LineTool extends Tools {
     public LineTool() {
@@ -15,6 +13,9 @@ public class LineTool extends Tools {
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
+        if (points.size() != 2) {
+            return false;
+        }
 
         float x_start = points.get(0).x;
         float y_start = points.get(0).y;
@@ -25,5 +26,13 @@ public class LineTool extends Tools {
         canvas.drawLine(x_start, y_start, x_end, y_end, paint);
 
         return true;
+    }
+
+    @Override
+    public void addPoint(PointF point) {
+        if (points.size() == 2)
+            points.remove(1);
+
+        super.addPoint(point);
     }
 }
