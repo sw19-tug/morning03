@@ -36,7 +36,7 @@ dependencies {
 task checkstyle(type: Checkstyle) {
     group = 'Code Quality'
 
-    configFile = file('/config/checkstyle.xml')
+    configFile = rootProject.file('/app/config/checkstyle.xml')
 
     ignoreFailures true
     showViolations true
