@@ -21,8 +21,6 @@ public class ShapeChooserFragment extends DialogFragment {
         builder.setTitle(R.string.shapeChooserFragment)
                 .setItems(R.array.shape_type, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
                         String[] types = getResources().getStringArray(R.array.shape_type);
 
                         MainActivity activity = (MainActivity) getContext();
@@ -39,7 +37,15 @@ public class ShapeChooserFragment extends DialogFragment {
                                 break;
                         }
                     }
-                });
+                }
+                )
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dialog.dismiss();
+                            }
+                        }
+                );
         return builder.create();
 
     }
