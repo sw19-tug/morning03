@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.MainActivity;
+import sw19.moring03.paint.tools.CircleTool;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
@@ -103,6 +104,7 @@ public class DrawingView extends View {
                 objectsToPaint.add(new PointTool());
                 break;
             case DRAW_CIRCLE:
+                objectsToPaint.add(new CircleTool());
                 break;
             case DRAW_RECTANGLE:
                 objectsToPaint.add(new RectangleTool());
