@@ -1,17 +1,158 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/colorChooserMenu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <Button
-        android:id="@+id/drawRectangleButton"
-        android:text="@string/drawRectangleButton"
-        android:layout_width="match_parent"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="chooseNewTool"
-        />
+        android:layout_width="match_parent">
 
+        <Button
+            android:id="@+id/whiteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/yellowButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/yellow"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/orangeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/orange"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/redButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/red"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <Button
+            android:id="@+id/magentaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/magenta"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/purpleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/purple"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/turkisButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/turkis"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/lightBlueButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/lightBlue"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <Button
+            android:id="@+id/darkBlueButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/darkBlue"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/lightGreenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/lightGreen"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/darkGreenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/darkGreen"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+
+        <Button
+            android:id="@+id/blackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:background="@color/black"
+            android:onClick="chooseNewColor"
+            style="?android:attr/buttonBarButtonStyle"
+            />
+    </LinearLayout>
 </LinearLayout>
