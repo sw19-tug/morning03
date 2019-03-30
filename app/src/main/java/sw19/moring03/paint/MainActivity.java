@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(Tool.FILL);
                 break;
             case R.id.drawShapesButton:
-                setChosenTool(Tool.DRAW_RECTANGLE);
                 FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
                 fragment.show(manager,"ShapeChooserFragment");
