@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Paint</string>
+    <string name="toolIcon">Tool Icon</string>
     <string name="toolChooserButton">Choose Drawing Tool</string>
     <string name="shapeChooserFragment">Choose Shape</string>
     <string name="drawPointButton">Point</string>
