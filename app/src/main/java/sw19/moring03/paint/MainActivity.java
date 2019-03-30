@@ -12,6 +12,7 @@ import sw19.moring03.paint.utils.Tool;
 public class MainActivity extends AppCompatActivity {
 
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
+    private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
 
     @Override
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.toolChooserButton) {
             toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
             toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
+            return true;
+        }
+
+        if (id == R.id.colorChooserButton) {
+            colorChooserMenu = ColorChooserMenuBottomSheetDialog.newInstance();
+            colorChooserMenu.show(getSupportFragmentManager(), "colorChooserMenu");
             return true;
         }
 

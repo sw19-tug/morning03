@@ -58,6 +58,23 @@ public class MainActivityEspressoTest {
     }
 
     @Test
+    public void testColorChooserMenuButtons() {
+        onView(withId(R.id.colorChooserButton)).perform(click());
+        onView(withId(R.id.whiteButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.blackButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.yellowButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.orangeButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.redButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.lightBlueButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.darkBlueButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.turkisButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.lightGreenButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.darkGreenButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.purpleButton)).check(matches(isDisplayed()));
+        onView(withId(R.id.magentaButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void testPointToolSelected() {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
