@@ -8,12 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import sw19.moring03.paint.tools.CircleTool;
 import sw19.moring03.paint.tools.RectangleTool;
 
 import static junit.framework.TestCase.assertEquals;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RectangleTest {
+public class CircleTest {
     private Canvas canvas;
     private Paint paint;
 
@@ -32,30 +32,28 @@ public class RectangleTest {
     }
 
     @Test
-    public void testRectangleSimple() {
-        RectangleTool tool = new RectangleTool();
+    public void testCircleSimple() {
+        CircleTool tool = new CircleTool();
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
-        tool.addPoint(new PointF(60, 60));
-        tool.addPoint(new PointF(90, 90));
 
         assertTrue(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testInvalidRectangle() {
-        RectangleTool tool = new RectangleTool();
+    public void testInvalidCircle() {
+        CircleTool tool = new CircleTool();
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testDrawRectangle() {
-        int expectedRectangles = 1;
+    public void testDrawCircle() {
+        int expectedCircles = 1;
 
-        RectangleTool tool = new RectangleTool();
+        CircleTool tool = new CircleTool();
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
@@ -66,8 +64,8 @@ public class RectangleTest {
 
         tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedRectangles)).drawRect(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(expectedCircles)).drawCircle(Mockito.anyFloat(),
+                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 
     @Test
@@ -79,7 +77,7 @@ public class RectangleTest {
         addedPoints.add(new PointF(30, 30));
         addedPoints.add(new PointF(40, 40));
 
-        RectangleTool tool = new RectangleTool();
+        CircleTool tool = new CircleTool();
 
         for (int i = 0; i < addedPoints.size(); i++) {
             tool.addPoint(addedPoints.get(i));
