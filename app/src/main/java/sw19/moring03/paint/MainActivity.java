@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
+    private Color chosenColor = Color.BLACK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,5 +85,56 @@ public class MainActivity extends AppCompatActivity {
         }
 
         toolChooserMenu.dismiss();
+    }
+
+    public Color getChosenColor() {
+        return chosenColor;
+    }
+
+    public void setChosenColor(Color chosenColor) {
+        this.chosenColor = chosenColor;
+    }
+
+    public void chooseNewColor(View view) {
+        switch (view.getId()) {
+            case R.id.whiteButton:
+                setChosenColor(Color.WHITE);
+                break;
+            case R.id.yellowButton:
+                setChosenColor(Color.YELLOW);
+                break;
+            case R.id.orangeButton:
+                setChosenColor(Color.ORANGE);
+                break;
+            case R.id.redButton:
+                setChosenColor(Color.RED);
+                break;
+            case R.id.purpleButton:
+                setChosenColor(Color.PURPLE);
+                break;
+            case R.id.magentaButton:
+                setChosenColor(Color.MAGENTA);
+                break;
+            case R.id.turkisButton:
+                setChosenColor(Color.TURKIS);
+                break;
+            case R.id.lightBlueButton:
+                setChosenColor(Color.LIGHT_BLUE);
+                break;
+            case R.id.lightGreenButton:
+                setChosenColor(Color.LIGHT_GREEN);
+                break;
+            case R.id.darkBlueButton:
+                setChosenColor(Color.DARK_BLUE);
+                break;
+            case R.id.darkGreenButton:
+                setChosenColor(Color.DARK_GREEN);
+                break;
+            case R.id.blackButton:
+                setChosenColor(Color.BLACK);
+                break;
+        }
+
+        colorChooserMenu.dismiss();
     }
 }

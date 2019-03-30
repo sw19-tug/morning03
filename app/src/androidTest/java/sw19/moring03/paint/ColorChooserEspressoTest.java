@@ -10,6 +10,8 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
+import sw19.moring03.paint.utils.Color;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -33,7 +35,8 @@ public class ColorChooserEspressoTest {
                 {R.id.colorChooserButton, R.id.lightBlueButton, Color.LIGHT_BLUE, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.lightGreenButton, Color.LIGHT_GREEN, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.darkBlueButton, Color.DARK_BLUE, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.darkGreenButton, Color.DARK_GREEN, R.id.colorChooserMenu}
+                {R.id.colorChooserButton, R.id.darkGreenButton, Color.DARK_GREEN, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.blackButton, Color.BLACK, R.id.colorChooserMenu}
         });
     }
 
