@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/toolIcon"
+                android:tint="@color/white"
                 app:srcCompat="@drawable/ic_pen_icon"
                 tools:ignore="VectorDrawableCompat"
                 tools:layout_width="wrap_content"
