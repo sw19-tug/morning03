@@ -32,8 +32,6 @@ public class ToolChooserMenuBottomSheetDialog extends BottomSheetDialogFragment 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
                 strokeWidth = progresValue;
-                System.out.println(strokeWidth);
-
                 ((MainActivity)getContext()).setStrokeWidth(strokeWidth);
                 
             }
