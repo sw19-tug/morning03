@@ -1,13 +1,16 @@
 package sw19.moring03.paint;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import sw19.moring03.paint.utils.Color;
+import sw19.moring03.paint.Fragments.ShapeChooserFragment;
+import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,14 +73,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawFillButton:
                 setChosenTool(Tool.FILL);
                 break;
-            case R.id.drawRectangleButton:
-                setChosenTool(Tool.DRAW_RECTANGLE);
+            case R.id.drawShapesButton:
+                FragmentManager manager = getSupportFragmentManager();
+                ShapeChooserFragment fragment = new ShapeChooserFragment();
+                fragment.show(manager,"ShapeChooserFragment");
                 break;
             case R.id.eraserButton:
                 setChosenTool(Tool.ERASER);
-                break;
-            case R.id.drawCircleButton:
-                setChosenTool(Tool.DRAW_CIRCLE);
                 break;
             case R.id.drawPathButton:
                 setChosenTool(Tool.DRAW_PATH);

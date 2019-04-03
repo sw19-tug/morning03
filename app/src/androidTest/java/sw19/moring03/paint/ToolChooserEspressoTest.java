@@ -1,5 +1,4 @@
 package sw19.moring03.paint;
-import android.graphics.Color;
 import android.support.annotation.IdRes;
 import android.support.test.rule.ActivityTestRule;
 
@@ -29,9 +28,7 @@ public class ToolChooserEspressoTest {
                 {R.id.toolChooserButton, R.id.drawLineButton, Tool.DRAW_LINE, R.id.toolChooserMenu},
                 {R.id.toolChooserButton, R.id.drawPathButton, Tool.DRAW_PATH, R.id.toolChooserMenu},
                 {R.id.toolChooserButton, R.id.drawFillButton, Tool.FILL, R.id.toolChooserMenu},
-                {R.id.toolChooserButton, R.id.eraserButton, Tool.ERASER, R.id.toolChooserMenu},
-                {R.id.toolChooserButton, R.id.drawCircleButton, Tool.DRAW_CIRCLE, R.id.toolChooserMenu},
-                {R.id.toolChooserButton, R.id.drawRectangleButton, Tool.DRAW_RECTANGLE, R.id.toolChooserMenu}
+                {R.id.toolChooserButton, R.id.eraserButton, Tool.ERASER, R.id.toolChooserMenu}
         });
     }
 
