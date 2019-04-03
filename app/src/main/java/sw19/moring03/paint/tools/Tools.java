@@ -9,6 +9,7 @@ import java.util.List;
 public abstract class Tools {
 
     protected List<PointF> points;
+    protected int color;
 
     public abstract boolean draw(Canvas canvas, Paint paint);
 
@@ -18,5 +19,9 @@ public abstract class Tools {
 
     public List<PointF> getPoints() {
         return points;
+    }
+
+    public int getColor() {
+        return color;
     }
 }
