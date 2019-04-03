@@ -6,8 +6,10 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 
 public class PointTool extends Tools {
-    public PointTool() {points = new ArrayList<>();}
-
+    public PointTool(int strkW) {
+        points = new ArrayList<>();
+        strokeWidth = strkW;
+    }
 
     public int getPointCount() {
         return points.size();
@@ -24,7 +26,6 @@ public class PointTool extends Tools {
             float yCoord = points.get(i).y;
             canvas.drawPoint(xCoord, yCoord, paint);
         }
-
         return true;
     }
 }

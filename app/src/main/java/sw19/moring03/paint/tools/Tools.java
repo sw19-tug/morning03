@@ -7,7 +7,7 @@ import android.graphics.PointF;
 import java.util.List;
 
 public abstract class Tools {
-
+    protected int strokeWidth = 5;
     protected List<PointF> points;
 
     public abstract boolean draw(Canvas canvas, Paint paint);
@@ -19,4 +19,9 @@ public abstract class Tools {
     public List<PointF> getPoints() {
         return points;
     }
+
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
 }

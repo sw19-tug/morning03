@@ -1,7 +1,7 @@
 package sw19.moring03.paint;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +13,17 @@ public class MainActivity extends AppCompatActivity {
 
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
+    private int strokeWidth = 5;
+
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
             toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
             toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
             return true;
-        }
-
+        } 
         return super.onOptionsItemSelected(item);
     }
 
@@ -74,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(Tool.DRAW_PATH);
                 break;
         }
-
         toolChooserMenu.dismiss();
     }
 }

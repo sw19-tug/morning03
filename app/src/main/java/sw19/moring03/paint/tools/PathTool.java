@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 public class PathTool extends Tools {
 
-    public PathTool() {
+    public PathTool(int strkW)
+    {
         points = new ArrayList<>();
+        strokeWidth = strkW;
     }
 
     @Override

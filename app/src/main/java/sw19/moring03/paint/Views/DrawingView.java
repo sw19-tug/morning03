@@ -14,11 +14,10 @@ import java.util.List;
 
 import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.tools.LineTool;
+import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
-import sw19.moring03.paint.tools.PathTool;
-
 
 public class DrawingView extends View {
     private Paint mPaint;
@@ -26,13 +25,11 @@ public class DrawingView extends View {
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
-
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(4.0f);
-
+        mPaint.setStrokeWidth(((MainActivity)getContext()).getStrokeWidth());
         objectsToPaint = new ArrayList<>();
     }
 
@@ -57,18 +54,18 @@ public class DrawingView extends View {
         }
         return true;
     }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         if(objectsToPaint != null) {
             for(Tools tool : objectsToPaint) {
+                mPaint.setStrokeWidth(tool.getStrokeWidth());
                 tool.draw(canvas, mPaint);
             }
         }
-    }
 
+    }
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
 
@@ -78,12 +75,14 @@ public class DrawingView extends View {
         {
             return;
         }
-
         objectsToPaint.get(objectsToPaint.size()-1).addPoint(point);
     }
 
     private void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
+
+
+        int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
 
         switch (chosenTool) {
             case FILL:
@@ -91,13 +90,13 @@ public class DrawingView extends View {
             case ERASER:
                 break;
             case DRAW_LINE:
-                objectsToPaint.add(new LineTool());
+                objectsToPaint.add(new LineTool(strokeWidth));
                 break;
             case DRAW_PATH:
-                objectsToPaint.add(new PathTool());
+                objectsToPaint.add(new PathTool(strokeWidth));
                 break;
             case DRAW_POINT:
-                objectsToPaint.add(new PointTool());
+                objectsToPaint.add(new PointTool(strokeWidth));
                 break;
             case DRAW_CIRCLE:
                 break;
