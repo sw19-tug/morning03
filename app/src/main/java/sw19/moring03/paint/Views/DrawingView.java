@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.MainActivity;
+import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.PointTool;
@@ -93,6 +94,7 @@ public class DrawingView extends View {
             case FILL:
                 break;
             case ERASER:
+                objectsToPaint.add(new EraseTool());
                 break;
             case DRAW_LINE:
                 objectsToPaint.add(new LineTool());
