@@ -136,4 +136,9 @@ public class MainActivityEspressoTest {
         } catch (NoMatchingViewException ignored) {
         }
     }
+    @Test
+    public void testVisibilityOfStrokeSeekbar() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.strokeWidth).check(matches(isDisplayed())));
+    }
 }
