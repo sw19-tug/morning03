@@ -1,6 +1,7 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
@@ -12,6 +13,15 @@ public class CircleTool extends Tools {
 
     public CircleTool() {
         points = new ArrayList<>();
+        strokeWidth = 5;
+        color = Color.BLACK;
+        radius = 0;
+    }
+
+    public CircleTool(int col, int strkW) {
+        points = new ArrayList<>();
+        strokeWidth = strkW;
+        color = col;
         radius = 0;
     }
 

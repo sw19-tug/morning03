@@ -1,6 +1,7 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
@@ -9,6 +10,12 @@ public class EraseTool extends Tools {
 
     public EraseTool() {
         points = new ArrayList<>();
+        strokeWidth = 5;
+    }
+
+    public EraseTool(int strkW) {
+        points = new ArrayList<>();
+        strokeWidth = strkW;
     }
 
     @Override

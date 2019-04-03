@@ -1,13 +1,22 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
 import java.util.ArrayList;
 
 public class PointTool extends Tools {
-    public PointTool(int strkW) {
+
+    public PointTool() {
+        color = Color.BLACK;
+        points = new ArrayList<>();
+        strokeWidth = 5;
+    }
+
+    public PointTool(int col, int strkW) {
+        color = col;
         points = new ArrayList<>();
         strokeWidth = strkW;
     }

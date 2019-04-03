@@ -1,15 +1,22 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
 
 public class PathTool extends Tools {
 
-    public PathTool(int strkW)
-    {
+    public PathTool() {
+        color = Color.BLACK;
         points = new ArrayList<>();
+        strokeWidth = 5;
+    }
+
+    public PathTool(int col, int strkW) {
+        points = new ArrayList<>();
+        color = col;
         strokeWidth = strkW;
     }
 

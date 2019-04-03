@@ -1,14 +1,22 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
 
+import android.graphics.PointF;
 import java.util.ArrayList;
 
 public class LineTool extends Tools {
-    public LineTool(int strkW) {
 
+    public LineTool() {
+        color = Color.BLACK;
+        points = new ArrayList<>();
+        strokeWidth = 5;
+    }
+
+    public LineTool(int col, int strkW) {
+        color = col;
         points = new ArrayList<>();
         strokeWidth = strkW;
     }

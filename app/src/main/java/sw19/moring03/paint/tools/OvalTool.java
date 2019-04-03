@@ -1,6 +1,7 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Build;
@@ -11,6 +12,14 @@ import java.util.ArrayList;
 public class OvalTool extends Tools {
     public OvalTool() {
         points = new ArrayList<>();
+        strokeWidth = 5;
+        color = Color.BLACK;
+    }
+
+    public OvalTool(int col, int strkW) {
+        points = new ArrayList<>();
+        strokeWidth = strkW;
+        color = col;
     }
 
     @Override

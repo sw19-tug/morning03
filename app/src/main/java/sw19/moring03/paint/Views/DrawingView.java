@@ -49,7 +49,6 @@ public class DrawingView extends View {
                 invalidate();
                 break;
             case MotionEvent.ACTION_DOWN:
-                selectColor();
                 selectTool();
                 addPoint(xCoord, yCoord);
                 invalidate();
@@ -69,6 +68,7 @@ public class DrawingView extends View {
         if(objectsToPaint != null) {
             for(Tools tool : objectsToPaint) {
                 mPaint.setStrokeWidth(tool.getStrokeWidth());
+                mPaint.setColor(tool.getColor());
                 tool.draw(canvas, mPaint);
             }
         }
@@ -86,76 +86,76 @@ public class DrawingView extends View {
     private void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
 
-
         int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
 
         switch (chosenTool) {
             case FILL:
                 break;
             case ERASER:
-                objectsToPaint.add(new EraseTool());
+                objectsToPaint.add(new EraseTool(strokeWidth));
                 break;
             case DRAW_LINE:
-                objectsToPaint.add(new LineTool(strokeWidth));
+                objectsToPaint.add(new LineTool(getColor(), strokeWidth));
                 break;
             case DRAW_PATH:
-                objectsToPaint.add(new PathTool(strokeWidth));
+                objectsToPaint.add(new PathTool(getColor(), strokeWidth));
                 break;
             case DRAW_POINT:
-                objectsToPaint.add(new PointTool(strokeWidth));
+                objectsToPaint.add(new PointTool(getColor(), strokeWidth));
                 break;
             case DRAW_CIRCLE:
-                objectsToPaint.add(new CircleTool());
+                objectsToPaint.add(new CircleTool(getColor(), strokeWidth));
                 break;
             case DRAW_RECTANGLE:
-                objectsToPaint.add(new RectangleTool());
+                objectsToPaint.add(new RectangleTool(getColor(), strokeWidth));
                 break;
             case DRAW_OVAL:
-                objectsToPaint.add(new OvalTool());
+                objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
                 break;
         }
     }
 
-    private void selectColor() {
+    private int getColor() {
         Color chosenColor = ((MainActivity) getContext()).getChosenColor();
-
+        int color = 0;
         switch (chosenColor) {
             case WHITE:
-                mPaint.setColor(getResources().getColor(R.color.white));
+                color = getResources().getColor(R.color.white);
                 break;
             case YELLOW:
-                mPaint.setColor(getResources().getColor(R.color.yellow));
+                color = getResources().getColor(R.color.yellow);
                 break;
             case ORANGE:
-                mPaint.setColor(getResources().getColor(R.color.orange));
+                color = getResources().getColor(R.color.orange);
                 break;
             case RED:
-                mPaint.setColor(getResources().getColor(R.color.red));
+                color = getResources().getColor(R.color.red);
                 break;
             case PURPLE:
-                mPaint.setColor(getResources().getColor(R.color.purple));
+                color = getResources().getColor(R.color.purple);
                 break;
             case MAGENTA:
-                mPaint.setColor(getResources().getColor(R.color.magenta));
+                color = getResources().getColor(R.color.magenta);
                 break;
             case TURKIS:
-                mPaint.setColor(getResources().getColor(R.color.turkis));
+                color = getResources().getColor(R.color.turkis);
                 break;
             case LIGHT_GREEN:
-                mPaint.setColor(getResources().getColor(R.color.lightGreen));
+                color = getResources().getColor(R.color.lightGreen);
                 break;
             case DARK_GREEN:
-                mPaint.setColor(getResources().getColor(R.color.darkGreen));
+                color = getResources().getColor(R.color.darkGreen);
                 break;
             case LIGHT_BLUE:
-                mPaint.setColor(getResources().getColor(R.color.lightBlue));
+                color = getResources().getColor(R.color.lightBlue);
                 break;
             case DARK_BLUE:
-                mPaint.setColor(getResources().getColor(R.color.darkBlue));
+                color = getResources().getColor(R.color.darkBlue);
                 break;
-            case BLACK:
-                mPaint.setColor(getResources().getColor(R.color.black));
+            default:
+                color = getResources().getColor(R.color.black);
                 break;
         }
+        return color;
     }
 }

@@ -8,8 +8,10 @@ import android.graphics.PointF;
 import java.util.List;
 
 public abstract class Tools {
-    protected int strokeWidth = 5;
+
     protected List<PointF> points;
+    protected int color;
+    protected int strokeWidth = 5;
 
     static private int backgroundColor = Color.WHITE;
 
@@ -27,6 +29,10 @@ public abstract class Tools {
         return strokeWidth;
     }
 
-
     protected static int getBackgroundColor() { return backgroundColor; }
+
+    public int getColor() {
+        return color;
+    }
+
 }

@@ -1,6 +1,7 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
@@ -9,6 +10,14 @@ import java.util.ArrayList;
 public class RectangleTool extends Tools {
     public RectangleTool() {
         points = new ArrayList<>();
+        strokeWidth = 5;
+        color = Color.BLACK;
+    }
+
+    public RectangleTool(int col, int strkW) {
+        points = new ArrayList<>();
+        strokeWidth = strkW;
+        color = col;
     }
 
     @Override
