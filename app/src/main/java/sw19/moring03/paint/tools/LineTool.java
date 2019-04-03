@@ -7,8 +7,10 @@ import android.graphics.PointF;
 import java.util.ArrayList;
 
 public class LineTool extends Tools {
-    public LineTool() {
+    public LineTool(int strkW) {
+
         points = new ArrayList<>();
+        strokeWidth = strkW;
     }
 
     @Override

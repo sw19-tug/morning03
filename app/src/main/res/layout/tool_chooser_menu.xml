@@ -4,6 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/titelStrokeWidth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Stroke width"
+        android:onClick="chooseNewTool"
+        />
+
+    <SeekBar
+        android:id="@+id/strokeWidth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="chooseNewTool"
+        android:max="50"
+        android:min="1"
+        />
 
     <Button
         android:id="@+id/drawPointButton"
@@ -58,5 +76,5 @@
         android:layout_weight="1"
         android:onClick="chooseNewTool"
         />
-
 </LinearLayout>
+

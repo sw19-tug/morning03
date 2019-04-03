@@ -31,13 +31,11 @@ public class DrawingView extends View {
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
-
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(getResources().getColor(R.color.black));
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(4.0f);
-
+        mPaint.setStrokeWidth(((MainActivity)getContext()).getStrokeWidth());
         objectsToPaint = new ArrayList<>();
     }
 
@@ -70,10 +68,12 @@ public class DrawingView extends View {
 
         if(objectsToPaint != null) {
             for(Tools tool : objectsToPaint) {
+                mPaint.setStrokeWidth(tool.getStrokeWidth());
                 tool.draw(canvas, mPaint);
             }
         }
     }
+
 
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
@@ -86,6 +86,9 @@ public class DrawingView extends View {
     private void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
 
+
+        int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
+
         switch (chosenTool) {
             case FILL:
                 break;
@@ -93,13 +96,13 @@ public class DrawingView extends View {
                 objectsToPaint.add(new EraseTool());
                 break;
             case DRAW_LINE:
-                objectsToPaint.add(new LineTool());
+                objectsToPaint.add(new LineTool(strokeWidth));
                 break;
             case DRAW_PATH:
-                objectsToPaint.add(new PathTool());
+                objectsToPaint.add(new PathTool(strokeWidth));
                 break;
             case DRAW_POINT:
-                objectsToPaint.add(new PointTool());
+                objectsToPaint.add(new PointTool(strokeWidth));
                 break;
             case DRAW_CIRCLE:
                 objectsToPaint.add(new CircleTool());

@@ -3,6 +3,7 @@ package sw19.moring03.paint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,17 @@ public class MainActivity extends AppCompatActivity {
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
     private Color chosenColor = Color.BLACK;
+    private int strokeWidth = 5;
+
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
