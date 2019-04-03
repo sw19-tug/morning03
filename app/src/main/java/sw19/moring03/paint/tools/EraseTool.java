@@ -18,13 +18,14 @@ public class EraseTool extends Tools {
             return false;
         }
 
-        Paint erasePaint = paint;
 
-        //erasePaint.setColor(backgroundColor);
+        int backUpColor = paint.getColor();
+
+        paint.setColor(backgroundColor);
         for(int i = 1; i < points.size(); i++) {
-            canvas.drawLine(points.get(i-1).x, points.get(i-1).y, points.get(i).x, points.get(i).y, erasePaint);
+            canvas.drawLine(points.get(i-1).x, points.get(i-1).y, points.get(i).x, points.get(i).y, paint);
         }
-
+        paint.setColor(backUpColor);
         return true;
     }
 }

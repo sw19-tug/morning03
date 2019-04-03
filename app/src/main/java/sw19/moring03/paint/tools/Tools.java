@@ -22,4 +22,6 @@ public abstract class Tools {
     public List<PointF> getPoints() {
         return points;
     }
+
+    public static int getBackgroundColor() { return backgroundColor; }
 }
