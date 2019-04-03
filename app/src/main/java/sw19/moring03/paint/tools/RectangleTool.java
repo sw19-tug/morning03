@@ -6,14 +6,14 @@ import android.graphics.PointF;
 
 import java.util.ArrayList;
 
-public class LineTool extends Tools {
-    public LineTool() {
+public class RectangleTool extends Tools {
+    public RectangleTool() {
         points = new ArrayList<>();
     }
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        if (points.size() != 2) {
+        if(points.size() < 2) {
             return false;
         }
 
@@ -23,15 +23,16 @@ public class LineTool extends Tools {
         float x_end = points.get(points.size() - 1).x;
         float y_end = points.get(points.size() - 1).y;
 
-        canvas.drawLine(x_start, y_start, x_end, y_end, paint);
+        canvas.drawRect(x_start, y_start, x_end, y_end, paint);
 
         return true;
     }
 
     @Override
     public void addPoint(PointF point) {
-        if (points.size() == 2)
+        if (points.size() == 2) {
             points.remove(1);
+        }
 
         super.addPoint(point);
     }

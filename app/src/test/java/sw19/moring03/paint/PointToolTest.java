@@ -36,7 +36,7 @@ public class PointToolTest {
 
     @Test
     public void testDrawMultiplePoints() {
-        final int expectedPints = 4;
+        final int expectedPoints = 1;
 
         PointTool tool = new PointTool();
         tool.addPoint(new PointF(1, 1));
@@ -48,7 +48,7 @@ public class PointToolTest {
 
         tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedPints)).drawPoint(Mockito.anyFloat(),
+        Mockito.verify(canvas, Mockito.times(expectedPoints)).drawPoint(Mockito.anyFloat(),
                 Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 }

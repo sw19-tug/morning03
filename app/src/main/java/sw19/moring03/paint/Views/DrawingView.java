@@ -14,8 +14,11 @@ import java.util.List;
 import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
+import sw19.moring03.paint.tools.CircleTool;
 import sw19.moring03.paint.tools.LineTool;
+import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.PointTool;
+import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
@@ -76,13 +79,6 @@ public class DrawingView extends View {
         PointF point = new PointF(x, y);
 
         if(objectsToPaint.size() != 0) {
-            Tools currentTool = objectsToPaint.get(objectsToPaint.size()-1);
-
-            if((currentTool instanceof PointTool) && ((PointTool)currentTool).getPointCount() > 0)
-            {
-                return;
-            }
-
             objectsToPaint.get(objectsToPaint.size()-1).addPoint(point);
         }
     }
@@ -106,8 +102,13 @@ public class DrawingView extends View {
                 objectsToPaint.add(new PointTool());
                 break;
             case DRAW_CIRCLE:
+                objectsToPaint.add(new CircleTool());
                 break;
             case DRAW_RECTANGLE:
+                objectsToPaint.add(new RectangleTool());
+                break;
+            case DRAW_OVAL:
+                objectsToPaint.add(new OvalTool());
                 break;
         }
     }

@@ -8,67 +8,64 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import sw19.moring03.paint.tools.CircleTool;
+import sw19.moring03.paint.tools.RectangleTool;
 
-import sw19.moring03.paint.tools.LineTool;
-
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LineTest {
+public class CircleTest {
     private Canvas canvas;
     private Paint paint;
 
     @Before
-    public void startUp() throws Exception {
+    public void startUp() {
         canvas = new Canvas();
         paint = new Paint();
     }
 
     @Test
-    public void testLineSimple() {
-        LineTool tool = new LineTool();
+    public void testCircleSimple() {
+        CircleTool tool = new CircleTool();
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
-        tool.addPoint(new PointF(60, 60));
-        tool.addPoint(new PointF(90, 90));
 
         assertTrue(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testInvalidLine() {
-        LineTool tool = new LineTool();
+    public void testInvalidCircle() {
+        CircleTool tool = new CircleTool();
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testDrawLine() {
-        int expectedLines = 1;
+    public void testDrawCircle() {
+        int expectedCircles = 1;
 
-        LineTool tools = new LineTool();
+        CircleTool tool = new CircleTool();
 
-        tools.addPoint(new PointF(10, 10));
-        tools.addPoint(new PointF(20, 20));
-        tools.addPoint(new PointF(30, 30));
-        tools.addPoint(new PointF(40, 40));
+        tool.addPoint(new PointF(10, 10));
+        tool.addPoint(new PointF(20, 20));
+        tool.addPoint(new PointF(30, 30));
+        tool.addPoint(new PointF(40, 40));
 
         canvas = Mockito.mock(Canvas.class);
 
-        tools.draw(canvas, paint);
+        tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(expectedCircles)).drawCircle(Mockito.anyFloat(),
+                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 
     @Test
@@ -80,7 +77,8 @@ public class LineTest {
         addedPoints.add(new PointF(30, 30));
         addedPoints.add(new PointF(40, 40));
 
-        LineTool tool = new LineTool();
+        CircleTool tool = new CircleTool();
+
         for (int i = 0; i < addedPoints.size(); i++) {
             tool.addPoint(addedPoints.get(i));
         }
@@ -89,5 +87,4 @@ public class LineTest {
         assertEquals((int)addedPoints.get(0).x, (int)tool.getPoints().get(0).x);
         assertEquals((int)addedPoints.get(3).x, (int)tool.getPoints().get(1).x);
     }
-
 }

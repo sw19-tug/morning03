@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setToolIcon();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setChosenTool(Tool chosenTool) {
         this.chosenTool = chosenTool;
+        setToolIcon();
     }
 
     public void chooseNewTool(View view) {
@@ -87,6 +90,37 @@ public class MainActivity extends AppCompatActivity {
         }
 
         toolChooserMenu.dismiss();
+    }
+
+    private void setToolIcon() {
+        ImageView imageView = findViewById(R.id.toolIcon);
+
+        switch(getChosenTool()) {
+            case DRAW_LINE:
+                imageView.setImageResource(R.drawable.ic_line_icon);
+                break;
+            case DRAW_CIRCLE:
+                imageView.setImageResource(R.drawable.ic_circle_icon);
+                break;
+            case DRAW_PATH:
+                imageView.setImageResource(R.drawable.ic_path_icon);
+                break;
+            case DRAW_OVAL:
+                imageView.setImageResource(R.drawable.ic_oval_icon);
+                break;
+            case DRAW_POINT:
+                imageView.setImageResource(R.drawable.ic_point_icon);
+                break;
+            case DRAW_RECTANGLE:
+                imageView.setImageResource(R.drawable.ic_rectangle_icon);
+                break;
+            case FILL:
+                imageView.setImageResource(R.drawable.ic_fill_icon);
+                break;
+            case ERASER:
+                imageView.setImageResource(R.drawable.ic_eraser_icon);
+                break;
+        }
     }
 
     public Color getChosenColor() {
