@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
+import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
 
 public class ToolChooserMenuBottomSheetDialog extends BottomSheetDialogFragment {

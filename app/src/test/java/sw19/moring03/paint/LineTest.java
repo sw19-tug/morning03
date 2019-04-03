@@ -46,7 +46,7 @@ public class LineTest {
 
     @Test
     public void testInvalidLine() {
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(5);
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -80,7 +80,7 @@ public class LineTest {
         addedPoints.add(new PointF(30, 30));
         addedPoints.add(new PointF(40, 40));
 
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(5);
         for (int i = 0; i < addedPoints.size(); i++) {
             tool.addPoint(addedPoints.get(i));
         }
