@@ -31,7 +31,7 @@ public class StrokeWidthTest {
 
     @Test
     public void testStrokeWidthLine() {
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(5);
 
         int lineStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
@@ -46,7 +46,7 @@ public class StrokeWidthTest {
 
     @Test
     public void testStrokeWidthPath() {
-        PathTool tool = new PathTool();
+        PathTool tool = new PathTool(5);
 
         int PathStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
@@ -62,7 +62,7 @@ public class StrokeWidthTest {
 
     @Test
     public void testStrokeWidthPoint() {
-        PointTool tool = new PointTool();
+        PointTool tool = new PointTool(5);
 
         int PointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
@@ -77,34 +77,15 @@ public class StrokeWidthTest {
     }
 
     @Test
-    public void testStrokeWidthPathFalse() {
-        PathTool tool = new PathTool();
-
-        int PathStrokeWidth = tool.getStrokeWidth();
-        boolean isInRange = false;
-
-
-        if(PathStrokeWidth > 1  && PathStrokeWidth < 50)
-        {
-            isInRange = true;
-        }
-
-        assertFalse(isInRange);
-    }
-
-    @Test
     public void testStrokeWidthPointFalse() {
-        PointTool tool = new PointTool();
-
-        int PointStrokeWidth = tool.getStrokeWidth();
+        int pointStrokeWidth = 0;
+        PointTool tool = new PointTool(pointStrokeWidth);
+        pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
-
-
-        if(PointStrokeWidth < 1  && PointStrokeWidth > 50)
+        if(pointStrokeWidth < 1  && pointStrokeWidth > 50)
         {
             isInRange = true;
         }
-
         assertFalse(isInRange);
     }
 

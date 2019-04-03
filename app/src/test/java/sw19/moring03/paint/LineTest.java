@@ -33,7 +33,7 @@ public class LineTest {
 
     @Test
     public void testLineSimple() {
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(5);
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
@@ -47,7 +47,7 @@ public class LineTest {
     public void testDrawLine() {
         int expectedLines = 1;
 
-        LineTool tools = new LineTool();
+        LineTool tools = new LineTool(5);
 
         tools.addPoint(new PointF(10, 10));
         tools.addPoint(new PointF(20, 20));
@@ -71,7 +71,7 @@ public class LineTest {
         expectedPoints.add(new PointF(30, 30));
         expectedPoints.add(new PointF(30, 30));
 
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(5);
 
         tool.addPoint(expectedPoints.get(0));
         tool.addPoint(expectedPoints.get(1));
