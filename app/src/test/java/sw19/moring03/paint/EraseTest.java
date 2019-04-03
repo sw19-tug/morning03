@@ -7,16 +7,11 @@ import android.graphics.PointF;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import sw19.moring03.paint.tools.EraseTool;
-import sw19.moring03.paint.tools.LineTool;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,7 +20,7 @@ public class EraseTest {
     private Paint paint;
 
     @Before
-    public void startUp() throws Exception {
+    public void startUp() {
         canvas = new Canvas();
         paint = new Paint();
     }
@@ -39,7 +34,7 @@ public class EraseTest {
         int tmp_color = paint.getColor();
 
         assertTrue(tool.draw(canvas, paint));
-        assertTrue(tmp_color == paint.getColor());
+        assertEquals(tmp_color, paint.getColor());
     }
 
 }

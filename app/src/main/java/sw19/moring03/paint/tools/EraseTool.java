@@ -18,7 +18,6 @@ public class EraseTool extends Tools {
             return false;
         }
 
-
         int backUpColor = paint.getColor();
 
         paint.setColor(getBackgroundColor());
