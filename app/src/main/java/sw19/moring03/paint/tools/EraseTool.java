@@ -21,7 +21,7 @@ public class EraseTool extends Tools {
 
         int backUpColor = paint.getColor();
 
-        paint.setColor(backgroundColor);
+        paint.setColor(getBackgroundColor());
         for(int i = 1; i < points.size(); i++) {
             canvas.drawLine(points.get(i-1).x, points.get(i-1).y, points.get(i).x, points.get(i).y, paint);
         }

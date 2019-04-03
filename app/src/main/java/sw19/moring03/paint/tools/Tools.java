@@ -11,7 +11,7 @@ public abstract class Tools {
 
     protected List<PointF> points;
 
-    static protected int backgroundColor = Color.WHITE;
+    static private int backgroundColor = Color.WHITE;
 
     public abstract boolean draw(Canvas canvas, Paint paint);
 
@@ -23,5 +23,5 @@ public abstract class Tools {
         return points;
     }
 
-    public static int getBackgroundColor() { return backgroundColor; }
+    protected static int getBackgroundColor() { return backgroundColor; }
 }
