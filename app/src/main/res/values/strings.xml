@@ -8,5 +8,6 @@
     <string name="drawFillButton">Fill</string>
     <string name="eraserButton">Eraser</string>
     <string name="drawShapesButton">Shapes</string>
+    <string name="drawCameraPicture">Camera</string>
     <string name="path">Path</string>
 </resources>
