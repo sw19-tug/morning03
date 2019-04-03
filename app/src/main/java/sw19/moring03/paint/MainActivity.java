@@ -1,5 +1,8 @@
 package sw19.moring03.paint;
 
+import android.content.ContentValues;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
-import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +24,15 @@ public class MainActivity extends AppCompatActivity {
     private Tool chosenTool = Tool.DRAW_POINT;
     private Color chosenColor = Color.BLACK;
 
+    static final int PICTURE_RESULT = 1;
+    String mCurrentPhotoPath;
+
+    ContentValues values;
+    private Uri file;
+    ImageView imageView;
+    Bitmap help1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        imageView = (ImageView) findViewById(R.id.imageView);
     }
 
     @Override
