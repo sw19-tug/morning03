@@ -1,18 +1,24 @@
 package sw19.moring03.paint;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import sw19.moring03.paint.utils.Color;
+import sw19.moring03.paint.Fragments.ShapeChooserFragment;
+import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
 
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
+    private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
+    private Color chosenColor = Color.BLACK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.colorChooserButton) {
+            colorChooserMenu = ColorChooserMenuBottomSheetDialog.newInstance();
+            colorChooserMenu.show(getSupportFragmentManager(), "colorChooserMenu");
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -61,14 +73,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawFillButton:
                 setChosenTool(Tool.FILL);
                 break;
-            case R.id.drawRectangleButton:
-                setChosenTool(Tool.DRAW_RECTANGLE);
+            case R.id.drawShapesButton:
+                FragmentManager manager = getSupportFragmentManager();
+                ShapeChooserFragment fragment = new ShapeChooserFragment();
+                fragment.show(manager,"ShapeChooserFragment");
                 break;
             case R.id.eraserButton:
                 setChosenTool(Tool.ERASER);
-                break;
-            case R.id.drawCircleButton:
-                setChosenTool(Tool.DRAW_CIRCLE);
                 break;
             case R.id.drawPathButton:
                 setChosenTool(Tool.DRAW_PATH);
@@ -76,5 +87,56 @@ public class MainActivity extends AppCompatActivity {
         }
 
         toolChooserMenu.dismiss();
+    }
+
+    public Color getChosenColor() {
+        return chosenColor;
+    }
+
+    public void setChosenColor(Color chosenColor) {
+        this.chosenColor = chosenColor;
+    }
+
+    public void chooseNewColor(View view) {
+        switch (view.getId()) {
+            case R.id.whiteButton:
+                setChosenColor(Color.WHITE);
+                break;
+            case R.id.yellowButton:
+                setChosenColor(Color.YELLOW);
+                break;
+            case R.id.orangeButton:
+                setChosenColor(Color.ORANGE);
+                break;
+            case R.id.redButton:
+                setChosenColor(Color.RED);
+                break;
+            case R.id.purpleButton:
+                setChosenColor(Color.PURPLE);
+                break;
+            case R.id.magentaButton:
+                setChosenColor(Color.MAGENTA);
+                break;
+            case R.id.turkisButton:
+                setChosenColor(Color.TURKIS);
+                break;
+            case R.id.lightBlueButton:
+                setChosenColor(Color.LIGHT_BLUE);
+                break;
+            case R.id.lightGreenButton:
+                setChosenColor(Color.LIGHT_GREEN);
+                break;
+            case R.id.darkBlueButton:
+                setChosenColor(Color.DARK_BLUE);
+                break;
+            case R.id.darkGreenButton:
+                setChosenColor(Color.DARK_GREEN);
+                break;
+            case R.id.blackButton:
+                setChosenColor(Color.BLACK);
+                break;
+        }
+
+        colorChooserMenu.dismiss();
     }
 }
