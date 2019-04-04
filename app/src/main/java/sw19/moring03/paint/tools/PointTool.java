@@ -10,15 +10,15 @@ import java.util.ArrayList;
 public class PointTool extends Tools {
 
     public PointTool() {
-        color = Color.BLACK;
         points = new ArrayList<>();
         strokeWidth = 5;
+        color = Color.BLACK;
     }
 
     public PointTool(int col, int strkW) {
-        color = col;
         points = new ArrayList<>();
         strokeWidth = strkW;
+        color = col;
     }
 
     public int getPointCount() {

@@ -1,7 +1,6 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
@@ -11,9 +10,7 @@ public abstract class Tools {
 
     protected List<PointF> points;
     protected int color;
-    protected int strokeWidth = 5;
-
-    static private int backgroundColor = Color.WHITE;
+    protected int strokeWidth;
 
     public abstract boolean draw(Canvas canvas, Paint paint);
 
@@ -27,10 +24,6 @@ public abstract class Tools {
 
     public int getStrokeWidth() {
         return strokeWidth;
-    }
-
-    protected static int getBackgroundColor() {
-        return backgroundColor;
     }
 
     public int getColor() {

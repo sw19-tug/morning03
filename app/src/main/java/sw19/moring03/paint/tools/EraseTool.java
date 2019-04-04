@@ -1,19 +1,23 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
 
 public class EraseTool extends Tools {
+    private final int backgroundColor = Color.WHITE;
 
     public EraseTool() {
         points = new ArrayList<>();
         strokeWidth = 5;
+        color = Color.BLACK;
     }
 
     public EraseTool(int strkW) {
         points = new ArrayList<>();
+        color = Color.BLACK;
         strokeWidth = strkW;
     }
 
@@ -26,7 +30,7 @@ public class EraseTool extends Tools {
 
         int backUpColor = paint.getColor();
 
-        paint.setColor(getBackgroundColor());
+        paint.setColor(backgroundColor);
         for (int i = 1; i < points.size(); i++) {
             canvas.drawLine(points.get(i - 1).x, points.get(i - 1).y, points.get(i).x, points.get(i).y, paint);
         }

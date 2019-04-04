@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -114,7 +115,8 @@ public class DrawingView extends View {
         }
     }
 
-    private int getColor() {
+    @VisibleForTesting
+    public int getColor() {
         Color chosenColor = ((MainActivity) getContext()).getChosenColor();
         int color = 0;
         switch (chosenColor) {
@@ -157,4 +159,10 @@ public class DrawingView extends View {
         }
         return color;
     }
+
+    @VisibleForTesting
+    public List<Tools> getObjectsToPaint() {
+        return objectsToPaint;
+    }
+
 }

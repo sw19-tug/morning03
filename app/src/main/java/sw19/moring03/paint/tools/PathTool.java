@@ -9,15 +9,15 @@ import java.util.ArrayList;
 public class PathTool extends Tools {
 
     public PathTool() {
-        color = Color.BLACK;
         points = new ArrayList<>();
         strokeWidth = 5;
+        color = Color.BLACK;
     }
 
     public PathTool(int col, int strkW) {
         points = new ArrayList<>();
-        color = col;
         strokeWidth = strkW;
+        color = col;
     }
 
     @Override

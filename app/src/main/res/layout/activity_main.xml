@@ -9,7 +9,9 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/white">
+
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -35,7 +37,7 @@
 
     <view
         class="sw19.moring03.paint.Views.DrawingView"
-        id="@+id/drawingView"
+        android:id="@+id/drawingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

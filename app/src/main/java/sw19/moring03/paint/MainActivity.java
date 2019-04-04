@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         this.strokeWidth = strokeWidth;
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
