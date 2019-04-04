@@ -22,17 +22,17 @@ public class RectangleTool extends Tools {
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        if(points.size() < 2) {
+        if (points.size() < 2) {
             return false;
         }
 
-        float x_start = points.get(0).x;
-        float y_start = points.get(0).y;
+        float xStart = points.get(0).x;
+        float yStart = points.get(0).y;
 
-        float x_end = points.get(points.size() - 1).x;
-        float y_end = points.get(points.size() - 1).y;
+        float xEnd = points.get(points.size() - 1).x;
+        float yEnd = points.get(points.size() - 1).y;
 
-        canvas.drawRect(x_start, y_start, x_end, y_end, paint);
+        canvas.drawRect(xStart, yStart, xEnd, yEnd, paint);
 
         return true;
     }

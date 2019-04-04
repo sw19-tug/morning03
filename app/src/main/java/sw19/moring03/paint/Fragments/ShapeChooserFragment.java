@@ -23,7 +23,7 @@ public class ShapeChooserFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String[] types = getResources().getStringArray(R.array.shape_type);
 
-                        if(getContext() != null) {
+                        if (getContext() != null) {
                             MainActivity activity = (MainActivity) getContext();
 
                             switch (types[which]) {

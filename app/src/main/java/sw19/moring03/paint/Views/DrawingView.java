@@ -24,18 +24,17 @@ import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
 import sw19.moring03.paint.tools.PathTool;
 
-
 public class DrawingView extends View {
-    private Paint mPaint;
+    private Paint paint;
     private List<Tools> objectsToPaint;
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(getResources().getColor(R.color.black));
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(((MainActivity)getContext()).getStrokeWidth());
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(getResources().getColor(R.color.black));
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(((MainActivity)getContext()).getStrokeWidth());
         objectsToPaint = new ArrayList<>();
     }
 
@@ -65,11 +64,11 @@ public class DrawingView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if(objectsToPaint != null) {
-            for(Tools tool : objectsToPaint) {
-                mPaint.setStrokeWidth(tool.getStrokeWidth());
-                mPaint.setColor(tool.getColor());
-                tool.draw(canvas, mPaint);
+        if (objectsToPaint != null) {
+            for (Tools tool : objectsToPaint) {
+                paint.setStrokeWidth(tool.getStrokeWidth());
+                paint.setColor(tool.getColor());
+                tool.draw(canvas, paint);
             }
         }
     }
@@ -78,8 +77,8 @@ public class DrawingView extends View {
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
 
-        if(objectsToPaint.size() != 0) {
-            objectsToPaint.get(objectsToPaint.size()-1).addPoint(point);
+        if (objectsToPaint.size() != 0) {
+            objectsToPaint.get(objectsToPaint.size() - 1).addPoint(point);
         }
     }
 

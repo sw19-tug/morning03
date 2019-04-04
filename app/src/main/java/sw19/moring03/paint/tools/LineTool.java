@@ -27,21 +27,22 @@ public class LineTool extends Tools {
             return false;
         }
 
-        float x_start = points.get(0).x;
-        float y_start = points.get(0).y;
+        float xStart = points.get(0).x;
+        float yStart = points.get(0).y;
 
-        float x_end = points.get(points.size() - 1).x;
-        float y_end = points.get(points.size() - 1).y;
+        float xEnd = points.get(points.size() - 1).x;
+        float yEnd = points.get(points.size() - 1).y;
 
-        canvas.drawLine(x_start, y_start, x_end, y_end, paint);
+        canvas.drawLine(xStart, yStart, xEnd, yEnd, paint);
 
         return true;
     }
 
     @Override
     public void addPoint(PointF point) {
-        if (points.size() == 2)
+        if (points.size() == 2) {
             points.remove(1);
+        }
 
         super.addPoint(point);
     }

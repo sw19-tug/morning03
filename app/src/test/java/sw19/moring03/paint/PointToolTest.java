@@ -1,6 +1,5 @@
 package sw19.moring03.paint;
 
-
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -21,7 +20,7 @@ public class PointToolTest {
     private Paint paint;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         canvas = new Canvas();
         paint = new Paint();
     }

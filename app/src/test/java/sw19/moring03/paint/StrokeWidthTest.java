@@ -1,34 +1,20 @@
 package sw19.moring03.paint;
 
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-
 import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.LineTool;
-import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.PathTool;
+import sw19.moring03.paint.tools.PointTool;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StrokeWidthTest {
-    private Canvas canvas;
-    private Paint paint;
-
-    @Before
-    public void startUp() throws Exception {
-        canvas = new Canvas();
-        paint = new Paint();
-    }
 
     @Test
     public void testStrokeWidthLine() {
@@ -37,8 +23,7 @@ public class StrokeWidthTest {
         int lineStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 
-        if(lineStrokeWidth > 1  && lineStrokeWidth < 51)
-        {
+        if (lineStrokeWidth > 1  && lineStrokeWidth < 51) {
             isInRange = true;
         }
 
@@ -49,12 +34,10 @@ public class StrokeWidthTest {
     public void testStrokeWidthPath() {
         PathTool tool = new PathTool(Color.BLACK,5);
 
-        int PathStrokeWidth = tool.getStrokeWidth();
+        int pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 
-
-        if(PathStrokeWidth > 1  && PathStrokeWidth < 51)
-        {
+        if (pointStrokeWidth > 1  && pointStrokeWidth < 51) {
             isInRange = true;
         }
 
@@ -65,12 +48,10 @@ public class StrokeWidthTest {
     public void testStrokeWidthPoint() {
         PointTool tool = new PointTool(Color.BLACK,5);
 
-        int PointStrokeWidth = tool.getStrokeWidth();
+        int pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 
-
-        if(PointStrokeWidth > 1  && PointStrokeWidth < 51)
-        {
+        if (pointStrokeWidth > 1  && pointStrokeWidth < 51) {
             isInRange = true;
         }
 
@@ -83,10 +64,11 @@ public class StrokeWidthTest {
         PointTool tool = new PointTool(Color.BLACK, pointStrokeWidth);
         pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
-        if(pointStrokeWidth < 1  && pointStrokeWidth > 50)
-        {
+
+        if (pointStrokeWidth > 1  && pointStrokeWidth < 50) {
             isInRange = true;
         }
+
         assertFalse(isInRange);
     }
 
