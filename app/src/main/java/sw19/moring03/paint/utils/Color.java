@@ -1,5 +1,0 @@
-package sw19.moring03.paint.utils;
-
-public enum Color {
-    WHITE, BLACK, YELLOW, ORANGE, RED, PURPLE, MAGENTA, TURKIS, LIGHT_BLUE, LIGHT_GREEN, DARK_BLUE, DARK_GREEN
-}

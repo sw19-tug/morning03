@@ -12,7 +12,6 @@ import java.util.List;
 
 import sw19.moring03.paint.Views.DrawingView;
 import sw19.moring03.paint.tools.Tools;
-import sw19.moring03.paint.utils.Color;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -29,12 +28,12 @@ public class ToolsTouchTest {
 
     @Test
     public void testColorSavedInTool() {
-        assertEquals(Color.BLACK, launchActivityRule.getActivity().getChosenColor());
+        assertEquals(R.color.black, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.colorChooserButton)).perform(click());
         onView(withId(R.id.yellowButton)).perform(click());
 
-        assertEquals(Color.YELLOW, launchActivityRule.getActivity().getChosenColor());
+        assertEquals(R.color.yellow, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
 
@@ -48,14 +47,14 @@ public class ToolsTouchTest {
 
     @Test
     public void testDifferentColorsForTools() {
-        assertEquals(Color.BLACK, launchActivityRule.getActivity().getChosenColor());
+        assertEquals(R.color.black, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
 
         onView(withId(R.id.colorChooserButton)).perform(click());
         onView(withId(R.id.yellowButton)).perform(click());
 
-        assertEquals(Color.YELLOW, launchActivityRule.getActivity().getChosenColor());
+        assertEquals(R.color.yellow, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
 

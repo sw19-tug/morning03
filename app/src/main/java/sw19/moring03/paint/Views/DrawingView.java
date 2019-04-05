@@ -21,7 +21,6 @@ import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.Tools;
-import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
 import sw19.moring03.paint.tools.PathTool;
 
@@ -117,47 +116,8 @@ public class DrawingView extends View {
 
     @VisibleForTesting
     public int getColor() {
-        Color chosenColor = ((MainActivity) getContext()).getChosenColor();
-        int color = 0;
-        switch (chosenColor) {
-            case WHITE:
-                color = getResources().getColor(R.color.white);
-                break;
-            case YELLOW:
-                color = getResources().getColor(R.color.yellow);
-                break;
-            case ORANGE:
-                color = getResources().getColor(R.color.orange);
-                break;
-            case RED:
-                color = getResources().getColor(R.color.red);
-                break;
-            case PURPLE:
-                color = getResources().getColor(R.color.purple);
-                break;
-            case MAGENTA:
-                color = getResources().getColor(R.color.magenta);
-                break;
-            case TURKIS:
-                color = getResources().getColor(R.color.turkis);
-                break;
-            case LIGHT_GREEN:
-                color = getResources().getColor(R.color.lightGreen);
-                break;
-            case DARK_GREEN:
-                color = getResources().getColor(R.color.darkGreen);
-                break;
-            case LIGHT_BLUE:
-                color = getResources().getColor(R.color.lightBlue);
-                break;
-            case DARK_BLUE:
-                color = getResources().getColor(R.color.darkBlue);
-                break;
-            default:
-                color = getResources().getColor(R.color.black);
-                break;
-        }
-        return color;
+        int chosenColor = ((MainActivity) getContext()).getChosenColor();
+        return getResources().getColor(chosenColor);
     }
 
     @VisibleForTesting

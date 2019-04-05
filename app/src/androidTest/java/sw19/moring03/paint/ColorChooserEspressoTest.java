@@ -10,8 +10,6 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 
-import sw19.moring03.paint.utils.Color;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -25,18 +23,18 @@ public class ColorChooserEspressoTest {
     @Parameterized.Parameters(name = "{0}")
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {R.id.colorChooserButton, R.id.whiteButton, Color.WHITE, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.yellowButton, Color.YELLOW, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.orangeButton, Color.ORANGE, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.redButton, Color.RED, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.purpleButton, Color.PURPLE, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.magentaButton, Color.MAGENTA, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.turkisButton, Color.TURKIS, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.lightBlueButton, Color.LIGHT_BLUE, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.lightGreenButton, Color.LIGHT_GREEN, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.darkBlueButton, Color.DARK_BLUE, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.darkGreenButton, Color.DARK_GREEN, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.blackButton, Color.BLACK, R.id.colorChooserMenu}
+                {R.id.colorChooserButton, R.id.whiteButton, R.color.white, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.yellowButton, R.color.yellow, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.orangeButton, R.color.orange, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.redButton, R.color.red, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.purpleButton, R.color.purple, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.magentaButton, R.color.magenta, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.turkisButton, R.color.turkis, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.lightBlueButton, R.color.lightBlue, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.lightGreenButton, R.color.lightGreen, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.darkBlueButton, R.color.darkBlue, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.darkGreenButton, R.color.darkGreen, R.id.colorChooserMenu},
+                {R.id.colorChooserButton, R.id.blackButton, R.color.black, R.id.colorChooserMenu}
         });
     }
 
@@ -47,7 +45,7 @@ public class ColorChooserEspressoTest {
     public @IdRes int selectedButtonInMenu;
 
     @Parameterized.Parameter(2)
-    public @IdRes Color chosenColorOption;
+    public @IdRes int chosenColorOption;
 
     @Parameterized.Parameter(3)
     public @IdRes int xmlBottomSheet;
