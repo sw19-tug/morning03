@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Color;
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        toolChooserMenu = new ToolChooserMenuBottomSheetDialog();
+        colorChooserMenu = new ColorChooserMenuBottomSheetDialog();
     }
 
 
@@ -52,13 +56,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.toolChooserButton) {
-            toolChooserMenu = ToolChooserMenuBottomSheetDialog.newInstance();
             toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
             return true;
         }
 
         if (id == R.id.colorChooserButton) {
-            colorChooserMenu = ColorChooserMenuBottomSheetDialog.newInstance();
             colorChooserMenu.show(getSupportFragmentManager(), "colorChooserMenu");
             return true;
         }

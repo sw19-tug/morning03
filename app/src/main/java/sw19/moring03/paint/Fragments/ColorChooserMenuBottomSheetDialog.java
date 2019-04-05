@@ -1,4 +1,4 @@
-package sw19.moring03.paint;
+package sw19.moring03.paint.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ColorChooserMenuBottomSheetDialog extends BottomSheetDialogFragment {
-    public static ColorChooserMenuBottomSheetDialog newInstance() {
-        return new ColorChooserMenuBottomSheetDialog();
-    }
+import sw19.moring03.paint.R;
 
+public class ColorChooserMenuBottomSheetDialog extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.color_chooser_menu, container, false);

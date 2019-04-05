@@ -39,6 +39,7 @@
         class="sw19.moring03.paint.Views.DrawingView"
         android:id="@+id/drawingView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"/>
 
 </FrameLayout>

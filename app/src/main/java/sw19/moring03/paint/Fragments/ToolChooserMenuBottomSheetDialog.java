@@ -22,15 +22,11 @@ public class ToolChooserMenuBottomSheetDialog extends BottomSheetDialogFragment 
         this.strokeWidth = strokeWidth;
     }
 
-    public static ToolChooserMenuBottomSheetDialog newInstance() {
-        return new ToolChooserMenuBottomSheetDialog();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tool_chooser_menu, container, false);
 
-        SeekBar seekBar = (SeekBar) view.findViewById(R.id.strokeWidth);
+        SeekBar seekBar = view.findViewById(R.id.strokeWidth);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {

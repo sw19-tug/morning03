@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Stroke width"
-        android:onClick="chooseNewTool"
+        android:text="@string/stroke_width"
         />
 
     <SeekBar
@@ -18,9 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:onClick="chooseNewTool"
         android:max="50"
-        android:min="1"
         />
 
     <Button

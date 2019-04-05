@@ -2,7 +2,9 @@ package sw19.moring03.paint.util;
 
 import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.GeneralClickAction;
+import android.support.test.espresso.action.GeneralSwipeAction;
 import android.support.test.espresso.action.Press;
+import android.support.test.espresso.action.Swipe;
 import android.support.test.espresso.action.Tap;
 import android.support.test.espresso.action.Tapper;
 
@@ -23,6 +25,10 @@ public final class Interaction {
                 new CoordProvider(x, y), Press.FINGER, 0, 0));
     }
 
+    public static ViewAction changeValueOfStrokeWidthSeekBar(int pathWidth) {
+        return actionWithAssertions(new GeneralSwipeAction(Swipe.SLOW,
+                new SeekBarCoordProvider(0), new SeekBarCoordProvider(pathWidth), Press.PINPOINT));
+    }
 }
 
 
