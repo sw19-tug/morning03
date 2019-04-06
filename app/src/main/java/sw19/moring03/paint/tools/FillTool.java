@@ -23,15 +23,14 @@ public class FillTool extends Tools {
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        return true;
-    }
-
-    @Override
-    public void addPoint(PointF point) {
-        if (points.size() > 0) {
-            return;
+        if (points.isEmpty() || (points.size() % 2 != 0) ) {
+            return false;
         }
 
-        super.addPoint(point);
+        for (int i = 1; i < points.size(); i += 2) {
+            canvas.drawLine(points.get(i-1).x, points.get(i-1).y, points.get(i).x, points.get(i).y, paint);
+        }
+
+        return true;
     }
 }

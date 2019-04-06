@@ -1,6 +1,8 @@
 package sw19.moring03.paint;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
@@ -30,6 +32,7 @@ public class FillTest {
     public void testSimpleFillTool() {
         FillTool tool = new FillTool();
         tool.addPoint(new PointF(15, 15));
+        tool.addPoint(new PointF(20, 20));
         assertTrue(tool.draw(canvas, paint));
     }
 
@@ -52,6 +55,24 @@ public class FillTest {
 
         canvas = Mockito.mock(Canvas.class);
 
+        tool.draw(canvas, paint);
+
+        Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(
+                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+    }
+
+    @Test
+    public void testFillOfWholeDrawingArea() {
+        final int expectedLines = 20;
+
+        Bitmap bitmap = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
+
+        canvas = Mockito.spy(Canvas.class);
+        canvas.setBitmap(bitmap);
+        canvas.drawColor(Color.WHITE);
+
+        FillTool tool = new FillTool(Color.BLACK, 5);
+        tool.addPoint(new PointF(5, 5));
         tool.draw(canvas, paint);
 
         Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(
