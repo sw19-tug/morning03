@@ -65,14 +65,32 @@ public class FillTest {
     public void testFillOfWholeDrawingArea() {
         final int expectedLines = 20;
 
-        Bitmap bitmap = Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_8888);
+        int[] frame = new int[100];
 
         canvas = Mockito.spy(Canvas.class);
-        canvas.setBitmap(bitmap);
-        canvas.drawColor(Color.WHITE);
 
-        FillTool tool = new FillTool(Color.BLACK, 5);
+        FillTool tool = new FillTool(Color.BLACK, frame, 10, 10);
         tool.addPoint(new PointF(5, 5));
+        tool.draw(canvas, paint);
+
+        Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(
+                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+    }
+
+    @Test
+    public void testFillRectangle() {
+        final int expectedLines = 1;
+
+        int[] frame = new int[] {
+                1, 1, 1,
+                1, 0, 1,
+                1, 1, 1
+        };
+
+        canvas = Mockito.spy(Canvas.class);
+
+        FillTool tool = new FillTool(Color.BLACK, frame, 3, 3);
+        tool.addPoint(new PointF(1, 1));
         tool.draw(canvas, paint);
 
         Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(

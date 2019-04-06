@@ -1,6 +1,7 @@
 package sw19.moring03.paint.Views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -15,6 +16,7 @@ import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.CircleTool;
+import sw19.moring03.paint.tools.FillTool;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.PointTool;
@@ -31,6 +33,7 @@ public class DrawingView extends View {
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
+        this.setDrawingCacheEnabled(true);
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(getResources().getColor(R.color.black));
@@ -90,6 +93,11 @@ public class DrawingView extends View {
 
         switch (chosenTool) {
             case FILL:
+                this.buildDrawingCache();
+                Bitmap bitmap = Bitmap.createBitmap(this.getDrawingCache());
+                int[] frameBuffer = new int[bitmap.getWidth() * bitmap.getHeight()];
+                bitmap.getPixels(frameBuffer, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+                objectsToPaint.add(new FillTool(getColor(), frameBuffer, bitmap.getWidth(), bitmap.getHeight()));
                 break;
             case ERASER:
                 objectsToPaint.add(new EraseTool(strokeWidth));
