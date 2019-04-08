@@ -1,9 +1,12 @@
 package sw19.moring03.paint;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,13 +22,12 @@ import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int CAMERA_REQUEST = 60;
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
     private Color chosenColor = Color.BLACK;
-
-    static final int PICTURE_RESULT = 1;
-    String mCurrentPhotoPath;
+    Bitmap lastCameraPicture = null;
 
     ContentValues values;
     private Uri file;
@@ -99,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawPathButton:
                 setChosenTool(Tool.DRAW_PATH);
                 break;
+            case R.id.cameraButton:
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, CAMERA_REQUEST);
+                break;
+
         }
 
         toolChooserMenu.dismiss();
@@ -153,5 +160,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         colorChooserMenu.dismiss();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CAMERA_REQUEST)
+        {
+            Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
+
+            if(cameraPicture == null)
+                return;
+
+            Matrix cameraMatrix = new Matrix();
+            cameraMatrix.postRotate(90);
+            Bitmap rotatedCameraPicture = Bitmap.createBitmap(cameraPicture, 0, 0,
+                    cameraPicture.getWidth(),
+                    cameraPicture.getHeight(),
+                    cameraMatrix, true);
+            lastCameraPicture = rotatedCameraPicture;
+        }
     }
 }
