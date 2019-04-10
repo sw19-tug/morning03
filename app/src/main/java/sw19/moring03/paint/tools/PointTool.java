@@ -34,7 +34,7 @@ public class PointTool extends Tools {
         for (int i = 0; i < points.size(); i++) {
             float xCoord = points.get(i).x;
             float yCoord = points.get(i).y;
-            canvas.drawPoint(xCoord, yCoord, paint);
+            canvas.drawCircle(xCoord, yCoord, strokeWidth / 2.0f, paint);
         }
         return true;
     }
