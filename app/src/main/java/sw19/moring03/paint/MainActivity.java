@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
+import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
+    private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolChooserMenu = new ToolChooserMenuBottomSheetDialog();
         colorChooserMenu = new ColorChooserMenuBottomSheetDialog();
+        strokeWidthChooserMenu = new StrokeWidthChooserMenuBottomSheetDialog();
     }
 
 
@@ -65,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.colorChooserButton) {
             colorChooserMenu.show(getSupportFragmentManager(), "colorChooserMenu");
+            return true;
+        }
+
+        if (id == R.id.strokeWidthChooserButton) {
+            strokeWidthChooserMenu.show(getSupportFragmentManager(), "strokeWidthChooserMenu");
             return true;
         }
 
