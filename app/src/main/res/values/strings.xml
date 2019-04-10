@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Paint</string>
+    <string name="toolIcon">Tool Icon</string>
+    <string name="toolChooserButton">Choose Drawing Tool</string>
+    <string name="colorChooserButton">Choose Color for Drawing Tool</string>
+    <string name="shapeChooserFragment">Choose Shape</string>
+    <string name="drawPointButton">Point</string>
+    <string name="drawLineButton">Line</string>
+    <string name="drawFillButton">Fill</string>
+    <string name="eraserButton">Eraser</string>
+    <string name="drawShapesButton">Shapes</string>
+    <string name="path">Path</string>
+    <string name="stroke_width">Stroke width</string>
+</resources>
