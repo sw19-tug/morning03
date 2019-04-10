@@ -47,7 +47,7 @@ public class PointToolTest {
 
         tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedPoints)).drawPoint(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(expectedPoints)).drawCircle(Mockito.anyFloat(),
+                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 }

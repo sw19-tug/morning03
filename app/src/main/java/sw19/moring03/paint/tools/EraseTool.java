@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 
 public class EraseTool extends Tools {
-    private final int backgroundColor = Color.WHITE;
 
     public EraseTool() {
         points = new ArrayList<>();
@@ -29,6 +28,8 @@ public class EraseTool extends Tools {
         }
 
         int backUpColor = paint.getColor();
+
+        final int backgroundColor = Color.WHITE;
 
         paint.setColor(backgroundColor);
         for (int i = 1; i < points.size(); i++) {
