@@ -25,13 +25,12 @@ public class StrokeWidthChooserMenuBottomSheetDialog extends BottomSheetDialogFr
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.stroke_width_chooser_menu, container, false);
-        ((MainActivity)getContext()).setStrokeWidth(strokeWidth);
 
         SeekBar seekBar = view.findViewById(R.id.strokeWidth);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
-                strokeWidth = progresValue;
+            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                strokeWidth = progressValue;
                 ((MainActivity)getContext()).setStrokeWidth(strokeWidth);
 
             }

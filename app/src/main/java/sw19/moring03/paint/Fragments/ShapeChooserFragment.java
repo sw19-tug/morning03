@@ -37,6 +37,8 @@ public class ShapeChooserFragment extends DialogFragment {
                                     activity.setChosenTool(Tool.DRAW_OVAL);
                                     break;
                             }
+
+                            activity.setToolIcon();
                         }
                     }
                 }
