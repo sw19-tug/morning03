@@ -74,7 +74,7 @@ public class ToolsTouchTest {
 
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
 
-        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.strokeWidthChooserButton)).perform(click());
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(15));
         onView(withId(R.id.strokeWidth)).perform(ViewActions.pressBack());
 
