@@ -38,7 +38,39 @@ public class PhotoToolTest {
 
     }
 
+    @Test
+    public void testValidImage() {
+        Bitmap image = getBitmap();
+        PhotoTool tool = new PhotoTool(image);
+        tool.draw(canvas, paint);
+        assertTrue(tool.draw(canvas, paint));
+    }
 
+    @Test
+    public void testInvalidImage() {
+        Bitmap image = null;
+        PhotoTool tool = new PhotoTool(image);
+        assertFalse(tool.draw(canvas, paint));
+    }
+
+    @Test
+    public void testDrawOnImage(){
+        Bitmap image = getBitmap();
+        PhotoTool photoTool = new PhotoTool(image);
+        photoTool.draw(canvas, paint);
+
+        LineTool tool = new LineTool(5);
+        tool.addPoint(new PointF(10, 10));
+
+        assertFalse(tool.draw(canvas, paint));
+    }
+    
+    @Test
+    public void testInvalidLineOnImage(){
+        Bitmap image = getBitmap();
+        PhotoTool photoTool = new PhotoTool(image);
+        photoTool.draw(canvas, paint);
+    }
 
     @After
     public void tearDown() throws Exception {
