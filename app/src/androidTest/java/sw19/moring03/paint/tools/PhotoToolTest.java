@@ -64,7 +64,36 @@ public class PhotoToolTest {
 
         assertFalse(tool.draw(canvas, paint));
     }
-    
+
+    @Test
+    public void testAddPointsOnImage() {
+        List<PointF> expectedPoints = new ArrayList<>();
+        expectedPoints.add(new PointF(10, 10));
+        expectedPoints.add(new PointF(20, 20));
+        expectedPoints.add(new PointF(30, 30));
+
+        PathTool tool = new PathTool(5);
+        tool.addPoint(expectedPoints.get(0));
+        tool.addPoint(expectedPoints.get(1));
+        tool.addPoint(expectedPoints.get(2));
+
+        List<PointF> points = tool.getPoints();
+        assertArrayEquals(expectedPoints.toArray(), points.toArray());
+    }
+
+    @Test
+    public void testDrawShapesonImage() {
+        OvalTool tool = new OvalTool();
+
+        tool.addPoint(new PointF(15, 15));
+        tool.addPoint(new PointF(30, 30));
+        tool.addPoint(new PointF(60, 60));
+        tool.addPoint(new PointF(90, 90));
+
+        Assert.assertTrue(tool.draw(canvas, paint));
+    }
+
+
     @Test
     public void testInvalidLineOnImage(){
         Bitmap image = getBitmap();
