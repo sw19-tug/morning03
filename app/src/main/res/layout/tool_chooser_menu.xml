@@ -33,6 +33,14 @@
         />
 
     <Button
+        android:id="@+id/takePhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="chooseNewTool"
+        android:text="Take Photo" />
+
+    <Button
         android:id="@+id/drawLineButton"
         android:text="@string/drawLineButton"
         android:layout_width="match_parent"

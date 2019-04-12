@@ -1,6 +1,12 @@
 package sw19.moring03.paint;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,13 +14,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.InputStream;
 
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.Views.DrawingView;
 import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
 
+
+
+
 public class MainActivity extends AppCompatActivity {
+
+
 
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
@@ -30,12 +45,16 @@ public class MainActivity extends AppCompatActivity {
         this.strokeWidth = strokeWidth;
     }
 
+    public Bitmap new_photo;
+    public static final int PICK_IMAGE = 1;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         setToolIcon();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -77,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
         setToolIcon();
     }
 
+    private void pickFromGallery(){
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+        startActivityForResult(intent,PICK_IMAGE);
+
+    }
+
     public void chooseNewTool(View view) {
         switch (view.getId()) {
             case R.id.drawPointButton:
@@ -99,9 +127,28 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawPathButton:
                 setChosenTool(Tool.DRAW_PATH);
                 break;
+            case R.id.takePhoto:
+                pickFromGallery();
+                break;
         }
 
         toolChooserMenu.dismiss();
+    }
+
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+
+        // Result code is RESULT_OK only if the user selects an Image
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode){
+                case PICK_IMAGE:
+                    Uri imageUri = data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                        new_photo = bitmap;
+                        setChosenTool(Tool.TAKE_PHOTO);
+                    }catch(Exception ex){}
+                    break;
+            }
     }
 
     private void setToolIcon() {
