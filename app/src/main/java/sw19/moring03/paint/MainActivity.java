@@ -6,14 +6,22 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -102,14 +110,40 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(Tool.DRAW_PATH);
                 break;
             case R.id.cameraButton:
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, CAMERA_REQUEST);
+                //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //startActivityForResult(intent, CAMERA_REQUEST);
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePicture.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePicture, CAMERA_REQUEST);
+                }
                 break;
 
         }
 
         toolChooserMenu.dismiss();
     }
+
+
+    private void captureAndSafeCameraPicture() {
+        Intent catchPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (catchPhoto.resolveActivity(getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Couldt not take picture!", Toast.LENGTH_SHORT);
+            toast.show();
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "sw19.moring03.paint.fileprovider",
+                        photoFile);
+                catchPhoto.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(catchPhoto, CAMERA_REQUEST);
+            }
+        }
+    }
+
 
     public Color getChosenColor() {
         return chosenColor;
@@ -184,4 +218,34 @@ public class MainActivity extends AppCompatActivity {
             lastCameraPicture = rotatedCameraPicture;
         }
     }
+
+    String currentPhotoPath;
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(currentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }
+
+
+
+
 }
