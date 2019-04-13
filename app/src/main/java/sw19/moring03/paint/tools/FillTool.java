@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class FillTool extends Tools {
         if (points.size() == 1) {
             PointF start = points.remove(0);
             int scanColor = frameBuffer[(int)start.y * bufferWidth + (int)start.x];
-            scanlineFloodFill((int)start.x, (int)start.y, scanColor, color);
+            scanlineFloodFill((int)start.x, (int)start.y, scanColor);
         }
 
         if (points.size() % 2 != 0 || points.isEmpty()) {
@@ -46,6 +47,11 @@ public class FillTool extends Tools {
         return true;
     }
 
+    public void addLinePoints(PointF startPoint, PointF endPoint) {
+        super.addPoint(startPoint);
+        super.addPoint(endPoint);
+    }
+
     private int getPixel(int x, int y) {
         return this.frameBuffer[y * bufferWidth + x];
     }
@@ -54,7 +60,8 @@ public class FillTool extends Tools {
         this.frameBuffer[y * bufferWidth + x] = color;
     }
 
-    private void scanlineFloodFill(int x, int y, int scanColor, int newColor) {
+    @VisibleForTesting
+    public void scanlineFloodFill(int x, int y, int scanColor) {
         // adapted code from source: https://lodev.org/cgtutor/floodfill.html#Recursive_Scanline_Floodfill_Algorithm
         if (getPixel(x, y) != scanColor)
             return;
@@ -63,56 +70,56 @@ public class FillTool extends Tools {
         int xEnd = x;
         while (xEnd < bufferWidth && getPixel(xEnd, y) == scanColor)
         {
-            setPixel(xEnd, y, newColor);
+            setPixel(xEnd, y, color);
             xEnd++;
         }
-        points.add(new PointF(x, y));
-        points.add(new PointF(xEnd - 1, y));
+        addLinePoints(new PointF(x, y), new PointF(xEnd - 1, y));
 
         // scanline left
         xEnd = x - 1;
         while (xEnd >= 0 && getPixel(xEnd, y) == scanColor)
         {
-            setPixel(xEnd, y, newColor);
+            setPixel(xEnd, y, color);
             xEnd--;
         }
-        points.add(new PointF(x, y));
-        points.add(new PointF(xEnd + 1, y));
+        if (x != xEnd + 1) {
+            addLinePoints(new PointF(x, y), new PointF(xEnd + 1, y));
+        }
 
         // add recursive scanline above
         xEnd = x;
-        while (y > 0 && xEnd < bufferWidth && getPixel(xEnd, y) == newColor)
+        while (y > 0 && xEnd < bufferWidth && getPixel(xEnd, y) == color)
         {
             if (getPixel(xEnd, y - 1) == scanColor) {
-                scanlineFloodFill(xEnd, y - 1, scanColor, newColor);
+                scanlineFloodFill(xEnd, y - 1, scanColor);
             }
             xEnd++;
         }
 
         xEnd = x - 1;
-        while (y > 0 && xEnd >= 0 && getPixel(xEnd, y) == newColor)
+        while (y > 0 && xEnd >= 0 && getPixel(xEnd, y) == color)
         {
             if (getPixel(xEnd, y - 1) == scanColor) {
-                scanlineFloodFill(xEnd, y - 1, scanColor, newColor);
+                scanlineFloodFill(xEnd, y - 1, scanColor);
             }
             xEnd--;
         }
 
         // add recursive scanline below
         xEnd = x;
-        while (y < bufferHeight - 1 && xEnd < bufferWidth && getPixel(xEnd, y) == newColor)
+        while (y < bufferHeight - 1 && xEnd < bufferWidth && getPixel(xEnd, y) == color)
         {
             if (getPixel(xEnd, y + 1) == scanColor) {
-                scanlineFloodFill(xEnd, y + 1, scanColor, newColor);
+                scanlineFloodFill(xEnd, y + 1, scanColor);
             }
             xEnd++;
         }
 
         xEnd = x - 1;
-        while (y < bufferHeight - 1 && xEnd >= 0 && getPixel(xEnd, y) == newColor)
+        while (y < bufferHeight - 1 && xEnd >= 0 && getPixel(xEnd, y) == color)
         {
             if (getPixel(xEnd, y + 1) == scanColor) {
-                scanlineFloodFill(xEnd, y + 1, scanColor, newColor);
+                scanlineFloodFill(xEnd, y + 1, scanColor);
             }
             xEnd--;
         }

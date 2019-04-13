@@ -35,7 +35,7 @@
 
     <view
         class="sw19.moring03.paint.Views.DrawingView"
-        id="@+id/drawingView"
+        android:id="@+id/drawingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

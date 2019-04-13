@@ -1,6 +1,5 @@
 package sw19.moring03.paint;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.FillTool;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -63,14 +63,14 @@ public class FillTest {
 
     @Test
     public void testFillOfWholeDrawingArea() {
-        final int expectedLines = 20;
+        final int expectedLines = 10;
 
         int[] frame = new int[100];
 
         canvas = Mockito.spy(Canvas.class);
 
         FillTool tool = new FillTool(Color.BLACK, frame, 10, 10);
-        tool.addPoint(new PointF(5, 5));
+        tool.addPoint(new PointF(0, 0));
         tool.draw(canvas, paint);
 
         Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(
@@ -79,7 +79,7 @@ public class FillTest {
 
     @Test
     public void testFillRectangle() {
-        final int expectedLines = 1;
+        final int expectedPoints = 2;
 
         int[] frame = new int[] {
                 1, 1, 1,
@@ -87,13 +87,47 @@ public class FillTest {
                 1, 1, 1
         };
 
-        canvas = Mockito.spy(Canvas.class);
-
         FillTool tool = new FillTool(Color.BLACK, frame, 3, 3);
-        tool.addPoint(new PointF(1, 1));
-        tool.draw(canvas, paint);
+        tool.scanlineFloodFill(1, 1, 0);
 
-        Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        assertEquals(expectedPoints, tool.getPoints().size());
+    }
+
+    @Test
+    public void testFillCircle() {
+        final int expectedPoints = 12;
+
+        int[] frame = new int[] {
+                0, 1, 1, 1, 0,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
+                0, 1, 1, 1, 0
+        };
+
+        FillTool tool = new FillTool(Color.BLACK, frame, 5, 5);
+        tool.scanlineFloodFill(2, 2, 0);
+
+        assertEquals(expectedPoints, tool.getPoints().size());
+    }
+
+    @Test
+    public void testFillHeartShape() {
+        final int expectedPoints = 14;
+
+        int[] frame = new int[] {
+                0, 1, 0, 1, 0,
+                1, 0, 1, 0, 1,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
+                0, 1, 0, 1, 0,
+                0, 0, 1, 0, 0
+        };
+
+        FillTool tool = new FillTool(Color.BLACK, frame, 5, 6);
+        tool.scanlineFloodFill(2, 2, 0);
+
+        assertEquals(expectedPoints, tool.getPoints().size());
     }
 }
+
