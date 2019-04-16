@@ -30,7 +30,8 @@ public class FillToolEspressoTest {
 
     @Test
     public void testFillRectangle() {
-        final int expectedPoints = 40;
+        final int expectedPoints = 12;
+
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawShapesButton)).perform(click());
         onView(withText("Rectangle")).perform(click());
@@ -49,9 +50,8 @@ public class FillToolEspressoTest {
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         List<Tools> pointsToDraw = view.getObjectsToPaint();
 
-        Tools lastTool = pointsToDraw.get(pointsToDraw.size() - 1);
+        Tools fillTool = pointsToDraw.get(pointsToDraw.size() - 1);
 
-        assertEquals(expectedPoints, lastTool.getPoints().size());
-
+        assertEquals(expectedPoints, fillTool.getPoints().size());
     }
 }

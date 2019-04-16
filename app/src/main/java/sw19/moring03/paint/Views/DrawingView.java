@@ -36,7 +36,7 @@ public class DrawingView extends View {
         super(c, attributeSet);
         this.setDrawingCacheEnabled(true);
         mPaint = new Paint();
-        mPaint.setAntiAlias(true);
+        mPaint.setAntiAlias(false);
         mPaint.setColor(getResources().getColor(R.color.black));
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(((MainActivity)getContext()).getStrokeWidth());
