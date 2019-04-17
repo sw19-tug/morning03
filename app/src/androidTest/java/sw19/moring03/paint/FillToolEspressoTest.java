@@ -54,4 +54,45 @@ public class FillToolEspressoTest {
 
         assertEquals(expectedPoints, fillTool.getPoints().size());
     }
+
+    @Test
+    public void testPartialBoxFill() {
+        final int expectedPointsWholeFill = 644;
+        final int expectedPointsPartialFill = 500;
+
+        // draw black box
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
+        onView(withText("Rectangle")).perform(click());
+        onView(withId(R.id.drawingView)).perform(swipe(400, 400, 600, 600));
+
+        // fill inside of box red
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawFillButton)).perform(click());
+        onView(withId(R.id.colorChooserButton)).perform(click());
+        onView(withId(R.id.redButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
+
+        // draw vertical green line through box
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawLineButton)).perform(click());
+        onView(withId(R.id.colorChooserButton)).perform(click());
+        onView(withId(R.id.darkGreenButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(swipe(400, 500, 600, 500));
+
+        // fill area above green line orange
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawFillButton)).perform(click());
+        onView(withId(R.id.colorChooserButton)).perform(click());
+        onView(withId(R.id.orangeButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
+
+        // the first fill should fill the whole box (644 points needed) while the second fill should only fill
+        // the upper part of the box (500 points needed)
+        DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
+        Tools wholeBoxFill = view.getObjectsToPaint().get(1);
+        assertEquals(expectedPointsWholeFill, wholeBoxFill.getPoints().size());
+        Tools upperPartFill = view.getObjectsToPaint().get(3);
+        assertEquals(expectedPointsPartialFill, upperPartFill.getPoints().size());
+    }
 }
