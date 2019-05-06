@@ -58,7 +58,9 @@ public class DrawingView extends View {
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                addPoint(xCoord, yCoord);
+                if (((MainActivity) getContext()).getChosenTool() != Tool.FILL) {
+                    addPoint(xCoord, yCoord);
+                }
                 invalidate();
                 break;
         }
@@ -94,8 +96,10 @@ public class DrawingView extends View {
 
         switch (chosenTool) {
             case FILL:
+                this.setDrawingCacheEnabled(true);
                 this.buildDrawingCache();
                 Bitmap bitmap = Bitmap.createBitmap(this.getDrawingCache());
+                this.setDrawingCacheEnabled(false);
                 int[] frameBuffer = new int[bitmap.getWidth() * bitmap.getHeight()];
                 bitmap.getPixels(frameBuffer, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
                 objectsToPaint.add(new FillTool(getColor(), frameBuffer, bitmap.getWidth(), bitmap.getHeight()));

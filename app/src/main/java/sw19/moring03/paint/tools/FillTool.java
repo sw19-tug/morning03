@@ -46,7 +46,7 @@ public class FillTool extends Tools {
 
         return true;
     }
-
+    
     public void addLinePoints(PointF startPoint, PointF endPoint) {
         super.addPoint(startPoint);
         super.addPoint(endPoint);
@@ -73,7 +73,7 @@ public class FillTool extends Tools {
             setPixel(xEnd, y, color);
             xEnd++;
         }
-        addLinePoints(new PointF(x, y), new PointF(xEnd - 1, y));
+        addLinePoints(new PointF(x, y), new PointF(xEnd, y));
 
         // scanline left
         xEnd = x - 1;
@@ -83,7 +83,7 @@ public class FillTool extends Tools {
             xEnd--;
         }
         if (x != xEnd + 1) {
-            addLinePoints(new PointF(x, y), new PointF(xEnd + 1, y));
+            addLinePoints(new PointF(x, y), new PointF(xEnd, y));
         }
 
         // add recursive scanline above
@@ -124,5 +124,4 @@ public class FillTool extends Tools {
             xEnd--;
         }
     }
-
 }

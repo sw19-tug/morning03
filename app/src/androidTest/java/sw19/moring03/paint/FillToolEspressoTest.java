@@ -1,6 +1,5 @@
 package sw19.moring03.paint;
 
-import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -58,7 +57,7 @@ public class FillToolEspressoTest {
     @Test
     public void testPartialBoxFill() {
         final int expectedPointsWholeFill = 644;
-        final int expectedPointsPartialFill = 500;
+        final int expectedPointsPartialFill = 388;
 
         // draw black box
         onView(withId(R.id.toolChooserButton)).perform(click());
@@ -88,7 +87,7 @@ public class FillToolEspressoTest {
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
 
         // the first fill should fill the whole box (644 points needed) while the second fill should only fill
-        // the upper part of the box (500 points needed)
+        // the upper part of the box (388 points needed)
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         Tools wholeBoxFill = view.getObjectsToPaint().get(1);
         assertEquals(expectedPointsWholeFill, wholeBoxFill.getPoints().size());
