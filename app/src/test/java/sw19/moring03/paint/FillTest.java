@@ -3,7 +3,7 @@ package sw19.moring03.paint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -88,14 +88,14 @@ public class FillTest {
         };
 
         FillTool tool = new FillTool(Color.BLACK, frame, 3, 3);
-        tool.scanlineFloodFill(1, 1, 0);
+        tool.scanlineFloodFillStack(1, 1, 0);
 
         assertEquals(expectedPoints, tool.getPoints().size());
     }
 
     @Test
     public void testFillCircle() {
-        final int expectedPoints = 12;
+        final int expectedPoints = 6;
 
         int[] frame = new int[] {
                 0, 1, 1, 1, 0,
@@ -106,14 +106,14 @@ public class FillTest {
         };
 
         FillTool tool = new FillTool(Color.BLACK, frame, 5, 5);
-        tool.scanlineFloodFill(2, 2, 0);
+        tool.scanlineFloodFillStack(2, 2, 0);
 
         assertEquals(expectedPoints, tool.getPoints().size());
     }
 
     @Test
     public void testFillHeartShape() {
-        final int expectedPoints = 14;
+        final int expectedPoints = 10;
 
         int[] frame = new int[] {
                 0, 1, 0, 1, 0,
@@ -125,7 +125,7 @@ public class FillTest {
         };
 
         FillTool tool = new FillTool(Color.BLACK, frame, 5, 6);
-        tool.scanlineFloodFill(2, 2, 0);
+        tool.scanlineFloodFillStack(2, 2, 0);
 
         assertEquals(expectedPoints, tool.getPoints().size());
     }

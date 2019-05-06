@@ -18,9 +18,6 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static sw19.moring03.paint.util.Interaction.swipe;
 import static sw19.moring03.paint.util.Interaction.touchAt;
 
@@ -32,7 +29,7 @@ public class FillToolEspressoTest {
 
     @Test
     public void testFillRectangle() {
-        final int expectedPoints = 12;
+        final int expectedPoints = 6;
 
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawShapesButton)).perform(click());
@@ -59,8 +56,8 @@ public class FillToolEspressoTest {
 
     @Test
     public void testPartialBoxFill() {
-        final int expectedPointsWholeFill = 644;
-        final int expectedPointsPartialFill = 388;
+        final int expectedPointsWholeFill = 322;
+        final int expectedPointsPartialFill = 194;
 
         // draw black box
         onView(withId(R.id.toolChooserButton)).perform(click());
@@ -100,7 +97,7 @@ public class FillToolEspressoTest {
 
     @Test
     public void testLineFill() {
-        final int expectedPointsFill = 221;
+        final int expectedPointsFill = 110;
 
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
@@ -120,7 +117,7 @@ public class FillToolEspressoTest {
 
     @Test
     public void testTriangleFill() {
-        final int expectedPointsFill = 100;
+        final int expectedPointsFill = 102;
 
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
