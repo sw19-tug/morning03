@@ -18,6 +18,9 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static sw19.moring03.paint.util.Interaction.swipe;
 import static sw19.moring03.paint.util.Interaction.touchAt;
 
@@ -93,5 +96,45 @@ public class FillToolEspressoTest {
         assertEquals(expectedPointsWholeFill, wholeBoxFill.getPoints().size());
         Tools upperPartFill = view.getObjectsToPaint().get(3);
         assertEquals(expectedPointsPartialFill, upperPartFill.getPoints().size());
+    }
+
+    @Test
+    public void testLineFill() {
+        final int expectedPointsFill = 221;
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawLineButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(swipe(400, 420, 500, 420));
+        onView(withId(R.id.drawingView)).perform(swipe(480, 400, 480, 500));
+        onView(withId(R.id.drawingView)).perform(swipe(500, 480, 400, 480));
+        onView(withId(R.id.drawingView)).perform(swipe(420, 500, 420, 400));
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawFillButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
+
+        DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
+        Tools wholeBoxFill = view.getObjectsToPaint().get(view.getObjectsToPaint().size() - 1);
+        assertEquals(expectedPointsFill, wholeBoxFill.getPoints().size());
+    }
+
+    @Test
+    public void testTriangleFill() {
+        final int expectedPointsFill = 100;
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawLineButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(swipe(400, 420, 500, 420));
+        onView(withId(R.id.drawingView)).perform(swipe(480, 400, 480, 500));
+        onView(withId(R.id.drawingView)).perform(swipe(500, 500, 400, 400));
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawFillButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(touchAt(470, 430));
+
+        DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
+        Tools wholeBoxFill = view.getObjectsToPaint().get(view.getObjectsToPaint().size() - 1);
+        assertEquals(expectedPointsFill, wholeBoxFill.getPoints().size());
+
     }
 }
