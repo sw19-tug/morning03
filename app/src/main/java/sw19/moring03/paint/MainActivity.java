@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void setStrokeWidth(int strokeWidth) {
         this.strokeWidth = strokeWidth;
+        MenuItem menuItem = menu.findItem(R.id.strokeWidthChooserButton);
+        menuItem.setTitle(strokeWidth + "pt");
     }
 
     @Override

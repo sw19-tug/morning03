@@ -14,4 +14,5 @@
     <string name="drawing_tool">Choose Drawing Tool</string>
     <string name="color">Choose Color</string>
     <string name="choose_stroke_width_for_drawing_tool">Choose Stroke Width for Drawing Tool</string>
+    <string name="stroke_width_display">5pt</string>
 </resources>

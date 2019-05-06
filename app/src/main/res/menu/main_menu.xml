@@ -4,24 +4,20 @@
     tools:context="com.example.bar.MainActivity">
 
     <item
+        android:id="@+id/strokeWidthChooserButton"
+        android:title="@string/stroke_width_display"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/toolChooserButton"
-        android:orderInCategory="100"
         android:icon="@drawable/ic_point_icon"
         android:title="@string/toolChooserButton"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/colorChooserButton"
-        android:orderInCategory="100"
         android:icon="@drawable/ic_color_lens_black_24dp"
         android:title="@string/colorChooserButton"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/strokeWidthChooserButton"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_panorama_fish_eye_black_24dp"
-        android:title="@string/choose_stroke_width_for_drawing_tool"
         app:showAsAction="ifRoom" />
 
 </menu>
