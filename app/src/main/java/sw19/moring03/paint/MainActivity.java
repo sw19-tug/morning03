@@ -2,6 +2,7 @@ package sw19.moring03.paint;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
-    private int chosenColor = R.color.black;
+    @ColorInt private int chosenColor;
     private int strokeWidth = 5;
     private Menu menu;
 
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         toolChooserMenu = new ToolChooserMenuBottomSheetDialog();
         colorChooserMenu = new ColorChooserMenuBottomSheetDialog();
         strokeWidthChooserMenu = new StrokeWidthChooserMenuBottomSheetDialog();
+
+        chosenColor = getResources().getColor(R.color.black);
     }
 
     @Override
@@ -154,7 +157,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setChosenColor(int chosenColor) {
-        this.chosenColor = chosenColor;
+        this.chosenColor = getResources().getColor(chosenColor);
+    }
+
+    public void setChosenColorInt(int colorInt) {
+        this.chosenColor = colorInt;
+        setColorToIconTint();
     }
 
     public void chooseNewColor(View view) {
@@ -198,16 +206,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         colorChooserMenu.dismiss();
-        setColorToIconTint(view);
+        setColorToIconTint();
     }
 
-    private void setColorToIconTint(View view) {
+    private void setColorToIconTint() {
         MenuItem menuItem = menu.findItem(R.id.colorChooserButton);
 
         Drawable drawable = menuItem.getIcon();
         drawable = DrawableCompat.wrap(drawable);
 
-        DrawableCompat.setTint(drawable, view.getResources().getColor(chosenColor));
+        DrawableCompat.setTint(drawable, chosenColor);
         menuItem.setIcon(drawable);
     }
 }

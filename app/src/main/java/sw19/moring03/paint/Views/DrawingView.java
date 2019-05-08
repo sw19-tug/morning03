@@ -116,8 +116,7 @@ public class DrawingView extends View {
 
     @VisibleForTesting
     public int getColor() {
-        int chosenColor = ((MainActivity) getContext()).getChosenColor();
-        return getResources().getColor(chosenColor);
+        return ((MainActivity) getContext()).getChosenColor();
     }
 
     @VisibleForTesting

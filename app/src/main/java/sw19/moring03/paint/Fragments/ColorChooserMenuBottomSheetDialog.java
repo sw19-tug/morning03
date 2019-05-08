@@ -1,6 +1,8 @@
 package sw19.moring03.paint.Fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ public class ColorChooserMenuBottomSheetDialog extends BottomSheetDialogFragment
     private int red = 0;
     private int green = 0;
     private int blue = 0;
+    @ColorInt
+    private int chosenColor;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,7 +29,8 @@ public class ColorChooserMenuBottomSheetDialog extends BottomSheetDialogFragment
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
                 red = progressValue;
-                ((MainActivity)getContext()).setChosenColor(R.color.custom);
+                chosenColor = Color.rgb(red, green, blue);
+                ((MainActivity)getContext()).setChosenColorInt(chosenColor);
 
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -38,7 +43,8 @@ public class ColorChooserMenuBottomSheetDialog extends BottomSheetDialogFragment
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
                 green = progressValue;
-                ((MainActivity)getContext()).setChosenColor(R.color.custom);
+                chosenColor = Color.rgb(red, green, blue);
+                ((MainActivity)getContext()).setChosenColorInt(chosenColor);
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
@@ -50,7 +56,8 @@ public class ColorChooserMenuBottomSheetDialog extends BottomSheetDialogFragment
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
                 blue = progressValue;
-                ((MainActivity)getContext()).setChosenColor(R.color.custom);
+                chosenColor = Color.rgb(red, green, blue);
+                ((MainActivity)getContext()).setChosenColorInt(chosenColor);
             }
             @Override public void onStartTrackingTouch(SeekBar seekBar) { }
             @Override public void onStopTrackingTouch(SeekBar seekBar) { }
