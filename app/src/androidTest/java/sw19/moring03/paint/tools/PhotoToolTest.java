@@ -32,7 +32,7 @@ public class PhotoToolTest {
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         canvas = new Canvas();
         paint = new Paint();
 
@@ -54,7 +54,7 @@ public class PhotoToolTest {
     }
 
     @Test
-    public void testDrawOnImage(){
+    public void testDrawOnImage() {
         Bitmap image = getBitmap();
         PhotoTool photoTool = new PhotoTool(image);
         photoTool.draw(canvas, paint);
@@ -82,7 +82,7 @@ public class PhotoToolTest {
     }
 
     @Test
-    public void testDrawShapesonImage() {
+    public void testDrawShapesOnImage() {
         OvalTool tool = new OvalTool();
 
         tool.addPoint(new PointF(15, 15));
@@ -95,25 +95,18 @@ public class PhotoToolTest {
 
 
     @Test
-    public void testInvalidLineOnImage(){
-        Bitmap image = getBitmap();
-        PhotoTool photoTool = new PhotoTool(image);
+    public void testInvalidLineOnImage() {
+        Bitmap tmp_image = getBitmap();
+        PhotoTool photoTool = new PhotoTool(tmp_image);
         photoTool.draw(canvas, paint);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown(){
     }
 
 
-    private Bitmap getBitmap()
-    {
-        try {
-            Bitmap bitmap = BitmapFactory.decodeResource(activityTestRule.getActivity().getResources(), R.drawable.test_image);
-            Bitmap new_photo = bitmap;
-            return new_photo;
-
-        } catch (Exception ex) {}
-        return null;
+    private Bitmap getBitmap() {
+        return BitmapFactory.decodeResource(activityTestRule.getActivity().getResources(), R.drawable.test_image);
     }
 }

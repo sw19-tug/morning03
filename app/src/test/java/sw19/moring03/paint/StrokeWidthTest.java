@@ -3,17 +3,14 @@ package sw19.moring03.paint;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-
 import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.LineTool;
-import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.PathTool;
+import sw19.moring03.paint.tools.PointTool;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
