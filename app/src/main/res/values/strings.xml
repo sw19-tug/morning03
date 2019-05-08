@@ -15,4 +15,7 @@
     <string name="color">Choose Color</string>
     <string name="choose_stroke_width_for_drawing_tool">Choose Stroke Width for Drawing Tool</string>
     <string name="stroke_width_display">5pt</string>
+    <string name="red_slider_label">Red:</string>
+    <string name="blue">Blue:</string>
+    <string name="green">Green:</string>
 </resources>
