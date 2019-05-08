@@ -26,18 +26,18 @@ public final class Interaction {
                 new CoordProvider(x, y), Press.FINGER, 0, 0));
     }
 
-    public static ViewAction swipe(int start_x, int start_y, int end_x, int end_y) {
-        return swipe((float) start_x, (float) start_y, (float) end_x, (float) end_y);
+    public static ViewAction swipe(int xStart, int yStart, int xEnd, int yEnd) {
+        return swipe((float) xStart, (float) yStart, (float) xEnd, (float) yEnd);
     }
 
-    public static ViewAction swipe(float start_x, float start_y, float end_x, float end_y) {
-        return swipe(start_x, start_y, end_x, end_y, Swipe.SLOW);
+    public static ViewAction swipe(float xStart, float yStart, float xEnd, float yEnd) {
+        return swipe(xStart, yStart, xEnd, yEnd, Swipe.SLOW);
     }
 
-    public static ViewAction swipe(float start_x, float start_y, float end_x, float end_y, Swiper swiper) {
+    public static ViewAction swipe(float xStart, float yStart, float xEnd, float yEnd, Swiper swiper) {
         return actionWithAssertions(new GeneralSwipeAction(swiper,
-                new CoordProvider(start_x, start_y),
-                new CoordProvider(end_x, end_y), Press.PINPOINT));
+                new CoordProvider(xStart, yStart),
+                new CoordProvider(xEnd, yEnd), Press.PINPOINT));
     }
 
     public static ViewAction changeValueOfStrokeWidthSeekBar(int pathWidth) {

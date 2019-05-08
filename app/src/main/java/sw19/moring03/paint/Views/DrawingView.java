@@ -27,7 +27,6 @@ import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
 import sw19.moring03.paint.tools.PathTool;
 
-
 public class DrawingView extends View {
     private Paint mPaint;
     private List<Tools> objectsToPaint;
@@ -68,11 +67,16 @@ public class DrawingView extends View {
     }
 
     @Override
+    public boolean performClick() {
+        return super.performClick();
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if(objectsToPaint != null) {
-            for(Tools tool : objectsToPaint) {
+        if (objectsToPaint != null) {
+            for (Tools tool : objectsToPaint) {
                 mPaint.setStrokeWidth(tool.getStrokeWidth());
                 mPaint.setColor(tool.getColor());
                 tool.draw(canvas, mPaint);
@@ -80,12 +84,11 @@ public class DrawingView extends View {
         }
     }
 
-
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
 
-        if(objectsToPaint.size() != 0) {
-            objectsToPaint.get(objectsToPaint.size()-1).addPoint(point);
+        if (objectsToPaint.size() != 0) {
+            objectsToPaint.get(objectsToPaint.size() - 1).addPoint(point);
         }
     }
 
@@ -96,14 +99,11 @@ public class DrawingView extends View {
 
         switch (chosenTool) {
             case FILL:
-                this.setDrawingCacheEnabled(true);
-                this.buildDrawingCache();
-                Bitmap bitmap = Bitmap.createBitmap(this.getDrawingCache());
-                this.setDrawingCacheEnabled(false);
+                Bitmap bitmap = getCurrentBitmap();
                 int[] frameBuffer = new int[bitmap.getWidth() * bitmap.getHeight()];
                 bitmap.getPixels(frameBuffer, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
                 objectsToPaint.add(new FillTool(getColor(), frameBuffer, bitmap.getWidth(), bitmap.getHeight()));
-                break;
+            break;
             case ERASER:
                 objectsToPaint.add(new EraseTool(strokeWidth));
                 break;
@@ -126,6 +126,14 @@ public class DrawingView extends View {
                 objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
                 break;
         }
+    }
+
+    private Bitmap getCurrentBitmap() {
+        this.setDrawingCacheEnabled(true);
+        this.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(this.getDrawingCache());
+        this.setDrawingCacheEnabled(false);
+        return bitmap;
     }
 
     private int getColor() {

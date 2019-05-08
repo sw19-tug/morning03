@@ -4,11 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -37,8 +35,7 @@ public class StrokeWidthTest {
         int lineStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 
-        if(lineStrokeWidth > 1  && lineStrokeWidth < 51)
-        {
+        if (lineStrokeWidth > 1  && lineStrokeWidth < 51) {
             isInRange = true;
         }
 
@@ -49,12 +46,10 @@ public class StrokeWidthTest {
     public void testStrokeWidthPath() {
         PathTool tool = new PathTool(Color.BLACK,5);
 
-        int PathStrokeWidth = tool.getStrokeWidth();
+        int pathStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 
-
-        if(PathStrokeWidth > 1  && PathStrokeWidth < 51)
-        {
+        if (pathStrokeWidth > 1  && pathStrokeWidth < 51) {
             isInRange = true;
         }
 
@@ -65,12 +60,10 @@ public class StrokeWidthTest {
     public void testStrokeWidthPoint() {
         PointTool tool = new PointTool(Color.BLACK,5);
 
-        int PointStrokeWidth = tool.getStrokeWidth();
+        int pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 
-
-        if(PointStrokeWidth > 1  && PointStrokeWidth < 51)
-        {
+        if (pointStrokeWidth > 1  && pointStrokeWidth < 51) {
             isInRange = true;
         }
 
@@ -81,10 +74,11 @@ public class StrokeWidthTest {
     public void testStrokeWidthPointFalse() {
         int pointStrokeWidth = 0;
         PointTool tool = new PointTool(Color.BLACK, pointStrokeWidth);
+
         pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
-        if(pointStrokeWidth < 1  && pointStrokeWidth > 50)
-        {
+
+        if (pointStrokeWidth < 1  && pointStrokeWidth > 50) {
             isInRange = true;
         }
         assertFalse(isInRange);

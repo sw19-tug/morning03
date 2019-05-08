@@ -1,6 +1,5 @@
 package sw19.moring03.paint;
 
-
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import sw19.moring03.paint.utils.PointF;

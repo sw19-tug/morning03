@@ -31,10 +31,10 @@ public class EraseTest {
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
 
-        int tmp_color = paint.getColor();
+        int tmpColor = paint.getColor();
 
         assertTrue(tool.draw(canvas, paint));
-        assertEquals(tmp_color, paint.getColor());
+        assertEquals(tmpColor, paint.getColor());
     }
 
 }

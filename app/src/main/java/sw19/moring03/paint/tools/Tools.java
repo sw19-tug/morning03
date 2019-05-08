@@ -29,7 +29,9 @@ public abstract class Tools {
         return strokeWidth;
     }
 
-    protected static int getBackgroundColor() { return backgroundColor; }
+    protected static int getBackgroundColor() {
+        return backgroundColor;
+    }
 
     public int getColor() {
         return color;

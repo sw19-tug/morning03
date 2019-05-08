@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     private void setToolIcon() {
         ImageView imageView = findViewById(R.id.toolIcon);
 
-        switch(getChosenTool()) {
+        switch (getChosenTool()) {
             case DRAW_LINE:
                 imageView.setImageResource(R.drawable.ic_line_icon);
                 break;
