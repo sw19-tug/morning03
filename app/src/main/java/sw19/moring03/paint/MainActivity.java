@@ -26,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     private int strokeWidth = 5;
     private Menu menu;
 
+    public Menu getMenu() {
+        return menu;
+    }
+
     public int getStrokeWidth() {
         return strokeWidth;
     }
@@ -201,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.colorChooserButton);
 
         Drawable drawable = menuItem.getIcon();
-
         drawable = DrawableCompat.wrap(drawable);
 
         DrawableCompat.setTint(drawable, view.getResources().getColor(chosenColor));
