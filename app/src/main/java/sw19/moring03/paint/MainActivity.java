@@ -9,10 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
+import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
 
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
+    private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
@@ -31,21 +32,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void setStrokeWidth(int strokeWidth) {
         this.strokeWidth = strokeWidth;
+        MenuItem menuItem = menu.findItem(R.id.strokeWidthChooserButton);
+        menuItem.setTitle(strokeWidth + "pt");
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setToolIcon();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         toolChooserMenu = new ToolChooserMenuBottomSheetDialog();
         colorChooserMenu = new ColorChooserMenuBottomSheetDialog();
+        strokeWidthChooserMenu = new StrokeWidthChooserMenuBottomSheetDialog();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.strokeWidthChooserButton) {
+            strokeWidthChooserMenu.show(getSupportFragmentManager(), "strokeWidthChooserMenu");
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -77,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void setChosenTool(Tool chosenTool) {
         this.chosenTool = chosenTool;
-        setToolIcon();
     }
 
     public void chooseNewTool(View view) {
@@ -105,35 +111,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         toolChooserMenu.dismiss();
+        setToolIcon();
     }
 
-    private void setToolIcon() {
-        ImageView imageView = findViewById(R.id.toolIcon);
+    public void setToolIcon() {
+        MenuItem menuItem = menu.findItem(R.id.toolChooserButton);
 
         switch (getChosenTool()) {
             case DRAW_LINE:
-                imageView.setImageResource(R.drawable.ic_line_icon);
+                menuItem.setIcon(R.drawable.ic_line_icon);
                 break;
             case DRAW_CIRCLE:
-                imageView.setImageResource(R.drawable.ic_circle_icon);
+                menuItem.setIcon(R.drawable.ic_circle_icon);
                 break;
             case DRAW_PATH:
-                imageView.setImageResource(R.drawable.ic_path_icon);
+                menuItem.setIcon(R.drawable.ic_path_icon);
                 break;
             case DRAW_OVAL:
-                imageView.setImageResource(R.drawable.ic_oval_icon);
+                menuItem.setIcon(R.drawable.ic_oval_icon);
                 break;
             case DRAW_POINT:
-                imageView.setImageResource(R.drawable.ic_point_icon);
+                menuItem.setIcon(R.drawable.ic_point_icon);
                 break;
             case DRAW_RECTANGLE:
-                imageView.setImageResource(R.drawable.ic_rectangle_icon);
+                menuItem.setIcon(R.drawable.ic_rectangle_icon);
                 break;
             case FILL:
-                imageView.setImageResource(R.drawable.ic_fill_icon);
+                menuItem.setIcon(R.drawable.ic_fill_icon);
                 break;
             case ERASER:
-                imageView.setImageResource(R.drawable.ic_eraser_icon);
+                menuItem.setIcon(R.drawable.ic_eraser_icon);
                 break;
         }
     }

@@ -23,7 +23,7 @@ public class StrokeWidthTest {
 
     @Test
     public void testStrokeWidthSliderVisible() {
-        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.strokeWidthChooserButton)).perform(click());
 
         onView(withId(R.id.strokeWidth)).check(matches(isDisplayed()));
     }
@@ -34,7 +34,7 @@ public class StrokeWidthTest {
         final int expectedStrokeWidth = 15;
 
         assertEquals(expectedInitialWidth, launchActivityRule.getActivity().getStrokeWidth());
-        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.strokeWidthChooserButton)).perform(click());
 
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(expectedStrokeWidth));
 
