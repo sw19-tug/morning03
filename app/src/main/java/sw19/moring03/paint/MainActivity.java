@@ -1,7 +1,10 @@
 package sw19.moring03.paint;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.Random;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
@@ -18,12 +24,17 @@ import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int CAMERA_REQUEST = 60;
+
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
     private Menu menu;
+
+    Bitmap lastCameraPicture = null;
+    String lastCameraPicturePath = null;
 
     public int getStrokeWidth() {
         return strokeWidth;
@@ -101,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.drawPathButton:
                 setChosenTool(Tool.DRAW_PATH);
+                break;
+            case R.id.cameraButton:
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePicture.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePicture, CAMERA_REQUEST);
+                }
                 break;
         }
 
@@ -200,4 +217,64 @@ public class MainActivity extends AppCompatActivity {
         DrawableCompat.setTint(drawable, view.getResources().getColor(chosenColor));
         menuItem.setIcon(drawable);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CAMERA_REQUEST)
+        {
+            try {
+                Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
+
+                if(cameraPicture == null)
+                    return;
+
+                lastCameraPicture = cameraPicture;
+                saveLastCameraPicture();
+
+            }
+            catch (Exception e)
+            {
+                Toast toast = Toast.makeText(getApplicationContext(), "Error while handling Camera request!", Toast.LENGTH_SHORT);
+                toast.show();
+                lastCameraPicturePath = null;
+                lastCameraPicture = null;
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void saveLastCameraPicture() {
+
+        if(lastCameraPicture == null)
+        {
+            Toast toast = Toast.makeText(getApplicationContext(), "First, take a picture :)", Toast.LENGTH_SHORT);
+            toast.show();
+            return;
+        }
+
+        Random generator = new Random();
+        int n = 100000;
+        n = generator.nextInt(n);
+        String fname = "Paint-"+ n +".jpg";
+        try {
+            String savedImageURI = MediaStore.Images.Media.insertImage(getContentResolver(),
+                    lastCameraPicture,
+                    fname,
+                    fname);
+            lastCameraPicturePath = savedImageURI;
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Image Saved to Gallery", Toast.LENGTH_SHORT);
+            toast.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast toast = Toast.makeText(getApplicationContext(), "Could not save Image. Check permissions in app settings.", Toast.LENGTH_LONG);
+            toast.show();
+            lastCameraPicture = null;
+            lastCameraPicturePath = null;
+        }
+    }
+
 }

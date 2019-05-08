@@ -73,5 +73,13 @@
         android:layout_weight="1"
         android:onClick="chooseNewTool"
         />
+    <Button
+        android:id="@+id/cameraButton"
+        android:text="@string/drawCameraPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="chooseNewTool"
+        />
 </LinearLayout>
 
