@@ -23,7 +23,7 @@ public class ColorChooserTest {
     public ActivityTestRule<MainActivity> launchActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void testStrokeWidthSliderVisible() {
+    public void testRGBSliderVisible() {
         onView(withId(R.id.colorChooserButton)).perform(click());
 
         onView(withId(R.id.redSlider)).check(matches(isDisplayed()));
@@ -32,7 +32,7 @@ public class ColorChooserTest {
     }
 
     @Test
-    public void testStrokeWidthChange() {
+    public void testRGBSliderChange() {
         final int expectedInitialColor = 0xFFFFFF;
         final int expectedColor = 0x7529D8;
 
