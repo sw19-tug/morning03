@@ -16,4 +16,5 @@
     <color name="lightGreen">#5BE82C</color>
     <color name="darkGreen">#098C2E</color>
     <color name="black">#000000</color>
+    <color name="custom">#bebebe</color>
 </resources>
