@@ -134,4 +134,17 @@ public class FillToolEspressoTest {
         assertEquals(expectedPointsFill, wholeBoxFill.getPoints().size());
 
     }
+
+    @Test
+    public void testOutOfMemoryFill()
+    {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawFillButton)).perform(click());
+
+        for (int i = 0; i < 50; i++) {
+            onView(withId(R.id.colorChooserButton)).perform(click());
+            onView(withId(i % 2 == 0 ? R.id.redButton : R.id.lightGreenButton)).perform(click());
+            onView(withId(R.id.drawingView)).perform(touchAt(405, 405));
+        }
+    }
 }
