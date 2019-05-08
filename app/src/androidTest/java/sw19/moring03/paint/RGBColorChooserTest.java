@@ -3,6 +3,7 @@ package sw19.moring03.paint;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -38,32 +39,26 @@ public class RGBColorChooserTest {
 
     @Test
     public void testRGBSliderChange() {
-        final int expectedInitialColor = 0xFFFFFF;
-        final int expectedColor = 0x7529D8;
+        @ColorInt final int expectedColor = Color.rgb(20, 20, 20);
 
-        assertEquals(expectedInitialColor, launchActivityRule.getActivity().getChosenColor());
         onView(withId(R.id.colorChooserButton)).perform(click());
 
-        Color tmp_color = Color.valueOf(expectedColor);
-        onView(withId(R.id.redSlider)).perform(changeValueOfStrokeWidthSeekBar((int)tmp_color.red()));
-        onView(withId(R.id.blueSlider)).perform(changeValueOfStrokeWidthSeekBar((int)tmp_color.blue()));
-        onView(withId(R.id.greenSlider)).perform(changeValueOfStrokeWidthSeekBar((int)tmp_color.green()));
+        onView(withId(R.id.redSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
+        onView(withId(R.id.blueSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
+        onView(withId(R.id.greenSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
 
         assertEquals(expectedColor, launchActivityRule.getActivity().getChosenColor());
     }
 
     @Test
     public void testIconColorChange() {
-        final int expectedInitialColor = 0xFFFFFF;
-        final int expectedColor = 0x7529D8;
+        @ColorInt final int expectedColor = Color.rgb(20, 20, 20);
 
-        assertEquals(expectedInitialColor, launchActivityRule.getActivity().getChosenColor());
         onView(withId(R.id.colorChooserButton)).perform(click());
 
-        Color tmp_color = Color.valueOf(expectedColor);
-        onView(withId(R.id.redSlider)).perform(changeValueOfStrokeWidthSeekBar((int)tmp_color.red()));
-        onView(withId(R.id.blueSlider)).perform(changeValueOfStrokeWidthSeekBar((int)tmp_color.blue()));
-        onView(withId(R.id.greenSlider)).perform(changeValueOfStrokeWidthSeekBar((int)tmp_color.green()));
+        onView(withId(R.id.redSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
+        onView(withId(R.id.blueSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
+        onView(withId(R.id.greenSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
 
         assertEquals(expectedColor, launchActivityRule.getActivity().getChosenColor());
 
