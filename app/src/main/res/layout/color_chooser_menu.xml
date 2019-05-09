@@ -202,6 +202,15 @@
             android:max="255"
             android:progress="0"
             />
+
+        <TextView
+            android:id="@+id/valueRed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/value"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -231,6 +240,15 @@
             android:layout_weight="1"
             android:max="255"
             android:progress="0"
+            />
+
+        <TextView
+            android:id="@+id/valueGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/value"
             />
     </LinearLayout>
 
@@ -262,6 +280,25 @@
             android:max="255"
             android:progress="0"
             />
+
+        <TextView
+            android:id="@+id/valueBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/value"
+            />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/currentColor"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="399dp"
+        android:layout_height="29dp"
+        android:layout_margin="5dp"
+        android:background="@color/black"
+        android:onClick="chooseNewColor"
+        />
 
 </LinearLayout>
