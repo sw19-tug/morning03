@@ -1,7 +1,12 @@
 package sw19.moring03.paint;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
@@ -16,8 +22,8 @@ import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
@@ -35,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.strokeWidthChooserButton);
         menuItem.setTitle(strokeWidth + "pt");
     }
+
+    public Bitmap new_photo;
+    public static final int PICK_IMAGE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
         this.chosenTool = chosenTool;
     }
 
+    private void pickFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        startActivityForResult(intent, PICK_IMAGE);
+
+    }
+
     public void chooseNewTool(View view) {
         switch (view.getId()) {
             case R.id.drawPointButton:
@@ -100,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawShapesButton:
                 FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
-                fragment.show(manager,"ShapeChooserFragment");
+                fragment.show(manager, "ShapeChooserFragment");
                 break;
             case R.id.eraserButton:
                 setChosenTool(Tool.ERASER);
@@ -108,10 +127,27 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawPathButton:
                 setChosenTool(Tool.DRAW_PATH);
                 break;
+            case R.id.takePhoto:
+                pickFromGallery();
+                break;
         }
 
         toolChooserMenu.dismiss();
         setToolIcon();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == Activity.RESULT_OK)
+            if(requestCode == PICK_IMAGE) {
+                Uri imageUri = data.getData();
+                try {
+                    new_photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    setChosenTool(Tool.TAKE_PHOTO);
+                } catch (Exception ex) {
+                    System.out.println("ERROR: Failed to load Bitmap");
+                }
+            }
     }
 
     public void setToolIcon() {

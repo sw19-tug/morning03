@@ -1,6 +1,7 @@
 package sw19.moring03.paint.Views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -16,8 +17,11 @@ import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.CircleTool;
+import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.OvalTool;
+import sw19.moring03.paint.tools.PathTool;
+import sw19.moring03.paint.tools.PhotoTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.Tools;
@@ -82,9 +86,9 @@ public class DrawingView extends View {
         }
     }
 
-    private void selectTool() {
+    public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
-
+        Bitmap cur_bitmap = ((MainActivity) getContext()).new_photo;
         int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
 
         switch (chosenTool) {
@@ -110,6 +114,9 @@ public class DrawingView extends View {
                 break;
             case DRAW_OVAL:
                 objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
+                break;
+            case TAKE_PHOTO:
+                objectsToPaint.add(new PhotoTool(cur_bitmap));
                 break;
         }
     }
