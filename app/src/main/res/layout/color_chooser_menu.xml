@@ -298,7 +298,7 @@
         android:layout_height="29dp"
         android:layout_margin="5dp"
         android:background="@color/black"
-        android:onClick="chooseNewColor"
+        android:src="@drawable/ic_fill_icon"
         />
 
 </LinearLayout>
