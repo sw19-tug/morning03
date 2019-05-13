@@ -3,6 +3,7 @@ package sw19.moring03.paint.tools;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.support.test.rule.ActivityTestRule;
@@ -59,7 +60,7 @@ public class PhotoToolTest {
         PhotoTool photoTool = new PhotoTool(image);
         photoTool.draw(canvas, paint);
 
-        LineTool tool = new LineTool(5);
+        LineTool tool = new LineTool(Color.BLACK, 5);
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -72,7 +73,7 @@ public class PhotoToolTest {
         expectedPoints.add(new PointF(20, 20));
         expectedPoints.add(new PointF(30, 30));
 
-        PathTool tool = new PathTool(5);
+        PathTool tool = new PathTool(Color.BLACK,5);
         tool.addPoint(expectedPoints.get(0));
         tool.addPoint(expectedPoints.get(1));
         tool.addPoint(expectedPoints.get(2));

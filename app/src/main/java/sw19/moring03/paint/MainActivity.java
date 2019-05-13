@@ -130,6 +130,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.takePhoto:
                 pickFromGallery();
                 break;
+            case R.id.drawTextButton:
+
+                break;
         }
 
         toolChooserMenu.dismiss();
@@ -177,6 +180,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case ERASER:
                 menuItem.setIcon(R.drawable.ic_eraser_icon);
+                break;
+            case DRAW_TEXT:
+                menuItem.setIcon(R.drawable.ic_text);
                 break;
         }
     }
