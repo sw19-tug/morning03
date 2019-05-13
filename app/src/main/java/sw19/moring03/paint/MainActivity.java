@@ -3,8 +3,8 @@ package sw19.moring03.paint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 pickFromGallery();
                 break;
             case R.id.drawTextButton:
-
+                setChosenTool(Tool.DRAW_TEXT);
                 break;
         }
 

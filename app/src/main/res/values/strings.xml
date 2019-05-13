@@ -9,6 +9,7 @@
     <string name="drawFillButton">Fill</string>
     <string name="eraserButton">Eraser</string>
     <string name="drawShapesButton">Shapes</string>
+    <string name="drawTextButton">Text</string>
     <string name="path">Path</string>
     <string name="stroke_width">Choose Stroke Width</string>
     <string name="drawing_tool">Choose Drawing Tool</string>
