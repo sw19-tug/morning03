@@ -10,18 +10,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.TextTool;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TextToolTest {
+public class TextTest {
     final private String testText = "HelloWorld";
     private Canvas canvas;
     private Paint paint;

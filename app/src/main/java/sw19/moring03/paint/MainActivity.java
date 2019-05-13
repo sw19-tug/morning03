@@ -18,9 +18,9 @@ import android.view.View;
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.Fragments.TextInsertFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
-
 
 public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
     private Menu menu;
+    private String textToInsert = "";
 
     public int getStrokeWidth() {
         return strokeWidth;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         menuItem.setTitle(strokeWidth + "pt");
     }
 
-    public Bitmap new_photo;
+    public Bitmap newPhoto;
     public static final int PICK_IMAGE = 1;
 
 
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chooseNewTool(View view) {
+        FragmentManager manager = getSupportFragmentManager();
         switch (view.getId()) {
             case R.id.drawPointButton:
                 setChosenTool(Tool.DRAW_POINT);
@@ -116,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(Tool.FILL);
                 break;
             case R.id.drawShapesButton:
-                FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
                 fragment.show(manager, "ShapeChooserFragment");
                 break;
@@ -130,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 pickFromGallery();
                 break;
             case R.id.drawTextButton:
+                TextInsertFragment textFragment = new TextInsertFragment();
+                textFragment.show(manager, "textInsertFragment");
                 setChosenTool(Tool.DRAW_TEXT);
                 break;
         }
@@ -140,16 +143,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (resultCode == Activity.RESULT_OK)
-            if(requestCode == PICK_IMAGE) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_IMAGE) {
                 Uri imageUri = data.getData();
                 try {
-                    new_photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                     setChosenTool(Tool.TAKE_PHOTO);
                 } catch (Exception ex) {
                     System.out.println("ERROR: Failed to load Bitmap");
                 }
             }
+        }
+
     }
 
     public void setToolIcon() {
@@ -247,5 +252,13 @@ public class MainActivity extends AppCompatActivity {
 
         DrawableCompat.setTint(drawable, view.getResources().getColor(chosenColor));
         menuItem.setIcon(drawable);
+    }
+
+    public void setTextToInsert(String textToInsert) {
+        this.textToInsert = textToInsert;
+    }
+
+    public String getTextToInsert() {
+        return textToInsert;
     }
 }

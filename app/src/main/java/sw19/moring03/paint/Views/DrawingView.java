@@ -23,6 +23,7 @@ import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PhotoTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
+import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
 
@@ -86,7 +87,7 @@ public class DrawingView extends View {
 
     public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
-        Bitmap cur_bitmap = ((MainActivity) getContext()).new_photo;
+        Bitmap curBitmap = ((MainActivity) getContext()).newPhoto;
         int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
 
         switch (chosenTool) {
@@ -114,10 +115,10 @@ public class DrawingView extends View {
                 objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
                 break;
             case TAKE_PHOTO:
-                objectsToPaint.add(new PhotoTool(cur_bitmap));
+                objectsToPaint.add(new PhotoTool(curBitmap));
                 break;
             case DRAW_TEXT:
-                objectsToPaint.add(new TextTool());
+                objectsToPaint.add(new TextTool(((MainActivity) getContext()).getTextToInsert()));
                 break;
         }
     }
