@@ -49,26 +49,4 @@ public class RGBColorChooserTest {
 
         assertEquals(expectedColor, launchActivityRule.getActivity().getChosenColor());
     }
-
-    @Test
-    public void testIconColorChange() {
-        @ColorInt final int expectedColor = Color.rgb(20, 20, 20);
-
-        onView(withId(R.id.colorChooserButton)).perform(click());
-
-        onView(withId(R.id.redSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
-        onView(withId(R.id.blueSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
-        onView(withId(R.id.greenSlider)).perform(changeValueOfStrokeWidthSeekBar(20));
-
-        assertEquals(expectedColor, launchActivityRule.getActivity().getChosenColor());
-
-        Menu menu = launchActivityRule.getActivity().getMenu();
-        MenuItem menuItem = menu.findItem(R.id.colorChooserButton);
-
-        Drawable drawable = menuItem.getIcon();
-        drawable = DrawableCompat.wrap(drawable);
-
-        int foundColor = ((ColorDrawable)drawable).getColor();
-        assertEquals(foundColor, expectedColor);
-    }
 }
