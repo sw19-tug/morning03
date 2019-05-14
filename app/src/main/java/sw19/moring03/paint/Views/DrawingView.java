@@ -1,6 +1,7 @@
 package sw19.moring03.paint.Views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -30,6 +31,7 @@ public class DrawingView extends View {
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
+        this.setDrawingCacheEnabled(true);
         paint = new Paint();
         paint.setAntiAlias(true);
         paint.setColor(getResources().getColor(R.color.black));
@@ -112,6 +114,14 @@ public class DrawingView extends View {
                 objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
                 break;
         }
+    }
+
+    public Bitmap getCurrentBitmap() {
+        this.setDrawingCacheEnabled(true);
+        this.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(this.getDrawingCache());
+        this.setDrawingCacheEnabled(false);
+        return bitmap;
     }
 
     @VisibleForTesting

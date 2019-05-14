@@ -1,5 +1,6 @@
 package sw19.moring03.paint;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -9,11 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.Views.DrawingView;
+import sw19.moring03.paint.utils.ImageSaver;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
@@ -73,6 +77,23 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.strokeWidthChooserButton) {
             strokeWidthChooserMenu.show(getSupportFragmentManager(), "strokeWidthChooserMenu");
             return true;
+        }
+
+        if (id == R.id.saveButton)
+        {
+            DrawingView view = findViewById(R.id.drawingView);
+            Bitmap currentBitmap = view.getCurrentBitmap();
+            ImageSaver is = new ImageSaver(getContentResolver());
+            if(is.saveImage(currentBitmap))
+            {
+
+                Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
+                toastSuccess.show();
+            }
+            else {
+                Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
+                toastFail.show();
+            }
         }
 
         return super.onOptionsItemSelected(item);
