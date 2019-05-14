@@ -5,10 +5,17 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 
 public class ImageSaver {
-    ContentResolver cr;
+
+    private ContentResolver cr;
+    private String savedImageURI;
+
     public ImageSaver(ContentResolver cr)
     {
         this.cr = cr;
+    }
+
+    public String getSavedImageURI() {
+        return savedImageURI;
     }
 
     public Boolean saveImage(Bitmap bitmap)
@@ -18,10 +25,11 @@ public class ImageSaver {
 
         String filename = "CANVAS" + System.currentTimeMillis() / 1000 + ".jpg";
         try {
-            String savedImageURI = MediaStore.Images.Media.insertImage(cr,
+            savedImageURI = MediaStore.Images.Media.insertImage(cr,
                     bitmap,
                     filename,
                     filename);
+
             return true;
         } catch (Exception e)
         {

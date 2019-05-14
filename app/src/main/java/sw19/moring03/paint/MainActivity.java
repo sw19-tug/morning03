@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final int REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE = 701;
 
+    private String lastSavedImageURI;
+
     public int getStrokeWidth() {
         return strokeWidth;
     }
@@ -121,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap currentBitmap = view.getCurrentBitmap();
         ImageSaver is = new ImageSaver(getContentResolver());
         if (is.saveImage(currentBitmap)) {
-
+            this.lastSavedImageURI = is.getSavedImageURI();
             Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
             toastSuccess.show();
             return true;
@@ -205,6 +207,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setChosenColor(int chosenColor) {
         this.chosenColor = chosenColor;
+    }
+
+    public String getLastSavedImageURI() {
+        return lastSavedImageURI;
     }
 
     public void chooseNewColor(View view) {
