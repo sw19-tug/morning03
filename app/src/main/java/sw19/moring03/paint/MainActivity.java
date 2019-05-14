@@ -1,12 +1,17 @@
 package sw19.moring03.paint;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
     private Menu menu;
+
+    private final int REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE = 701;
 
     public int getStrokeWidth() {
         return strokeWidth;
@@ -61,6 +68,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PERMISSION", "permission for FileStorage was granted.");
+                    saveCanvas();
+                } else {
+                    Log.w("PERMISSION", "permission for FileStorage was denied.");
+                }
+            }
+            default:
+                Log.d("PERMISSON", "tried to retrieve an unknown request code.");
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -79,24 +104,32 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (id == R.id.saveButton)
-        {
-            DrawingView view = findViewById(R.id.drawingView);
-            Bitmap currentBitmap = view.getCurrentBitmap();
-            ImageSaver is = new ImageSaver(getContentResolver());
-            if(is.saveImage(currentBitmap))
-            {
-
-                Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
-                toastSuccess.show();
-            }
-            else {
-                Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
-                toastFail.show();
-            }
+        if (id == R.id.saveButton) {
+            saveCanvasRequest();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean saveCanvasRequest() {
+        requestIfAllowed(REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE);
+        return true;
+    }
+
+    private boolean saveCanvas() {
+        DrawingView view = findViewById(R.id.drawingView);
+        Bitmap currentBitmap = view.getCurrentBitmap();
+        ImageSaver is = new ImageSaver(getContentResolver());
+        if (is.saveImage(currentBitmap)) {
+
+            Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
+            toastSuccess.show();
+            return true;
+        }
+
+        Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
+        toastFail.show();
+        return false;
     }
 
     public Tool getChosenTool() {
@@ -121,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawShapesButton:
                 FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
-                fragment.show(manager,"ShapeChooserFragment");
+                fragment.show(manager, "ShapeChooserFragment");
                 break;
             case R.id.eraserButton:
                 setChosenTool(Tool.ERASER);
@@ -227,5 +260,28 @@ public class MainActivity extends AppCompatActivity {
 
         DrawableCompat.setTint(drawable, view.getResources().getColor(chosenColor));
         menuItem.setIcon(drawable);
+    }
+
+    private boolean requestIfAllowed(int requestCode) {
+        String requestedPermission = "";
+
+        switch (requestCode) {
+            case REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE:
+                requestedPermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                requestedPermission)
+                != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{requestedPermission},
+                        requestCode);
+        } else {
+            // No PermissionRequest needed, it's already granted - can execute directly.
+            saveCanvas();
+            return true;
+        }
+        return false;
     }
 }
