@@ -30,24 +30,16 @@ public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
+
     private Tool chosenTool = Tool.DRAW_POINT;
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
+
     private Menu menu;
 
-    private final int REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE = 701;
+    private final int SAVE_CANVAS_TO_EXT_STORAGE = 701;
 
     private String lastSavedImageURI;
-
-    public int getStrokeWidth() {
-        return strokeWidth;
-    }
-
-    public void setStrokeWidth(int strokeWidth) {
-        this.strokeWidth = strokeWidth;
-        MenuItem menuItem = menu.findItem(R.id.strokeWidthChooserButton);
-        menuItem.setTitle(strokeWidth + "pt");
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
                                            String[] permissions,
                                            int[] grantResults) {
         switch (requestCode) {
-            case REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE: {
+            case SAVE_CANVAS_TO_EXT_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d("PERMISSION", "permission for FileStorage was granted.");
                     saveCanvas();
                 } else {
                     Log.w("PERMISSION", "permission for FileStorage was denied.");
                 }
-            }
+                break;
             default:
                 Log.d("PERMISSON", "tried to retrieve an unknown request code.");
         }
@@ -107,15 +99,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.saveButton) {
-            saveCanvasRequest();
+            tryPerformAction(SAVE_CANVAS_TO_EXT_STORAGE);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private boolean saveCanvasRequest() {
-        requestIfAllowed(REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE);
-        return true;
     }
 
     private boolean saveCanvas() {
@@ -132,6 +120,16 @@ public class MainActivity extends AppCompatActivity {
         Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
         toastFail.show();
         return false;
+    }
+
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+        MenuItem menuItem = menu.findItem(R.id.strokeWidthChooserButton);
+        menuItem.setTitle(strokeWidth + "pt");
     }
 
     public Tool getChosenTool() {
@@ -209,10 +207,6 @@ public class MainActivity extends AppCompatActivity {
         this.chosenColor = chosenColor;
     }
 
-    public String getLastSavedImageURI() {
-        return lastSavedImageURI;
-    }
-
     public void chooseNewColor(View view) {
         switch (view.getId()) {
             case R.id.whiteButton:
@@ -268,26 +262,24 @@ public class MainActivity extends AppCompatActivity {
         menuItem.setIcon(drawable);
     }
 
-    private boolean requestIfAllowed(int requestCode) {
-        String requestedPermission = "";
+    public String getLastSavedImageURI() {
+        return lastSavedImageURI;
+    }
 
+    private boolean tryPerformAction(int requestCode) {
         switch (requestCode) {
-            case REQUEST_SAVE_ON_CANVAS_WITH_WRITE_EXT_STORAGE:
-                requestedPermission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+            case SAVE_CANVAS_TO_EXT_STORAGE:
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    saveCanvas();
+                    return true;
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode);
+                }
+                break;
+            default:
+                return false;
         }
 
-        if (ContextCompat.checkSelfPermission(this,
-                requestedPermission)
-                != PackageManager.PERMISSION_GRANTED) {
-
-                ActivityCompat.requestPermissions(this,
-                        new String[]{requestedPermission},
-                        requestCode);
-        } else {
-            // No PermissionRequest needed, it's already granted - can execute directly.
-            saveCanvas();
-            return true;
-        }
         return false;
     }
 }

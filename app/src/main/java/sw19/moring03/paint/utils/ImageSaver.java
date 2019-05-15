@@ -9,8 +9,7 @@ public class ImageSaver {
     private ContentResolver cr;
     private String savedImageURI;
 
-    public ImageSaver(ContentResolver cr)
-    {
+    public ImageSaver(ContentResolver cr) {
         this.cr = cr;
     }
 
@@ -18,10 +17,10 @@ public class ImageSaver {
         return savedImageURI;
     }
 
-    public Boolean saveImage(Bitmap bitmap)
-    {
-        if(bitmap == null)
+    public Boolean saveImage(Bitmap bitmap) {
+        if (bitmap == null) {
             return false;
+        }
 
         String filename = "CANVAS" + System.currentTimeMillis() / 1000 + ".jpg";
         try {
@@ -31,8 +30,7 @@ public class ImageSaver {
                     filename);
 
             return true;
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

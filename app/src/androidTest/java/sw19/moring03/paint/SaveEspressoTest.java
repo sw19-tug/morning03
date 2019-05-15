@@ -2,15 +2,12 @@ package sw19.moring03.paint;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.IdRes;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
-import java.util.Arrays;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -20,35 +17,24 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
-@RunWith(Parameterized.class)
+@RunWith(AndroidJUnit4.class)
 public class SaveEspressoTest {
-
-    @Parameterized.Parameters(name = "{0}")
-    public static Iterable<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-                {R.id.saveButton}
-
-        });
-    }
-
-    @Parameterized.Parameter
-    public @IdRes int menuButtonId;
 
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void testSaveButtonExists() {
-        onView(withId(menuButtonId)).check(matches(isDisplayed()));
-
+        onView(withId(R.id.saveButton)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testImageSaved() {
-        onView(withId(menuButtonId)).perform(click());
-        String uri = activityTestRule.getActivity().getLastSavedImageURI();
+        onView(withId(R.id.saveButton)).perform(click());
+
+        Uri imageURI = Uri.parse(activityTestRule.getActivity().getLastSavedImageURI());
         try {
-            Bitmap image = MediaStore.Images.Media.getBitmap(activityTestRule.getActivity().getContentResolver(), Uri.parse(uri));
+            Bitmap image = MediaStore.Images.Media.getBitmap(activityTestRule.getActivity().getContentResolver(), imageURI);
             assertNotNull(image);
         } catch (Exception exc) {
             assertTrue(false);
