@@ -23,20 +23,18 @@ import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
 import sw19.moring03.paint.tools.PathTool;
 
-
 public class DrawingView extends View {
-    private Paint mPaint;
+    private Paint paint;
     private List<Tools> objectsToPaint;
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
 
-        mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(getResources().getColor(R.color.black));
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(4.0f);
-
+        paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(getResources().getColor(R.color.black));
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(4.0f);
         objectsToPaint = new ArrayList<>();
     }
 
@@ -69,7 +67,7 @@ public class DrawingView extends View {
 
         if (objectsToPaint != null) {
             for (Tools tool : objectsToPaint) {
-                tool.draw(canvas, mPaint);
+                tool.draw(canvas, paint);
             }
         }
     }
@@ -91,7 +89,7 @@ public class DrawingView extends View {
     public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
 
-        Bitmap cur_bitmap = (((MainActivity) getContext()).new_photo);
+        Bitmap curBitmap = (((MainActivity) getContext()).newPhoto);
 
         switch (chosenTool) {
             case FILL:
@@ -113,7 +111,7 @@ public class DrawingView extends View {
             case DRAW_RECTANGLE:
                 break;
             case TAKE_PHOTO:
-                objectsToPaint.add(new PhotoTool(cur_bitmap));
+                objectsToPaint.add(new PhotoTool(curBitmap));
                 break;
         }
     }
@@ -123,40 +121,40 @@ public class DrawingView extends View {
 
         switch (chosenColor) {
             case WHITE:
-                mPaint.setColor(getResources().getColor(R.color.white));
+                paint.setColor(getResources().getColor(R.color.white));
                 break;
             case YELLOW:
-                mPaint.setColor(getResources().getColor(R.color.yellow));
+                paint.setColor(getResources().getColor(R.color.yellow));
                 break;
             case ORANGE:
-                mPaint.setColor(getResources().getColor(R.color.orange));
+                paint.setColor(getResources().getColor(R.color.orange));
                 break;
             case RED:
-                mPaint.setColor(getResources().getColor(R.color.red));
+                paint.setColor(getResources().getColor(R.color.red));
                 break;
             case PURPLE:
-                mPaint.setColor(getResources().getColor(R.color.purple));
+                paint.setColor(getResources().getColor(R.color.purple));
                 break;
             case MAGENTA:
-                mPaint.setColor(getResources().getColor(R.color.magenta));
+                paint.setColor(getResources().getColor(R.color.magenta));
                 break;
             case TURKIS:
-                mPaint.setColor(getResources().getColor(R.color.turkis));
+                paint.setColor(getResources().getColor(R.color.turkis));
                 break;
             case LIGHT_GREEN:
-                mPaint.setColor(getResources().getColor(R.color.lightGreen));
+                paint.setColor(getResources().getColor(R.color.lightGreen));
                 break;
             case DARK_GREEN:
-                mPaint.setColor(getResources().getColor(R.color.darkGreen));
+                paint.setColor(getResources().getColor(R.color.darkGreen));
                 break;
             case LIGHT_BLUE:
-                mPaint.setColor(getResources().getColor(R.color.lightBlue));
+                paint.setColor(getResources().getColor(R.color.lightBlue));
                 break;
             case DARK_BLUE:
-                mPaint.setColor(getResources().getColor(R.color.darkBlue));
+                paint.setColor(getResources().getColor(R.color.darkBlue));
                 break;
             case BLACK:
-                mPaint.setColor(getResources().getColor(R.color.black));
+                paint.setColor(getResources().getColor(R.color.black));
                 break;
         }
     }

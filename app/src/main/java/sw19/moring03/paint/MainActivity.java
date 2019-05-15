@@ -1,9 +1,7 @@
 package sw19.moring03.paint;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
@@ -14,8 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.util.Random;
 
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -29,13 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
     private Color chosenColor = Color.BLACK;
-    Bitmap lastCameraPicture = null;
-    String lastCameraPicturePath = null;
-
     ImageView imageView;
-
-    public Bitmap new_photo;
-    public static final int PICK_IMAGE = 1;
+    public Bitmap newPhoto;
 
 
     @Override
@@ -74,15 +65,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void pickFromGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        String[] mimeTypes = {"image/jpeg", "image/png"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-        startActivityForResult(intent, PICK_IMAGE);
-
-    }
-
     public Tool getChosenTool() {
         return chosenTool;
     }
@@ -119,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivityForResult(takePicture, CAMERA_REQUEST);
                 }
                 break;
-
         }
 
         toolChooserMenu.dismiss();
@@ -185,69 +166,21 @@ public class MainActivity extends AppCompatActivity {
             try {
                 Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
 
-                if (cameraPicture == null)
+                if (cameraPicture == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Could not load image from Camera!", Toast.LENGTH_SHORT);
+                    toast.show();
                     return;
-
-                lastCameraPicture = cameraPicture;
-                saveLastCameraPicture();
-                pickFromGallery(); // function die dir is foto rausholt
+                }
+                newPhoto = cameraPicture;
+                setChosenTool(Tool.TAKE_PHOTO);
 
             } catch (Exception e) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Error while handling Camera request!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "Error while handling Camera request!", Toast.LENGTH_SHORT);
                 toast.show();
-                lastCameraPicturePath = null;
-                lastCameraPicture = null;
                 e.printStackTrace();
             }
-
-        }
-
-        if (resultCode == Activity.RESULT_OK) {
-            try {
-                Uri imageUri = data.getData();
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                new_photo = bitmap;
-                setChosenTool(Tool.TAKE_PHOTO);
-            } catch (Exception ex) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Error while trying to import Image!", Toast.LENGTH_SHORT);
-                toast.show();
-                ex.printStackTrace();
-            }
         }
     }
-
-    private void saveLastCameraPicture() {
-
-        if (lastCameraPicture == null) {
-            Toast toast = Toast.makeText(getApplicationContext(), "First, take a picture :)", Toast.LENGTH_SHORT);
-            toast.show();
-            return;
-        }
-
-
-        Random generator = new Random();
-        int n = 100000;
-        n = generator.nextInt(n);
-        String fname = "Paint-" + n + ".jpg";
-        try {
-            String savedImageURI = MediaStore.Images.Media.insertImage(getContentResolver(),
-                    lastCameraPicture,
-                    fname,
-                    fname);
-            lastCameraPicturePath = savedImageURI;
-
-
-            Toast toast = Toast.makeText(getApplicationContext(), "Image Saved to Gallery", Toast.LENGTH_SHORT);
-            toast.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast toast = Toast.makeText(getApplicationContext(), "Could not save Image. Check permissions in app settings.", Toast.LENGTH_LONG);
-            toast.show();
-            lastCameraPicture = null;
-            lastCameraPicturePath = null;
-        }
-    }
-
-
 }

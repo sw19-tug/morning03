@@ -9,21 +9,20 @@ import java.util.ArrayList;
 
 public class PhotoTool extends Tools {
 
-    private Bitmap new_image;
+    private Bitmap newImage;
 
     public PhotoTool(Bitmap image) {
         points = new ArrayList<>();
-        new_image = image;
+        newImage = image;
     }
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        if (new_image != null) {
+        if (newImage != null) {
             Rect source = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
-            canvas.drawBitmap(new_image, null, source, null);
+            canvas.drawBitmap(newImage, null, source, null);
             return true;
         }
-
         return false;
     }
 }

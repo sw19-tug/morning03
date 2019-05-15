@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import sw19.moring03.paint.tools.LineTool;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -80,7 +79,5 @@ public class LineTest {
 
         List<PointF> points = tool.getPoints();
         assertArrayEquals(expectedPoints.toArray(), points.toArray());
-
     }
-
 }
