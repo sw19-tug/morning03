@@ -10,11 +10,10 @@ import java.util.ArrayList;
 public class TextTool extends Tools {
     private String text = "";
 
-    public TextTool(String textToInsert) {
+    public TextTool() {
         points = new ArrayList<>();
         strokeWidth = 5;
         color = Color.BLACK;
-        this.text = textToInsert;
     }
 
     @Override
@@ -35,5 +34,9 @@ public class TextTool extends Tools {
         }
 
         super.addPoint(point);
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

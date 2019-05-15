@@ -15,6 +15,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static sw19.moring03.paint.util.Interaction.touchAt;
 
 @RunWith(AndroidJUnit4.class)
 public class TextInsertFragmentTest {
@@ -26,6 +27,8 @@ public class TextInsertFragmentTest {
     public void testFragmentVisibility() {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawTextButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
+
         onView(withText(R.string.insertTextFragment)).check(matches(isDisplayed()));
     }
 
@@ -33,6 +36,8 @@ public class TextInsertFragmentTest {
     public void testInsertFieldVisibility() {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawTextButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
+
         onView(withId(R.id.editText)).check(matches(isDisplayed()));
     }
 
@@ -40,6 +45,8 @@ public class TextInsertFragmentTest {
     public void testSimpleTextInsert() {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawTextButton)).perform(click());
+        onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
+
         onView(withId(R.id.editText)).perform(typeText("Hello World"));
         onView(withId(R.id.editText)).check(matches(withText("Hello World")));
     }
@@ -47,7 +54,10 @@ public class TextInsertFragmentTest {
     public void testTextInsertCancel () {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawTextButton)).perform(click());
+
+        onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
         onView(withText(R.string.insertTextFragment)).perform(pressBack());
-        onView(withId(R.id.toolChooserButton)).check(matches(isDisplayed()));
+        onView(withText(R.string.insertTextFragment)).perform(pressBack());
+        onView(withId(R.id.strokeWidthChooserButton)).check(matches(isDisplayed()));
     }
 }

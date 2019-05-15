@@ -20,7 +20,6 @@ import android.view.View;
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
-import sw19.moring03.paint.Fragments.TextInsertFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.utils.Tool;
 
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
     private Menu menu;
-    private String textToInsert = "";
 
     public int getStrokeWidth() {
         return strokeWidth;
@@ -132,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
                 pickFromGallery();
                 break;
             case R.id.drawTextButton:
-                TextInsertFragment textFragment = new TextInsertFragment();
-                textFragment.show(manager, "textInsertFragment");
                 setChosenTool(Tool.DRAW_TEXT);
                 break;
         }
@@ -258,13 +254,5 @@ public class MainActivity extends AppCompatActivity {
 
         DrawableCompat.setTint(drawable, view.getResources().getColor(chosenColor));
         menuItem.setIcon(drawable);
-    }
-
-    public void setTextToInsert(String textToInsert) {
-        this.textToInsert = textToInsert;
-    }
-
-    public String getTextToInsert() {
-        return textToInsert;
     }
 }

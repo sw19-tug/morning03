@@ -11,8 +11,10 @@ import android.widget.EditText;
 
 import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
+import sw19.moring03.paint.Views.DrawingView;
 
 public class TextInsertFragment extends DialogFragment {
+    private String insertedText = "";
 
     @NonNull
     @Override
@@ -26,11 +28,7 @@ public class TextInsertFragment extends DialogFragment {
         builder.setTitle(R.string.insertTextFragment)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
-                        if (getContext() != null) {
-                            MainActivity activity = (MainActivity) getContext();
-                            activity.setTextToInsert(userinput.getText().toString());
-                        }
+                        insertedText = userinput.getText().toString();
                     }
                 }
                 )
@@ -42,5 +40,13 @@ public class TextInsertFragment extends DialogFragment {
                         }
                 );
         return builder.create();
+    }
+
+    @Override
+    public void onStop() {
+        DrawingView view = ((MainActivity) getContext()).findViewById(R.id.drawingView);
+        view.addTextToView(insertedText);
+
+        super.onStop();
     }
 }

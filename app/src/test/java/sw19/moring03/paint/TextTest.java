@@ -17,7 +17,6 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TextTest {
-    final private String testText = "HelloWorld";
     private Canvas canvas;
     private Paint paint;
 
@@ -29,7 +28,7 @@ public class TextTest {
 
     @Test
     public void testText() {
-        TextTool tool = new TextTool(testText);
+        TextTool tool = new TextTool();
         tool.addPoint(new PointF(15, 15));
 
         assertTrue(tool.draw(canvas, paint));
@@ -37,14 +36,14 @@ public class TextTest {
 
     @Test
     public void testNoPoint() {
-        TextTool tool = new TextTool(testText);
+        TextTool tool = new TextTool();
 
         assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
     public void testOnlyOnePoint() {
-        TextTool tool = new TextTool(testText);
+        TextTool tool = new TextTool();
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(25, 25));
         tool.addPoint(new PointF(35, 35));
@@ -56,7 +55,7 @@ public class TextTest {
     public void testDrawText() {
         int expected = 1;
 
-        TextTool tool = new TextTool(testText);
+        TextTool tool = new TextTool();
         tool.addPoint(new PointF(10, 10));
 
         canvas = Mockito.mock(Canvas.class);
