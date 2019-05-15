@@ -42,6 +42,5 @@ public class TextInsertFragment extends DialogFragment {
                         }
                 );
         return builder.create();
-
     }
 }
