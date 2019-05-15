@@ -15,8 +15,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.util.Random;
-
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -105,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawShapesButton:
                 FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
-                fragment.show(manager,"ShapeChooserFragment");
+                fragment.show(manager, "ShapeChooserFragment");
                 break;
             case R.id.eraserButton:
                 setChosenTool(Tool.ERASER);
@@ -223,20 +221,18 @@ public class MainActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == CAMERA_REQUEST)
-        {
+        if (requestCode == CAMERA_REQUEST) {
             try {
                 Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
 
-                if(cameraPicture == null)
+                if (cameraPicture == null) {
                     return;
+                }
 
                 lastCameraPicture = cameraPicture;
                 saveLastCameraPicture();
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Error while handling Camera request!", Toast.LENGTH_SHORT);
                 toast.show();
                 lastCameraPicturePath = null;
@@ -248,17 +244,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void saveLastCameraPicture() {
 
-        if(lastCameraPicture == null)
-        {
+        if (lastCameraPicture == null) {
             Toast toast = Toast.makeText(getApplicationContext(), "First, take a picture :)", Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
 
-        Random generator = new Random();
-        int n = 100000;
-        n = generator.nextInt(n);
-        String fname = "Paint-"+ n +".jpg";
+        String fname = "Paint-" + System.currentTimeMillis()/1000 + ".jpg";
         try {
             String savedImageURI = MediaStore.Images.Media.insertImage(getContentResolver(),
                     lastCameraPicture,
