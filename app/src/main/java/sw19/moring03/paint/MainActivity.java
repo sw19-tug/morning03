@@ -4,22 +4,29 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.Views.DrawingView;
+import sw19.moring03.paint.utils.ImageSaver;
 import sw19.moring03.paint.utils.Tool;
 
 
@@ -27,20 +34,16 @@ public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
+
     private Tool chosenTool = Tool.DRAW_POINT;
     private int chosenColor = R.color.black;
     private int strokeWidth = 5;
+
     private Menu menu;
 
-    public int getStrokeWidth() {
-        return strokeWidth;
-    }
+    private final int SAVE_CANVAS_TO_EXT_STORAGE = 701;
 
-    public void setStrokeWidth(int strokeWidth) {
-        this.strokeWidth = strokeWidth;
-        MenuItem menuItem = menu.findItem(R.id.strokeWidthChooserButton);
-        menuItem.setTitle(strokeWidth + "pt");
-    }
+    private String lastSavedImageURI;
 
     public Bitmap new_photo;
     public static final int PICK_IMAGE = 1;
@@ -67,6 +70,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case SAVE_CANVAS_TO_EXT_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("PERMISSION", "permission for FileStorage was granted.");
+                    saveCanvas();
+                } else {
+                    Log.w("PERMISSION", "permission for FileStorage was denied.");
+                }
+                break;
+            default:
+                Log.d("PERMISSON", "tried to retrieve an unknown request code.");
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -85,7 +106,38 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.saveButton) {
+            tryPerformAction(SAVE_CANVAS_TO_EXT_STORAGE);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean saveCanvas() {
+        DrawingView view = findViewById(R.id.drawingView);
+        Bitmap currentBitmap = view.getCurrentBitmap();
+        ImageSaver is = new ImageSaver(getContentResolver());
+        if (is.saveImage(currentBitmap)) {
+            this.lastSavedImageURI = is.getSavedImageURI();
+            Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
+            toastSuccess.show();
+            return true;
+        }
+
+        Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
+        toastFail.show();
+        return false;
+    }
+
+    public int getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+        MenuItem menuItem = menu.findItem(R.id.strokeWidthChooserButton);
+        menuItem.setTitle(strokeWidth + "pt");
     }
 
     public Tool getChosenTool() {
@@ -242,5 +294,26 @@ public class MainActivity extends AppCompatActivity {
 
         DrawableCompat.setTint(drawable, view.getResources().getColor(chosenColor));
         menuItem.setIcon(drawable);
+    }
+
+    public String getLastSavedImageURI() {
+        return lastSavedImageURI;
+    }
+
+    private boolean tryPerformAction(int requestCode) {
+        switch (requestCode) {
+            case SAVE_CANVAS_TO_EXT_STORAGE:
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    saveCanvas();
+                    return true;
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode);
+                }
+                break;
+            default:
+                return false;
+        }
+
+        return false;
     }
 }

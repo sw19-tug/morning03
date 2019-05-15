@@ -121,6 +121,14 @@ public class DrawingView extends View {
         }
     }
 
+    public Bitmap getCurrentBitmap() {
+        this.setDrawingCacheEnabled(true);
+        this.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(this.getDrawingCache());
+        this.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
     @VisibleForTesting
     public int getColor() {
         int chosenColor = ((MainActivity) getContext()).getChosenColor();
