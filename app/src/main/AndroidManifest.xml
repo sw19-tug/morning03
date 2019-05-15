@@ -26,7 +26,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="sw19.moring03.paint.fileprovider"
+            android:authorities="sw19.morning03.paint.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

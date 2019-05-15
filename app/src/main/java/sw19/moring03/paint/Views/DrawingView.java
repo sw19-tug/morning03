@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,7 @@ import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.PointTool;
+import sw19.moring03.paint.tools.PhotoTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Color;
 import sw19.moring03.paint.utils.Tool;
@@ -87,8 +89,10 @@ public class DrawingView extends View {
         }
     }
 
-    private void selectTool() {
+    public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
+
+        Bitmap cur_bitmap = (((MainActivity) getContext()).new_photo);
 
         switch (chosenTool) {
             case FILL:
@@ -108,6 +112,9 @@ public class DrawingView extends View {
             case DRAW_CIRCLE:
                 break;
             case DRAW_RECTANGLE:
+                break;
+            case TAKE_PHOTO:
+                objectsToPaint.add(new PhotoTool(cur_bitmap));
                 break;
         }
     }

@@ -1,7 +1,9 @@
 package sw19.moring03.paint;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
@@ -12,8 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
+import android.provider.MediaStore;
 import java.util.Random;
+import java.io.InputStream;
 
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     String lastCameraPicturePath = null;
 
     ImageView imageView;
+
+    public Bitmap new_photo;
+    public static final int PICK_IMAGE = 1;
 
 
     @Override
@@ -67,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void pickFromGallery(){
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+        startActivityForResult(intent,PICK_IMAGE);
+
     }
 
     public Tool getChosenTool() {
@@ -177,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
                 lastCameraPicture = cameraPicture;
                 saveLastCameraPicture();
+                pickFromGallery(); // function die dir is foto rausholt
 
             }
             catch (Exception e)
@@ -187,7 +203,26 @@ public class MainActivity extends AppCompatActivity {
                 lastCameraPicture = null;
                 e.printStackTrace();
             }
+
         }
+
+        if (resultCode == Activity.RESULT_OK)
+        {
+            try {
+                Uri imageUri = data.getData();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                new_photo = bitmap;
+                setChosenTool(Tool.TAKE_PHOTO);
+            }
+            catch(Exception ex)
+            {
+                Toast toast = Toast.makeText(getApplicationContext(), "Error while trying to import Image!", Toast.LENGTH_SHORT);
+                toast.show();
+                ex.printStackTrace();
+            }
+        }
+
+
     }
 
     private void saveLastCameraPicture() {
@@ -198,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
             return;
         }
+
 
         Random generator = new Random();
         int n = 100000;
@@ -210,8 +246,10 @@ public class MainActivity extends AppCompatActivity {
                     fname);
             lastCameraPicturePath = savedImageURI;
 
+
             Toast toast = Toast.makeText(getApplicationContext(), "Image Saved to Gallery", Toast.LENGTH_SHORT);
             toast.show();
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast toast = Toast.makeText(getApplicationContext(), "Could not save Image. Check permissions in app settings.", Toast.LENGTH_LONG);
