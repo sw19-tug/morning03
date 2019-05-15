@@ -1,14 +1,9 @@
 package sw19.moring03.paint;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import org.junit.Rule;
 import org.junit.Test;
