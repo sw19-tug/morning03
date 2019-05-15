@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
@@ -102,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         String[] mimeTypes = {"image/jpeg", "image/png"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
         startActivityForResult(intent, PICK_IMAGE);
-
     }
 
     public void chooseNewTool(View view) {
@@ -149,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                     setChosenTool(Tool.TAKE_PHOTO);
+
+                    findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
+                            SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+                            MotionEvent.ACTION_DOWN, 0, 0, 0));
+
                 } catch (Exception ex) {
                     System.out.println("ERROR: Failed to load Bitmap");
                 }
