@@ -14,9 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.provider.MediaStore;
+
 import java.util.Random;
-import java.io.InputStream;
 
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -75,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void pickFromGallery(){
-        Intent intent=new Intent(Intent.ACTION_PICK);
+    private void pickFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         String[] mimeTypes = {"image/jpeg", "image/png"};
-        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-        startActivityForResult(intent,PICK_IMAGE);
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+        startActivityForResult(intent, PICK_IMAGE);
 
     }
 
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawShapesButton:
                 FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
-                fragment.show(manager,"ShapeChooserFragment");
+                fragment.show(manager, "ShapeChooserFragment");
                 break;
             case R.id.eraserButton:
                 setChosenTool(Tool.ERASER);
@@ -182,21 +181,18 @@ public class MainActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == CAMERA_REQUEST)
-        {
+        if (requestCode == CAMERA_REQUEST) {
             try {
                 Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
 
-                if(cameraPicture == null)
+                if (cameraPicture == null)
                     return;
 
                 lastCameraPicture = cameraPicture;
                 saveLastCameraPicture();
                 pickFromGallery(); // function die dir is foto rausholt
 
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Error while handling Camera request!", Toast.LENGTH_SHORT);
                 toast.show();
                 lastCameraPicturePath = null;
@@ -206,29 +202,23 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        if (resultCode == Activity.RESULT_OK)
-        {
+        if (resultCode == Activity.RESULT_OK) {
             try {
                 Uri imageUri = data.getData();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 new_photo = bitmap;
                 setChosenTool(Tool.TAKE_PHOTO);
-            }
-            catch(Exception ex)
-            {
+            } catch (Exception ex) {
                 Toast toast = Toast.makeText(getApplicationContext(), "Error while trying to import Image!", Toast.LENGTH_SHORT);
                 toast.show();
                 ex.printStackTrace();
             }
         }
-
-
     }
 
     private void saveLastCameraPicture() {
 
-        if(lastCameraPicture == null)
-        {
+        if (lastCameraPicture == null) {
             Toast toast = Toast.makeText(getApplicationContext(), "First, take a picture :)", Toast.LENGTH_SHORT);
             toast.show();
             return;
@@ -238,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
         Random generator = new Random();
         int n = 100000;
         n = generator.nextInt(n);
-        String fname = "Paint-"+ n +".jpg";
+        String fname = "Paint-" + n + ".jpg";
         try {
             String savedImageURI = MediaStore.Images.Media.insertImage(getContentResolver(),
                     lastCameraPicture,
@@ -258,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
             lastCameraPicturePath = null;
         }
     }
-
 
 
 }

@@ -23,5 +23,7 @@ public abstract class Tools {
         return points;
     }
 
-    protected static int getBackgroundColor() { return backgroundColor; }
+    protected static int getBackgroundColor() {
+        return backgroundColor;
+    }
 }

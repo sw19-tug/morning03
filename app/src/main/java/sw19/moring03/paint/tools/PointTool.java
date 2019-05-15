@@ -6,7 +6,9 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 
 public class PointTool extends Tools {
-    public PointTool() {points = new ArrayList<>();}
+    public PointTool() {
+        points = new ArrayList<>();
+    }
 
 
     public int getPointCount() {
@@ -15,11 +17,10 @@ public class PointTool extends Tools {
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        if(points != null && points.size() < 1)
+        if (points != null && points.size() < 1)
             return false;
 
-        for(int i=0; i< points.size(); i++)
-        {
+        for (int i = 0; i < points.size(); i++) {
             float xCoord = points.get(i).x;
             float yCoord = points.get(i).y;
             canvas.drawPoint(xCoord, yCoord, paint);
