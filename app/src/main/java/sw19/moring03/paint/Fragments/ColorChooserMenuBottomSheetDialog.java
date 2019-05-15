@@ -22,6 +22,32 @@ public class ColorChooserMenuBottomSheetDialog extends BottomSheetDialogFragment
     @ColorInt
     private int chosenColor;
 
+    public int getChosenColor() {
+        return chosenColor;
+    }
+
+    public void setChosenColor(int chosenColor) {
+        this.chosenColor = chosenColor;
+    }
+
+    public void setRed(int red) {
+        SeekBar seekBar = getView().findViewById(R.id.redSlider);
+        seekBar.setProgress(red);
+        this.red = red;
+    }
+
+    public void setGreen(int green) {
+        SeekBar seekBar = getView().findViewById(R.id.greenSlider);
+        seekBar.setProgress(green);
+        this.green = green;
+    }
+
+    public void setBlue(int blue) {
+        SeekBar seekBar = getView().findViewById(R.id.blueSlider);
+        seekBar.setProgress(blue);
+        this.blue = blue;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.color_chooser_menu, container, false);

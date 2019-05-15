@@ -1,5 +1,6 @@
 package sw19.moring03.paint;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -20,6 +21,11 @@ import sw19.moring03.paint.utils.Tool;
 public class MainActivity extends AppCompatActivity {
 
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
+
+    public ColorChooserMenuBottomSheetDialog getColorChooserMenu() {
+        return colorChooserMenu;
+    }
+
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
@@ -206,6 +212,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         colorChooserMenu.dismiss();
+
+        int red = Color.red(chosenColor);
+        int green = Color.green(chosenColor);
+        int blue = Color.blue(chosenColor);
+        colorChooserMenu.setChosenColor(chosenColor);
+        colorChooserMenu.setRed(red);
+        colorChooserMenu.setGreen(green);
+        colorChooserMenu.setBlue(blue);
+
         setColorToIconTint();
     }
 
