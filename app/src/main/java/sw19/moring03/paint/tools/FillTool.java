@@ -37,7 +37,7 @@ public class FillTool extends Tools {
             this.frameBuffer = null;
         }
 
-        if (points.size() % 2 != 0 || points.isEmpty()) {
+        if (points.isEmpty() || points.size() % 2 != 0) {
             return false;
         }
 
@@ -46,6 +46,14 @@ public class FillTool extends Tools {
         }
 
         return true;
+    }
+
+    @Override
+    public void addPoint(PointF point) {
+        if (points.size() > 0) {
+            return;
+        }
+        super.addPoint(point);
     }
 
     private int getPixel(int x, int y) {

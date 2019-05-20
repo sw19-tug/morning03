@@ -33,7 +33,6 @@ public class DrawingView extends View {
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
-        this.setDrawingCacheEnabled(true);
         mPaint = new Paint();
         mPaint.setAntiAlias(false);
         mPaint.setColor(getResources().getColor(R.color.black));
@@ -57,18 +56,11 @@ public class DrawingView extends View {
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (((MainActivity) getContext()).getChosenTool() != Tool.FILL) {
-                    addPoint(xCoord, yCoord);
-                }
+                addPoint(xCoord, yCoord);
                 invalidate();
                 break;
         }
         return true;
-    }
-
-    @Override
-    public boolean performClick() {
-        return super.performClick();
     }
 
     @Override
@@ -103,7 +95,7 @@ public class DrawingView extends View {
                 int[] frameBuffer = new int[bitmap.getWidth() * bitmap.getHeight()];
                 bitmap.getPixels(frameBuffer, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
                 objectsToPaint.add(new FillTool(getColor(), frameBuffer, bitmap.getWidth(), bitmap.getHeight()));
-            break;
+                break;
             case ERASER:
                 objectsToPaint.add(new EraseTool(strokeWidth));
                 break;
