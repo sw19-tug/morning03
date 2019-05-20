@@ -145,6 +145,11 @@ public class DrawingView extends View {
     public void removeLastElementFromList() {
         objectsToPaint.remove(objectsToPaint.size() -1);
         invalidate();
+
+        if(objectsToPaint.isEmpty()){
+            ((MainActivity)getContext()).invalidateOptionsMenu();
+        }
+
     }
 
     public boolean isAlreadyDrawn() { return !objectsToPaint.isEmpty();}
