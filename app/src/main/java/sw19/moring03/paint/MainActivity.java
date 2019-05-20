@@ -66,6 +66,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         this.menu = menu;
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        DrawingView view = findViewById(R.id.drawingView);
+        if(view.isAlreadyDrawn()) {
+            menu.findItem(R.id.undoButton).setVisible(true);
+        }
+        else{
+            menu.findItem(R.id.undoButton).setVisible(false);
+        }
         return true;
     }
 

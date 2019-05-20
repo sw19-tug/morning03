@@ -54,6 +54,8 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_DOWN:
                 selectTool();
                 addPoint(xCoord, yCoord);
+                if(objectsToPaint.size() == 1)
+                    ((MainActivity)getContext()).invalidateOptionsMenu();
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -74,9 +76,9 @@ public class DrawingView extends View {
                 paint.setColor(tool.getColor());
                 tool.draw(canvas, paint);
             }
+
         }
     }
-
 
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
@@ -139,5 +141,7 @@ public class DrawingView extends View {
     public List<Tools> getObjectsToPaint() {
         return objectsToPaint;
     }
+
+    public boolean isAlreadyDrawn() { return !objectsToPaint.isEmpty();}
 
 }
