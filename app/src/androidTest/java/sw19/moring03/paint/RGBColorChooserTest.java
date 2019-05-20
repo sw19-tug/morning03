@@ -53,8 +53,10 @@ public class RGBColorChooserTest {
         onView(withId(R.id.colorChooserButton)).check(matches(isDisplayed()));
         onView(withId(R.id.colorChooserButton)).perform(click());
 
-        assertEquals(9, Color.red(launchActivityRule.getActivity().getColorChooserMenu().getChosenColor()));
-        assertEquals(140, Color.green(launchActivityRule.getActivity().getColorChooserMenu().getChosenColor()));
-        assertEquals(46, Color.blue(launchActivityRule.getActivity().getColorChooserMenu().getChosenColor()));
+       @ColorInt int green = launchActivityRule.getActivity().getResources().getColor(R.color.darkGreen);
+
+        assertEquals(9, Color.red(green));
+        assertEquals(140, Color.green(green));
+        assertEquals(46, Color.blue(green));
     }
 }

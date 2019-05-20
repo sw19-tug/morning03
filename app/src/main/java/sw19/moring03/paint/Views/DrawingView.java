@@ -13,16 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.MainActivity;
-import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.CircleTool;
+import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.OvalTool;
+import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
-import sw19.moring03.paint.tools.PathTool;
 
 public class DrawingView extends View {
     private Paint paint;

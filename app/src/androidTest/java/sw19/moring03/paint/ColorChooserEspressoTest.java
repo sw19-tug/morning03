@@ -1,5 +1,6 @@
 package sw19.moring03.paint;
 
+import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
 import android.support.test.rule.ActivityTestRule;
 
@@ -75,7 +76,8 @@ public class ColorChooserEspressoTest {
         onView(withId(menuButtonId)).perform(click());
         onView(withId(selectedButtonInMenu)).perform(click());
 
-        assertEquals(activityTestRule.getActivity().getChosenColor(), chosenColorOption);
+        @ColorInt int color = activityTestRule.getActivity().getResources().getColor(chosenColorOption);
+        assertEquals(activityTestRule.getActivity().getChosenColor(), color);
         onView(withId(menuButtonId)).check(matches(isDisplayed()));
     }
 
