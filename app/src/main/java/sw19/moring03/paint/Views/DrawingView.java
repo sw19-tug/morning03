@@ -142,6 +142,11 @@ public class DrawingView extends View {
         return objectsToPaint;
     }
 
+    public void removeLastElementFromList() {
+        objectsToPaint.remove(objectsToPaint.size() -1);
+        invalidate();
+    }
+
     public boolean isAlreadyDrawn() { return !objectsToPaint.isEmpty();}
 
 }

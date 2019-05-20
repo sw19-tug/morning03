@@ -1,6 +1,5 @@
 package sw19.moring03.paint;
 
-
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -28,13 +27,14 @@ public class UndoButtonTest {
 
     @Test
     public void testButtonVisibility() {
-
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
+
         onView(withId(R.id.undoButton)).perform(click());
     }
 
+    @Test
     public void testUndoLastObject() {
 
         onView(withId(R.id.toolChooserButton)).perform(click());
@@ -45,7 +45,6 @@ public class UndoButtonTest {
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         List<Tools> pointsToDraw = view.getObjectsToPaint();
 
-        assertEquals(pointsToDraw.size(),0);
-
+        assertEquals(pointsToDraw.size(),0); 
     }
 }

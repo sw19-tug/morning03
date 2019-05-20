@@ -124,6 +124,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.undoButton) {
+            ((DrawingView)findViewById(R.id.drawingView)).removeLastElementFromList();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
