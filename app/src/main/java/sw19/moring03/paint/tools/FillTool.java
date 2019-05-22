@@ -13,6 +13,7 @@ public class FillTool extends Tools {
     private int[] frameBuffer;
     private int bufferWidth;
     private int bufferHeight;
+    private int scanColor;
 
     public FillTool() {
         points = new ArrayList<>();
@@ -56,55 +57,63 @@ public class FillTool extends Tools {
         super.addPoint(point);
     }
 
-    private int getPixel(int x, int y) {
-        return this.frameBuffer[y * bufferWidth + x];
+    private int getPixel(float x, float y) {
+        return this.frameBuffer[(int)y * bufferWidth + (int)x];
     }
 
-    private void setPixel(int x, int y, int color) {
-        this.frameBuffer[y * bufferWidth + x] = color;
+    private void setPixel(float x, float y, int color) {
+        this.frameBuffer[(int)y * bufferWidth + (int)x] = color;
+    }
+
+    private boolean isScanlineAbove(PointF point) {
+        return point.y > 0 && getPixel(point.x, point.y - 1) == scanColor;
+    }
+
+    private boolean isScanlineBelow(PointF point) {
+        return point.y < bufferHeight - 1 && getPixel(point.x, point.y + 1) == scanColor;
     }
 
     public void scanlineFloodFillStack(int x, int y, int scanColor) {
         // adapted code from source: https://lodev.org/cgtutor/floodfill.html#Scanline_Floodfill_Algorithm_With_Stack
-        int x1;
-        int y1;
-        boolean spanAbove;
-        boolean spanBelow;
-        Stack<PointF> pointsToCheck = new Stack<>();
+        this.scanColor = scanColor;
+        boolean checkForScanlineAbove;
+        boolean checkForScanlineBelow;
 
+        Stack<PointF> pointsToCheck = new Stack<>();
         pointsToCheck.push(new PointF(x, y));
 
         while (!pointsToCheck.empty()) {
             PointF currentScanlinePoint = pointsToCheck.pop();
-            x1 = (int)currentScanlinePoint.x;
-            y1 = (int)currentScanlinePoint.y;
 
-            while (x1 >= 0 && getPixel(x1, y1) == scanColor) {
-                x1--;
+            while (currentScanlinePoint.x >= 0 && getPixel(currentScanlinePoint.x, currentScanlinePoint.y) == scanColor) {
+                currentScanlinePoint.x--;
             }
-            points.add(new PointF(x1, y1));
-            x1++;
+            points.add(new PointF(currentScanlinePoint.x, currentScanlinePoint.y));
+            currentScanlinePoint.x++;
 
-            spanAbove = false;
-            spanBelow = false;
-            while (x1 < bufferWidth && getPixel(x1, y1) == scanColor) {
-                setPixel(x1, y1, color);
-                if (!spanAbove && y1 > 0 && getPixel(x1, (y1 - 1)) == scanColor) {
-                    pointsToCheck.push(new PointF(x1, y1 - 1));
-                    spanAbove = true;
-                } else if (spanAbove && y1 > 0 && getPixel(x1, y1 - 1) != scanColor) {
-                    spanAbove = false;
+            checkForScanlineAbove = true;
+            checkForScanlineBelow = true;
+
+            while (currentScanlinePoint.x < bufferWidth && getPixel(currentScanlinePoint.x, currentScanlinePoint.y) == scanColor) {
+                setPixel(currentScanlinePoint.x, currentScanlinePoint.y, color);
+
+                if (checkForScanlineAbove && isScanlineAbove(currentScanlinePoint)) {
+                    pointsToCheck.push(new PointF(currentScanlinePoint.x, currentScanlinePoint.y - 1));
+                    checkForScanlineAbove = false;
+                } else if (!checkForScanlineAbove && !isScanlineAbove(currentScanlinePoint)) {
+                    checkForScanlineAbove = true;
                 }
 
-                if (!spanBelow && y1 < bufferHeight - 1 && getPixel(x1, y1 + 1) == scanColor) {
-                    pointsToCheck.push(new PointF(x1, y1 + 1));
-                    spanBelow = true;
-                } else if (spanBelow && y1 < bufferHeight - 1 && getPixel(x1, y1 + 1) != scanColor) {
-                    spanBelow = false;
+                if (checkForScanlineBelow && isScanlineBelow(currentScanlinePoint)) {
+                    pointsToCheck.push(new PointF(currentScanlinePoint.x, currentScanlinePoint.y + 1));
+                    checkForScanlineBelow = false;
+                } else if (!checkForScanlineBelow && !isScanlineBelow(currentScanlinePoint)) {
+                    checkForScanlineBelow = true;
                 }
-                x1++;
+
+                currentScanlinePoint.x++;
             }
-            points.add(new PointF(x1, y1));
+            points.add(new PointF(currentScanlinePoint.x, currentScanlinePoint.y));
         }
     }
 
