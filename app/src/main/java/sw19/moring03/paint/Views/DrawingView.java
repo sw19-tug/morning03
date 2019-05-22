@@ -89,8 +89,6 @@ public class DrawingView extends View {
     public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
 
-        Bitmap curBitmap = (((MainActivity) getContext()).newPhoto);
-
         switch (chosenTool) {
             case FILL:
                 break;
@@ -111,6 +109,7 @@ public class DrawingView extends View {
             case DRAW_RECTANGLE:
                 break;
             case TAKE_PHOTO:
+                Bitmap curBitmap = (((MainActivity) getContext()).newPhoto);
                 objectsToPaint.add(new PhotoTool(curBitmap));
                 break;
         }

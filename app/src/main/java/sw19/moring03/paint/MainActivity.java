@@ -1,14 +1,18 @@
 package sw19.moring03.paint;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Color chosenColor = Color.BLACK;
     ImageView imageView;
     public Bitmap newPhoto;
+
 
 
     @Override
@@ -96,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(Tool.DRAW_PATH);
                 break;
             case R.id.cameraButton:
+                setChosenTool(Tool.TAKE_PHOTO);
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePicture.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePicture, CAMERA_REQUEST);
@@ -162,25 +168,19 @@ public class MainActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == CAMERA_REQUEST) {
-            try {
-                Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
+        if(resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST) {
+                Uri imageUri = data.getData();
+                try {
+                    newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    setChosenTool(Tool.TAKE_PHOTO);
 
-                if (cameraPicture == null) {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "Could not load image from Camera!", Toast.LENGTH_SHORT);
-                    toast.show();
-                    return;
+                } catch (Exception e) {
+                    System.out.println("ERROR: Failed to load Bitmap");
                 }
-                newPhoto = cameraPicture;
-                setChosenTool(Tool.TAKE_PHOTO);
-
-            } catch (Exception e) {
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        "Error while handling Camera request!", Toast.LENGTH_SHORT);
-                toast.show();
-                e.printStackTrace();
             }
+
         }
+
     }
 }

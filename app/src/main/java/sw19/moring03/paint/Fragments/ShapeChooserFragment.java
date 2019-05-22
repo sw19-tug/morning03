@@ -20,8 +20,8 @@ public class ShapeChooserFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.shapeChooserFragment)
                 .setItems(R.array.shape_type, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                String[] types = getResources().getStringArray(R.array.shape_type);
+                        public void onClick(DialogInterface dialog, int which) {
+                            String[] types = getResources().getStringArray(R.array.shape_type);
 
                                 if (getContext() != null) {
                                     MainActivity activity = (MainActivity) getContext();
