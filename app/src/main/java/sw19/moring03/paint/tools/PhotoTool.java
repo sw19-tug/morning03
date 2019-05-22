@@ -20,10 +20,9 @@ public class PhotoTool extends Tools {
     public boolean draw(Canvas canvas, Paint paint) {
         if (newImage != null) {
             Rect source = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
-            canvas.drawBitmap (newImage, null, source, null);
+            canvas.drawBitmap(newImage, null, source, null);
             return true;
         }
-
         return false;
     }
 }

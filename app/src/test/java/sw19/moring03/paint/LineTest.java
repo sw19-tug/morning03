@@ -87,5 +87,4 @@ public class LineTest {
         assertEquals((int)addedPoints.get(0).x, (int)tool.getPoints().get(0).x);
         assertEquals((int)addedPoints.get(3).x, (int)tool.getPoints().get(1).x);
     }
-
 }

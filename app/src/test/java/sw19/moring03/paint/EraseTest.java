@@ -36,5 +36,4 @@ public class EraseTest {
         assertTrue(tool.draw(canvas, paint));
         assertEquals(tmpColor, paint.getColor());
     }
-
 }

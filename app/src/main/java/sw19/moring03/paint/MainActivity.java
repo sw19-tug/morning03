@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int PICK_IMAGE = 1;
     private final int saveCanvasToExtStorage = 701;
     public Bitmap newPhoto;
+
+    private static final int CAMERA_REQUEST = 60;
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
@@ -183,6 +185,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawTextButton:
                 setChosenTool(Tool.DRAW_TEXT);
                 break;
+            case R.id.cameraButton:
+                setChosenTool(Tool.TAKE_PHOTO);
+                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePicture.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePicture, CAMERA_REQUEST);
+                }
+                break;
         }
 
         toolChooserMenu.dismiss();
@@ -202,6 +211,22 @@ public class MainActivity extends AppCompatActivity {
                         MotionEvent.ACTION_DOWN, 0, 0, 0));
 
             } catch (Exception ex) {
+                System.out.println("ERROR: Failed to load Bitmap");
+            }
+        } else if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST) {
+            super.onActivityResult(requestCode, resultCode, data);
+
+            Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
+            try {
+                newPhoto = cameraPicture;
+                setChosenTool(Tool.TAKE_PHOTO);
+
+
+                findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
+                        SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+                        MotionEvent.ACTION_DOWN, 0, 0, 0));
+
+            } catch (Exception e) {
                 System.out.println("ERROR: Failed to load Bitmap");
             }
         }
