@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Typeface;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -72,6 +73,7 @@ public class DrawingView extends View {
             for (Tools tool : objectsToPaint) {
                 paint.setStrokeWidth(tool.getStrokeWidth());
                 paint.setColor(tool.getColor());
+
                 tool.draw(canvas, paint);
             }
         }
@@ -120,13 +122,17 @@ public class DrawingView extends View {
                 TextInsertFragment textFragment = new TextInsertFragment();
                 textFragment.show(((MainActivity) getContext()).getSupportFragmentManager(), "textInsertFragment");
 
-                objectsToPaint.add(new TextTool());
+                objectsToPaint.add(new TextTool(getColor(), strokeWidth, getContext()));
                 break;
         }
     }
 
-    public void addTextToView(String text) {
+    public void addTextToTool(String text) {
         ((TextTool)objectsToPaint.get(objectsToPaint.size() - 1)).setText(text);
+    }
+
+    public void addFontToTool(String font) {
+        ((TextTool)objectsToPaint.get(objectsToPaint.size() - 1)).setFont(font);
     }
 
     public Bitmap getCurrentBitmap() {
