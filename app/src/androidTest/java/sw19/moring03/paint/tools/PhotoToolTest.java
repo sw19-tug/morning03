@@ -4,25 +4,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
 import android.support.test.rule.ActivityTestRule;
 
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
-
 
 public class PhotoToolTest {
     private Canvas canvas;
@@ -35,7 +27,6 @@ public class PhotoToolTest {
     public void setUp() {
         canvas = new Canvas();
         paint = new Paint();
-
     }
 
     @Test
@@ -55,11 +46,10 @@ public class PhotoToolTest {
 
     @Test
     public void testInvalidLineOnImage() {
-        Bitmap tmp_image = getBitmap();
-        PhotoTool photoTool = new PhotoTool(tmp_image);
+        Bitmap tmpImage = getBitmap();
+        PhotoTool photoTool = new PhotoTool(tmpImage);
         photoTool.draw(canvas, paint);
     }
-
 
     private Bitmap getBitmap() {
         return BitmapFactory.decodeResource(activityTestRule.getActivity().getResources(), R.drawable.test_image);

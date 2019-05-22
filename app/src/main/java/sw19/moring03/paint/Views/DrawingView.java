@@ -17,7 +17,6 @@ import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.CircleTool;
-import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.PathTool;
@@ -26,7 +25,6 @@ import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
-import sw19.moring03.paint.tools.PathTool;
 
 public class DrawingView extends View {
     private Paint paint;
@@ -54,8 +52,9 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_DOWN:
                 selectTool();
                 addPoint(xCoord, yCoord);
-                if(objectsToPaint.size() == 1)
-                    ((MainActivity)getContext()).invalidateOptionsMenu();
+                if (objectsToPaint.size() == 1) {
+                    ((MainActivity) getContext()).invalidateOptionsMenu();
+                }
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -90,7 +89,7 @@ public class DrawingView extends View {
 
     public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
-        Bitmap cur_bitmap = ((MainActivity) getContext()).new_photo;
+        Bitmap curBitmap = ((MainActivity) getContext()).newPhoto;
         int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
 
         switch (chosenTool) {
@@ -118,7 +117,7 @@ public class DrawingView extends View {
                 objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
                 break;
             case TAKE_PHOTO:
-                objectsToPaint.add(new PhotoTool(cur_bitmap));
+                objectsToPaint.add(new PhotoTool(curBitmap));
                 break;
         }
     }
@@ -142,16 +141,18 @@ public class DrawingView extends View {
         return objectsToPaint;
     }
 
-    public void removeLastElementFromList() {
-        objectsToPaint.remove(objectsToPaint.size() -1);
+    public void removeLastElementFromPaintList() {
+        objectsToPaint.remove(objectsToPaint.size() - 1);
         invalidate();
 
-        if(objectsToPaint.isEmpty()){
+        if (objectsToPaint.isEmpty()) {
             ((MainActivity)getContext()).invalidateOptionsMenu();
         }
 
     }
 
-    public boolean isAlreadyDrawn() { return !objectsToPaint.isEmpty();}
+    public boolean isAlreadyDrawn() {
+        return !objectsToPaint.isEmpty();
+    }
 
 }

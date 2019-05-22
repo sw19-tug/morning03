@@ -29,7 +29,6 @@ import sw19.moring03.paint.Views.DrawingView;
 import sw19.moring03.paint.utils.ImageSaver;
 import sw19.moring03.paint.utils.Tool;
 
-
 public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
@@ -41,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Menu menu;
 
-    private final int SAVE_CANVAS_TO_EXT_STORAGE = 701;
+    private static final int SAVE_CANVAS_TO_EXT_STORAGE = 701;
 
     private String lastSavedImageURI;
 
-    public Bitmap new_photo;
+    public Bitmap newPhoto;
     public static final int PICK_IMAGE = 1;
 
 
@@ -73,10 +72,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         DrawingView view = findViewById(R.id.drawingView);
-        if(view.isAlreadyDrawn()) {
+        if (view.isAlreadyDrawn()) {
             menu.findItem(R.id.undoButton).setVisible(true);
-        }
-        else{
+        } else {
             menu.findItem(R.id.undoButton).setVisible(false);
         }
         return true;
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (id == R.id.undoButton) {
-            ((DrawingView)findViewById(R.id.drawingView)).removeLastElementFromList();
+            ((DrawingView)findViewById(R.id.drawingView)).removeLastElementFromPaintList();
             return true;
         }
 
@@ -208,16 +206,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if (resultCode == Activity.RESULT_OK)
-            if(requestCode == PICK_IMAGE) {
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_IMAGE) {
                 Uri imageUri = data.getData();
                 try {
-                    new_photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                     setChosenTool(Tool.TAKE_PHOTO);
                 } catch (Exception ex) {
                     System.out.println("ERROR: Failed to load Bitmap");
                 }
             }
+        }
     }
 
     public void setToolIcon() {

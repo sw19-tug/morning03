@@ -14,10 +14,10 @@ import sw19.moring03.paint.tools.Tools;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static sw19.moring03.paint.util.Interaction.touchAt;
 import static org.junit.Assert.assertEquals;
-
 
 @RunWith(AndroidJUnit4.class)
 public class UndoButtonTest {
@@ -27,6 +27,7 @@ public class UndoButtonTest {
 
     @Test
     public void testButtonVisibility() {
+        onView(withId(R.id.undoButton)).check(doesNotExist());
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
@@ -36,6 +37,7 @@ public class UndoButtonTest {
 
     @Test
     public void testUndoLastObject() {
+        onView(withId(R.id.undoButton)).check(doesNotExist());
 
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
@@ -45,6 +47,7 @@ public class UndoButtonTest {
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         List<Tools> pointsToDraw = view.getObjectsToPaint();
 
-        assertEquals(pointsToDraw.size(),0); 
+        assertEquals(pointsToDraw.size(),0);
+        onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 }
