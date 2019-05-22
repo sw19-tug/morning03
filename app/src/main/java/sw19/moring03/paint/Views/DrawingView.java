@@ -142,13 +142,15 @@ public class DrawingView extends View {
     }
 
     public void removeLastElementFromPaintList() {
-        objectsToPaint.remove(objectsToPaint.size() - 1);
-        invalidate();
+        if(objectsToPaint != null && !objectsToPaint.isEmpty())
+        {
+            objectsToPaint.remove(objectsToPaint.size() - 1);
+            invalidate();
 
-        if (objectsToPaint.isEmpty()) {
-            ((MainActivity)getContext()).invalidateOptionsMenu();
+            if (objectsToPaint.isEmpty()) {
+                ((MainActivity)getContext()).invalidateOptionsMenu();
+            }
         }
-
     }
 
     public boolean isAlreadyDrawn() {
