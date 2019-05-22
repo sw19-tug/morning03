@@ -23,23 +23,23 @@ public class ShapeChooserFragment extends DialogFragment {
                         public void onClick(DialogInterface dialog, int which) {
                             String[] types = getResources().getStringArray(R.array.shape_type);
 
-                                if (getContext() != null) {
-                                    MainActivity activity = (MainActivity) getContext();
+                            if (getContext() != null) {
+                                MainActivity activity = (MainActivity) getContext();
 
-                                    switch (types[which]) {
-                                        case "Circle":
-                                            activity.setChosenTool(Tool.DRAW_CIRCLE);
-                                            break;
-                                        case "Rectangle":
-                                            activity.setChosenTool(Tool.DRAW_RECTANGLE);
-                                            break;
-                                        case "Oval":
-                                            activity.setChosenTool(Tool.DRAW_OVAL);
-                                            break;
-                                    }
+                                switch (types[which]) {
+                                    case "Circle":
+                                        activity.setChosenTool(Tool.DRAW_CIRCLE);
+                                        break;
+                                    case "Rectangle":
+                                        activity.setChosenTool(Tool.DRAW_RECTANGLE);
+                                        break;
+                                    case "Oval":
+                                        activity.setChosenTool(Tool.DRAW_OVAL);
+                                        break;
                                 }
                             }
                         }
+                    }
                 )
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {

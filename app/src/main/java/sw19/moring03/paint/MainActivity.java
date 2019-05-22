@@ -3,7 +3,6 @@ package sw19.moring03.paint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
@@ -14,8 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
+
 
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private Tool chosenTool = Tool.DRAW_POINT;
     private Color chosenColor = Color.BLACK;
-    ImageView imageView;
     public Bitmap newPhoto;
 
 
@@ -41,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        imageView = findViewById(R.id.imageView);
     }
 
     @Override
@@ -170,10 +165,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_REQUEST) {
-                Uri imageUri = data.getData();
+                Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
                 try {
-                    newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    newPhoto = cameraPicture;
                     setChosenTool(Tool.TAKE_PHOTO);
+
+
+                    findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
+                            SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+                            MotionEvent.ACTION_DOWN, 0, 0, 0));
 
                 } catch (Exception e) {
                     System.out.println("ERROR: Failed to load Bitmap");
