@@ -2,6 +2,7 @@ package sw19.moring03.paint;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.graphics.PointF;
@@ -25,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 public class LineTestWithLineType {
     private Canvas canvas;
     private Paint paint;
-    private PathEffect pathEffect = new PathEffect();
+    private PathEffect pathEffect;
 
     @Before
     public void startUp() {
@@ -34,8 +35,11 @@ public class LineTestWithLineType {
     }
 
     @Test
-    public void testLineSimple() {
-        LineTool tool = new LineTool(Color.BLACK, 5, pathEffect);
+    public void testPathLineSimple() {
+        pathEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
+        paint.setPathEffect(pathEffect);
+
+        LineTool tool = new LineTool();
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
@@ -46,7 +50,10 @@ public class LineTestWithLineType {
     }
 
     @Test
-    public void testInvalidLine() {
+    public void testPathInvalidLine() {
+        pathEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
+        paint.setPathEffect(pathEffect);
+
         LineTool tool = new LineTool();
         tool.addPoint(new PointF(10, 10));
 
@@ -54,10 +61,13 @@ public class LineTestWithLineType {
     }
 
     @Test
-    public void testDrawLine() {
+    public void testpathDrawLine() {
+        pathEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
+        paint.setPathEffect(pathEffect);
+
         int expectedLines = 1;
 
-        LineTool tools = new LineTool(Color.BLACK, 5, pathEffect);
+        LineTool tools = new LineTool();
 
         tools.addPoint(new PointF(10, 10));
         tools.addPoint(new PointF(20, 20));
@@ -71,24 +81,4 @@ public class LineTestWithLineType {
         Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(Mockito.anyFloat(),
                 Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
     }
-
-    @Test
-    public void testAddPoints() {
-        List<PointF> addedPoints = new ArrayList<>();
-
-        addedPoints.add(new PointF(10, 10));
-        addedPoints.add(new PointF(20, 20));
-        addedPoints.add(new PointF(30, 30));
-        addedPoints.add(new PointF(40, 40));
-
-        LineTool tool = new LineTool(Color.BLACK, 5, pathEffect);
-        for (int i = 0; i < addedPoints.size(); i++) {
-            tool.addPoint(addedPoints.get(i));
-        }
-
-        assertEquals(2, tool.getPoints().size());
-        assertEquals((int)addedPoints.get(0).x, (int)tool.getPoints().get(0).x);
-        assertEquals((int)addedPoints.get(3).x, (int)tool.getPoints().get(1).x);
-    }
-
 }
