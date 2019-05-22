@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        setToolIcon();
         DrawingView view = findViewById(R.id.drawingView);
         if (view.isAlreadyDrawn()) {
             menu.findItem(R.id.undoButton).setVisible(true);

@@ -3,10 +3,8 @@ package sw19.moring03.paint;
 import android.graphics.drawable.Drawable;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.view.menu.ActionMenuItem;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +17,6 @@ import sw19.moring03.paint.tools.Tools;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -59,7 +56,8 @@ public class UndoButtonTest {
     }
 
     @Test
-    public void testUndoToolIcon(){
+    public void testUndoToolIcon() {
+        Drawable expectedIcon = launchActivityRule.getActivity().getResources().getDrawable(R.drawable.ic_line_icon);
 
         onView(withId(R.id.undoButton)).check(doesNotExist());
 
@@ -68,12 +66,11 @@ public class UndoButtonTest {
         onView(withId(R.id.drawingView)).perform(swipeLeft());
         onView(withId(R.id.undoButton)).perform(click());
 
-        DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
-        ActionMenuItemView toolchooser  = toolbar.findViewById(R.id.toolChooserButton);
-        Drawable test = toolchooser.getItemData().getIcon();
+        ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.toolChooserButton);
+        Drawable currentIcon = toolChooser.getItemData().getIcon();
 
-        assertEquals(launchActivityRule.getActivity().getResources().getDrawable(R.drawable.ic_line_icon).getConstantState(),test.getConstantState());
+        assertEquals(expectedIcon.getConstantState(),currentIcon.getConstantState());
 
         onView(withId(R.id.undoButton)).check(doesNotExist());
     }

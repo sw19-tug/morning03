@@ -142,8 +142,7 @@ public class DrawingView extends View {
     }
 
     public void removeLastElementFromPaintList() {
-        if(objectsToPaint != null && !objectsToPaint.isEmpty())
-        {
+        if (objectsToPaint != null && !objectsToPaint.isEmpty()) {
             objectsToPaint.remove(objectsToPaint.size() - 1);
             invalidate();
 
