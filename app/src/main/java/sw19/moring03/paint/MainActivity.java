@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setLineEffect(PATHEFFECTS effect)
     {
+        MenuItem menuItem = menu.findItem(R.id.toolChooserButton);
+        setChosenTool(Tool.DRAW_LINE);
+        menuItem.setIcon(R.drawable.ic_line_icon);
+
         switch(effect)
         {
             case SOLID:
