@@ -3,7 +3,9 @@ package sw19.moring03.paint.tools;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.support.test.rule.ActivityTestRule;
 
 import org.junit.Before;
@@ -41,6 +43,18 @@ public class PhotoToolTest {
     @Test
     public void testInvalidImage() {
         PhotoTool tool = new PhotoTool(null);
+        assertFalse(tool.draw(canvas, paint));
+    }
+
+    @Test
+    public void testDrawOnImage() {
+        Bitmap image = getBitmap();
+        PhotoTool photoTool = new PhotoTool(image);
+        photoTool.draw(canvas, paint);
+
+        LineTool tool = new LineTool(Color.BLACK, 5);
+        tool.addPoint(new PointF(10, 10));
+
         assertFalse(tool.draw(canvas, paint));
     }
 

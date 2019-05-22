@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -94,43 +96,37 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.toolChooserButton) {
-            toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
-            return true;
+        switch (id) {
+            case R.id.toolChooserButton:
+                toolChooserMenu.show(getSupportFragmentManager(), "toolChooserMenu");
+                return true;
+            case R.id.colorChooserButton:
+                colorChooserMenu.show(getSupportFragmentManager(), "colorChooserMenu");
+                return true;
+            case R.id.strokeWidthChooserButton:
+                strokeWidthChooserMenu.show(getSupportFragmentManager(), "strokeWidthChooserMenu");
+                return true;
+            case R.id.saveButton:
+                tryPerformAction(saveCanvasToExtStorage);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        if (id == R.id.colorChooserButton) {
-            colorChooserMenu.show(getSupportFragmentManager(), "colorChooserMenu");
-            return true;
-        }
-
-        if (id == R.id.strokeWidthChooserButton) {
-            strokeWidthChooserMenu.show(getSupportFragmentManager(), "strokeWidthChooserMenu");
-            return true;
-        }
-
-        if (id == R.id.saveButton) {
-            tryPerformAction(saveCanvasToExtStorage);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
-    private boolean saveCanvas() {
+    private void saveCanvas() {
         DrawingView view = findViewById(R.id.drawingView);
         Bitmap currentBitmap = view.getCurrentBitmap();
         ImageSaver is = new ImageSaver(getContentResolver());
+
         if (is.saveImage(currentBitmap)) {
             this.lastSavedImageURI = is.getSavedImageURI();
             Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
             toastSuccess.show();
-            return true;
         }
 
         Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
         toastFail.show();
-        return false;
     }
 
     public int getStrokeWidth() {
@@ -160,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chooseNewTool(View view) {
+        FragmentManager manager = getSupportFragmentManager();
         switch (view.getId()) {
             case R.id.drawPointButton:
                 setChosenTool(Tool.DRAW_POINT);
@@ -171,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(Tool.FILL);
                 break;
             case R.id.drawShapesButton:
-                FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
                 fragment.show(manager, "ShapeChooserFragment");
                 break;
@@ -183,6 +179,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.takePhoto:
                 pickFromGallery();
+                break;
+            case R.id.drawTextButton:
+                setChosenTool(Tool.DRAW_TEXT);
                 break;
         }
 
@@ -197,6 +196,11 @@ public class MainActivity extends AppCompatActivity {
             try {
                 newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 setChosenTool(Tool.TAKE_PHOTO);
+
+                findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
+                        SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
+                        MotionEvent.ACTION_DOWN, 0, 0, 0));
+
             } catch (Exception ex) {
                 System.out.println("ERROR: Failed to load Bitmap");
             }
@@ -230,6 +234,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case ERASER:
                 menuItem.setIcon(R.drawable.ic_eraser_icon);
+                break;
+            case DRAW_TEXT:
+                menuItem.setIcon(R.drawable.ic_text);
                 break;
         }
     }
@@ -314,20 +321,13 @@ public class MainActivity extends AppCompatActivity {
         return lastSavedImageURI;
     }
 
-    private boolean tryPerformAction(int requestCode) {
-        switch (requestCode) {
-            case saveCanvasToExtStorage:
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    saveCanvas();
-                    return true;
-                } else {
-                    ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode);
-                }
-                break;
-            default:
-                return false;
+    private void tryPerformAction(int requestCode) {
+        if (requestCode == saveCanvasToExtStorage) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                saveCanvas();
+            } else {
+                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode);
+            }
         }
-
-        return false;
     }
 }

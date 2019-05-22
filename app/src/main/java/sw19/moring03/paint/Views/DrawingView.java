@@ -13,6 +13,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import sw19.moring03.paint.Fragments.TextInsertFragment;
 import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.CircleTool;
@@ -23,6 +24,7 @@ import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PhotoTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
+import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
 
@@ -114,7 +116,17 @@ public class DrawingView extends View {
             case TAKE_PHOTO:
                 objectsToPaint.add(new PhotoTool(((MainActivity) getContext()).newPhoto));
                 break;
+            case DRAW_TEXT:
+                TextInsertFragment textFragment = new TextInsertFragment();
+                textFragment.show(((MainActivity) getContext()).getSupportFragmentManager(), "textInsertFragment");
+
+                objectsToPaint.add(new TextTool());
+                break;
         }
+    }
+
+    public void addTextToView(String text) {
+        ((TextTool)objectsToPaint.get(objectsToPaint.size() - 1)).setText(text);
     }
 
     public Bitmap getCurrentBitmap() {
