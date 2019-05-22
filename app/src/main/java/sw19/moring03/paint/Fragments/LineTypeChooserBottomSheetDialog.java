@@ -1,6 +1,5 @@
 package sw19.moring03.paint.Fragments;
 
-import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 
 import sw19.moring03.paint.MainActivity;

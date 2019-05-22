@@ -3,7 +3,6 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.PathEffect;
 import android.graphics.PointF;
 
