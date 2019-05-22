@@ -56,6 +56,7 @@ public class TextInsertFragmentTest {
         onView(withId(R.id.drawTextButton)).perform(click());
 
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
+        onView(withId(R.id.editText)).perform(click());
         onView(withText(R.string.insertTextFragment)).perform(pressBack());
         onView(withText(R.string.insertTextFragment)).perform(pressBack());
         onView(withId(R.id.strokeWidthChooserButton)).check(matches(isDisplayed()));
