@@ -15,13 +15,37 @@
         android:paddingEnd="15dp"
         android:text="@string/choose_line_type" />
 
-    <Spinner
-        android:id="@+id/lineType"
+    <Button
+        android:id="@+id/dashedLine"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:entries="@array/spinnerItems"
-        />
+        android:onClick="chooseLineType"
+        android:text="Dashed Line" />
+
+    <Button
+        android:id="@+id/dotedLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="chooseLineType"
+        android:text="Doted Line" />
+
+    <Button
+        android:id="@+id/solidLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="chooseLineType"
+        android:text="Solid Line" />
+
+    <Button
+        android:id="@+id/dasheddotedLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="chooseLineType"
+        android:text="Dashed-doted Line" />
 
 </LinearLayout>
 

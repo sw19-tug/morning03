@@ -54,39 +54,10 @@ public class MainActivity extends AppCompatActivity {
     public Bitmap new_photo;
     public static final int PICK_IMAGE = 1;
 
-    public enum PATHEFFECTS {SOLID, DASHED, DOTED, DASHEDDOTED}
-
     public PathEffect getPathEffect()
     {
         return lineEffect;
     }
-
-    public void setLineEffect(PATHEFFECTS effect)
-    {
-        MenuItem menuItem = menu.findItem(R.id.toolChooserButton);
-        setChosenTool(Tool.DRAW_LINE);
-        menuItem.setIcon(R.drawable.ic_line_icon);
-
-        switch(effect)
-        {
-            case SOLID:
-                lineEffect = new PathEffect();
-                break;
-            case DASHED:
-                lineEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
-                break;
-            case DOTED:
-                lineEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
-                break;
-            case DASHEDDOTED:
-                lineEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
-                break;
-            default:
-                break;
-        }
-    }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -284,6 +255,31 @@ public class MainActivity extends AppCompatActivity {
 
     public void setChosenColor(int chosenColor) {
         this.chosenColor = chosenColor;
+    }
+
+    public void chooseLineType(View view) {
+        MenuItem menuItem = menu.findItem(R.id.toolChooserButton);
+        setChosenTool(Tool.DRAW_LINE);
+        menuItem.setIcon(R.drawable.ic_line_icon);
+
+        switch (view.getId()) {
+            case R.id.dashedLine:
+                lineEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
+                break;
+            case R.id.solidLine:
+                lineEffect = new PathEffect();
+                break;
+            case R.id.dasheddotedLine:
+                lineEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
+                break;
+            case R.id.dotedLine:
+                lineEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
+                break;
+            default:
+                break;
+        }
+
+       lineTypeChooserMenu.dismiss();
     }
 
     public void chooseNewColor(View view) {
