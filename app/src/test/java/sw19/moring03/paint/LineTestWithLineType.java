@@ -1,7 +1,6 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
@@ -13,12 +12,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import sw19.moring03.paint.tools.LineTool;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

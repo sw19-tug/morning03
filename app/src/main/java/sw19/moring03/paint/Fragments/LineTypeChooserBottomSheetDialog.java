@@ -6,6 +6,7 @@ import android.support.design.widget.BottomSheetDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import sw19.moring03.paint.R;
 
 public class LineTypeChooserBottomSheetDialog extends BottomSheetDialogFragment {
