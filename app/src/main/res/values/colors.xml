@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#bebebe</color>
+    <color name="colorPrimary">#BEBEBE</color>
     <color name="colorPrimaryDark">#969696</color>
     <color name="colorAccent">#D81B60</color>
 
@@ -16,4 +16,5 @@
     <color name="lightGreen">#5BE82C</color>
     <color name="darkGreen">#098C2E</color>
     <color name="black">#000000</color>
+    <color name="custom">#bebebe</color>
 </resources>

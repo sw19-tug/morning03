@@ -9,11 +9,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static junit.framework.Assert.fail;
 import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
@@ -29,15 +32,13 @@ public class SaveEspressoTest {
     }
 
     @Test
-    public void testImageSaved() {
+    public void testImageSaved() throws IOException {
         onView(withId(R.id.saveButton)).perform(click());
 
         Uri imageURI = Uri.parse(activityTestRule.getActivity().getLastSavedImageURI());
-        try {
-            Bitmap image = MediaStore.Images.Media.getBitmap(activityTestRule.getActivity().getContentResolver(), imageURI);
-            assertNotNull(image);
-        } catch (Exception exc) {
-            assertTrue(false);
-        }
+
+        Bitmap image = MediaStore.Images.Media.getBitmap(activityTestRule.getActivity().getContentResolver(), imageURI);
+        assertNotNull(image);
+
     }
 }

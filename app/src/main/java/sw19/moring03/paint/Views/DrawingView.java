@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.MainActivity;
-import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.CircleTool;
 import sw19.moring03.paint.tools.EraseTool;
@@ -26,7 +25,6 @@ import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
-import sw19.moring03.paint.tools.PathTool;
 
 public class DrawingView extends View {
     private Paint paint;
@@ -77,7 +75,6 @@ public class DrawingView extends View {
         }
     }
 
-
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
 
@@ -88,7 +85,6 @@ public class DrawingView extends View {
 
     public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
-        Bitmap cur_bitmap = ((MainActivity) getContext()).new_photo;
         int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
 
         switch (chosenTool) {
@@ -116,7 +112,7 @@ public class DrawingView extends View {
                 objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
                 break;
             case TAKE_PHOTO:
-                objectsToPaint.add(new PhotoTool(cur_bitmap));
+                objectsToPaint.add(new PhotoTool(((MainActivity) getContext()).newPhoto));
                 break;
         }
     }
@@ -131,8 +127,7 @@ public class DrawingView extends View {
 
     @VisibleForTesting
     public int getColor() {
-        int chosenColor = ((MainActivity) getContext()).getChosenColor();
-        return getResources().getColor(chosenColor);
+        return ((MainActivity) getContext()).getChosenColor();
     }
 
     @VisibleForTesting
