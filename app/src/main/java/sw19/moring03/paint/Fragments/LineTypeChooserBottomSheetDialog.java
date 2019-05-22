@@ -36,18 +36,22 @@ public class LineTypeChooserBottomSheetDialog extends BottomSheetDialogFragment 
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 if(spinner.getSelectedItem().toString().equals("Solid Line"))
                 {
+                    spinner.setSelection(0);
                     ((MainActivity)getContext()).setLineEffect(MainActivity.PATHEFFECTS.SOLID);
                 }
                 else if(spinner.getSelectedItem().toString().equals("Dashed Line"))
                 {
+                    spinner.setSelection(1);
                     ((MainActivity)getContext()).setLineEffect(MainActivity.PATHEFFECTS.DASHED);
                 }
                 else if(spinner.getSelectedItem().toString().equals("Doted Line"))
                 {
+                    spinner.setSelection(2);
                     ((MainActivity)getContext()).setLineEffect(MainActivity.PATHEFFECTS.DOTED);
                 }
                 else if(spinner.getSelectedItem().toString().equals("Dashed-Doted Line"))
                 {
+                    spinner.setSelection(3);
                     ((MainActivity)getContext()).setLineEffect(MainActivity.PATHEFFECTS.DASHEDDOTED);
                 }
             }

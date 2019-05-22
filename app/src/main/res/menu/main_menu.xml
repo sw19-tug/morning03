@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/lineTypeChooserButton"
-        android:icon="@drawable/ic_pen_icon"
+        android:icon="@drawable/ic_more_vert_black_24dp"
         android:title="@string/lineTypeChooserButton"
         app:showAsAction="always" />
 
