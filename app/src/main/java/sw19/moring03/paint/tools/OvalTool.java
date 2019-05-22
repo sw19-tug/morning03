@@ -3,6 +3,7 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import android.graphics.PointF;
 
 import java.util.ArrayList;
@@ -14,10 +15,11 @@ public class OvalTool extends Tools {
         color = Color.BLACK;
     }
 
-    public OvalTool(int col, int strkW) {
+    public OvalTool(int col, int strkW, PathEffect effect) {
         points = new ArrayList<>();
         strokeWidth = strkW;
         color = col;
+        pathEffect = effect;
     }
 
     @Override
@@ -31,6 +33,8 @@ public class OvalTool extends Tools {
 
         float xEnd = points.get(points.size() - 1).x;
         float yEnd = points.get(points.size() - 1).y;
+
+        paint.setPathEffect(pathEffect);
 
         canvas.drawOval(xStart, yStart, xEnd, yEnd, paint);
         return true;

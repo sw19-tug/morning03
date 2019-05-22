@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Paint</string>
     <string name="toolIcon">Tool Icon</string>
+    <string name="lineTypeChooserButton">Choose Line Type</string>
     <string name="toolChooserButton">Choose Drawing Tool</string>
     <string name="colorChooserButton">Choose Color for Drawing Tool</string>
     <string name="saveButton">Save current drawing</string>
@@ -16,4 +17,5 @@
     <string name="color">Choose Color</string>
     <string name="choose_stroke_width_for_drawing_tool">Choose Stroke Width for Drawing Tool</string>
     <string name="stroke_width_display">5pt</string>
+    <string name="choose_line_type">Choose the line type</string>
 </resources>

@@ -3,6 +3,8 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.PathEffect;
 import android.graphics.PointF;
 
 import java.util.ArrayList;
@@ -14,10 +16,11 @@ public class RectangleTool extends Tools {
         color = Color.BLACK;
     }
 
-    public RectangleTool(int col, int strkW) {
+    public RectangleTool(int col, int strkW, PathEffect effect) {
         points = new ArrayList<>();
         strokeWidth = strkW;
         color = col;
+        pathEffect = effect;
     }
 
     @Override

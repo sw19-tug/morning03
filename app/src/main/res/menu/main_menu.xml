@@ -9,6 +9,12 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/lineTypeChooserButton"
+        android:icon="@drawable/ic_pen_icon"
+        android:title="@string/lineTypeChooserButton"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/toolChooserButton"
         android:icon="@drawable/ic_point_icon"
         android:title="@string/toolChooserButton"

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import android.graphics.PointF;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
@@ -90,6 +91,7 @@ public class DrawingView extends View {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
         Bitmap cur_bitmap = ((MainActivity) getContext()).new_photo;
         int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
+        PathEffect effect = ((MainActivity)getContext()).getPathEffect();
 
         switch (chosenTool) {
             case FILL:
@@ -98,22 +100,22 @@ public class DrawingView extends View {
                 objectsToPaint.add(new EraseTool(strokeWidth));
                 break;
             case DRAW_LINE:
-                objectsToPaint.add(new LineTool(getColor(), strokeWidth));
+                objectsToPaint.add(new LineTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_PATH:
-                objectsToPaint.add(new PathTool(getColor(), strokeWidth));
+                objectsToPaint.add(new PathTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_POINT:
                 objectsToPaint.add(new PointTool(getColor(), strokeWidth));
                 break;
             case DRAW_CIRCLE:
-                objectsToPaint.add(new CircleTool(getColor(), strokeWidth));
+                objectsToPaint.add(new CircleTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_RECTANGLE:
-                objectsToPaint.add(new RectangleTool(getColor(), strokeWidth));
+                objectsToPaint.add(new RectangleTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_OVAL:
-                objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
+                objectsToPaint.add(new OvalTool(getColor(), strokeWidth, effect));
                 break;
             case TAKE_PHOTO:
                 objectsToPaint.add(new PhotoTool(cur_bitmap));

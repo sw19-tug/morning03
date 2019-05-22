@@ -3,6 +3,9 @@ package sw19.moring03.paint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.DashPathEffect;
+import android.graphics.PathDashPathEffect;
+import android.graphics.PathEffect;
 import android.net.Uri;
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -22,6 +25,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.Fragments.LineTypeChooserBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
+    private LineTypeChooserBottomSheetDialog lineTypeChooserMenu;
 
     private Tool chosenTool = Tool.DRAW_POINT;
     private int chosenColor = R.color.black;
@@ -45,8 +50,39 @@ public class MainActivity extends AppCompatActivity {
 
     private String lastSavedImageURI;
 
+    private PathEffect lineEffect;
+
     public Bitmap new_photo;
     public static final int PICK_IMAGE = 1;
+
+    public enum PATHEFFECTS {SOLID, DASHED, DOTED, DASHEDDOTED}
+
+    public PathEffect getPathEffect()
+    {
+        return lineEffect;
+    }
+
+    public void setLineEffect(PATHEFFECTS effect)
+    {
+        switch(effect)
+        {
+            case SOLID:
+                lineEffect = new PathEffect();
+                break;
+            case DASHED:
+                lineEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
+                break;
+            case DOTED:
+                lineEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
+                break;
+            case DASHEDDOTED:
+                lineEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
+                break;
+            default:
+                break;
+        }
+    }
+
 
 
     @Override
@@ -60,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         toolChooserMenu = new ToolChooserMenuBottomSheetDialog();
         colorChooserMenu = new ColorChooserMenuBottomSheetDialog();
         strokeWidthChooserMenu = new StrokeWidthChooserMenuBottomSheetDialog();
+        lineTypeChooserMenu = new LineTypeChooserBottomSheetDialog();
     }
 
     @Override
@@ -103,6 +140,11 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.strokeWidthChooserButton) {
             strokeWidthChooserMenu.show(getSupportFragmentManager(), "strokeWidthChooserMenu");
+            return true;
+        }
+
+        if (id == R.id.lineTypeChooserButton) {
+            lineTypeChooserMenu.show(getSupportFragmentManager(), "lineTypeChooserMenu");
             return true;
         }
 
