@@ -13,6 +13,7 @@ public class RectangleTool extends Tools {
         points = new ArrayList<>();
         strokeWidth = 5;
         color = Color.BLACK;
+        pathEffect = new PathEffect();
     }
 
     public RectangleTool(int col, int strkW, PathEffect effect) {

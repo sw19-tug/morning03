@@ -71,6 +71,7 @@ public class DrawingView extends View {
             for (Tools tool : objectsToPaint) {
                 paint.setStrokeWidth(tool.getStrokeWidth());
                 paint.setColor(tool.getColor());
+                paint.setPathEffect(tool.getPathEffect());
                 tool.draw(canvas, paint);
             }
         }

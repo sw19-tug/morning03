@@ -3,6 +3,7 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class EraseTool extends Tools {
         points = new ArrayList<>();
         strokeWidth = 5;
         color = Color.BLACK;
+        pathEffect = new PathEffect();
     }
 
     public EraseTool(int strkW) {

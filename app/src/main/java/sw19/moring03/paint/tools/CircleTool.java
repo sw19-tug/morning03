@@ -17,6 +17,7 @@ public class CircleTool extends Tools {
         strokeWidth = 5;
         color = Color.BLACK;
         radius = 0;
+        pathEffect = new PathEffect();
     }
 
     public CircleTool(int col, int strkW, PathEffect effect) {

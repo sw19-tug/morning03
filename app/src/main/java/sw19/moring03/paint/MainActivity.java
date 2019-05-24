@@ -259,7 +259,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void chooseLineType(View view) {
         MenuItem menuItem = menu.findItem(R.id.toolChooserButton);
-        setChosenTool(Tool.DRAW_LINE);
+
+        if(getChosenTool() == Tool.DRAW_POINT) {
+            setChosenTool(Tool.DRAW_LINE);
+        }
+
         menuItem.setIcon(R.drawable.ic_line_icon);
 
         switch (view.getId()) {

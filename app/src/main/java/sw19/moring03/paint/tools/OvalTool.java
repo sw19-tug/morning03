@@ -13,6 +13,7 @@ public class OvalTool extends Tools {
         points = new ArrayList<>();
         strokeWidth = 5;
         color = Color.BLACK;
+        pathEffect = new PathEffect();
     }
 
     public OvalTool(int col, int strkW, PathEffect effect) {

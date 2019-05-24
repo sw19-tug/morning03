@@ -14,6 +14,7 @@ public class LineTool extends Tools {
         points = new ArrayList<>();
         strokeWidth = 5;
         color = Color.BLACK;
+        pathEffect = new PathEffect();
     }
 
     public LineTool(int col, int strkW, PathEffect effect) {
