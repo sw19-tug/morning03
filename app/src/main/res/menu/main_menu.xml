@@ -4,6 +4,11 @@
     tools:context="com.example.bar.MainActivity">
 
     <item
+        android:id="@+id/undoButton"
+        android:icon="@drawable/ic_undo_black_24dp"
+        android:title="@string/undo_button"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/strokeWidthChooserButton"
         android:title="@string/stroke_width_display"
         app:showAsAction="always" />
@@ -25,5 +30,7 @@
         android:icon="@drawable/ic_save_icon"
         android:title="@string/saveButton"
         app:showAsAction="always" />
+
+
 
 </menu>

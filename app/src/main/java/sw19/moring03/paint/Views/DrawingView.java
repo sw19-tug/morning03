@@ -55,6 +55,9 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_DOWN:
                 selectTool();
                 addPoint(xCoord, yCoord);
+                if (objectsToPaint.size() == 1) {
+                    ((MainActivity) getContext()).invalidateOptionsMenu();
+                }
                 invalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -152,6 +155,21 @@ public class DrawingView extends View {
     @VisibleForTesting
     public List<Tools> getObjectsToPaint() {
         return objectsToPaint;
+    }
+
+    public void removeLastElementFromPaintList() {
+        if (objectsToPaint != null && !objectsToPaint.isEmpty()) {
+            objectsToPaint.remove(objectsToPaint.size() - 1);
+            invalidate();
+
+            if (objectsToPaint.isEmpty()) {
+                ((MainActivity)getContext()).invalidateOptionsMenu();
+            }
+        }
+    }
+
+    public boolean isAlreadyDrawn() {
+        return !objectsToPaint.isEmpty();
     }
 
 }

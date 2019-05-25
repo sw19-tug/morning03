@@ -75,6 +75,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         this.menu = menu;
+
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        setToolIcon();
+        setStrokeWidth(strokeWidth);
+        DrawingView view = findViewById(R.id.drawingView);
+        if (view.isAlreadyDrawn()) {
+            menu.findItem(R.id.undoButton).setVisible(true);
+        } else {
+            menu.findItem(R.id.undoButton).setVisible(false);
+        }
         return true;
     }
 
@@ -110,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.saveButton:
                 tryPerformAction(saveCanvasToExtStorage);
+                return true;
+            case R.id.undoButton:
+                ((DrawingView)findViewById(R.id.drawingView)).removeLastElementFromPaintList();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
