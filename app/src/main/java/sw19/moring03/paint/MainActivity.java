@@ -209,6 +209,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivityForResult(takePicture, CAMERA_REQUEST);
                 }
                 break;
+            case R.id.sprayCanButton:
+                setChosenTool(Tool.SPRAY_CAN);
+                break;
         }
 
         toolChooserMenu.dismiss();

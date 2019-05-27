@@ -28,7 +28,6 @@ import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
 
-
 public class DrawingView extends View {
     private Paint paint;
     private List<Tools> objectsToPaint;
