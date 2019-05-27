@@ -271,6 +271,9 @@ public class MainActivity extends AppCompatActivity {
             case DRAW_POINT:
                 menuItem.setIcon(R.drawable.ic_point_icon);
                 break;
+            case SPRAY_CAN:
+                menuItem.setIcon(R.drawable.ic_spray_can_icon);
+                break;
             case DRAW_RECTANGLE:
                 menuItem.setIcon(R.drawable.ic_rectangle_icon);
                 break;

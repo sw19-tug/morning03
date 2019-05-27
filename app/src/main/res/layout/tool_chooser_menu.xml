@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:drawableStart="@drawable/ic_grain_black_24dp"
+        android:drawableStart="@drawable/ic_spray_can_icon"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
         android:drawablePadding="15dp"
