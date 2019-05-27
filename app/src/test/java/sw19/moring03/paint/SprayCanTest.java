@@ -7,10 +7,9 @@ import android.graphics.PointF;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import sw19.moring03.paint.tools.PointTool;
+import sw19.moring03.paint.tools.SprayCanTool;
 
 import static junit.framework.TestCase.assertTrue;
 

@@ -24,6 +24,7 @@ import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PhotoTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
+import sw19.moring03.paint.tools.SprayCanTool;
 import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
@@ -112,6 +113,9 @@ public class DrawingView extends View {
                 break;
             case DRAW_POINT:
                 objectsToPaint.add(new PointTool(getColor(), strokeWidth));
+                break;
+            case SPRAY_CAN:
+                objectsToPaint.add(new SprayCanTool(getColor(), strokeWidth));
                 break;
             case DRAW_CIRCLE:
                 objectsToPaint.add(new CircleTool(getColor(), strokeWidth));
