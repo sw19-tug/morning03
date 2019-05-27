@@ -47,8 +47,7 @@ public class CustomizeTextTest {
 
     }
     @Test
-    public void testDrawTextChangeSize()
-    {
+    public void testDrawTextChangeSize() {
         int expected = 1;
 
         TextTool tool = new TextTool();
@@ -63,8 +62,7 @@ public class CustomizeTextTest {
                 Mockito.anyFloat(), Mockito.anyFloat(), eq(paint));
     }
     @Test
-    public void testDrawChangeFont()
-    {
+    public void testDrawTextChangeFont() {
         int expected = 1;
 
         TextTool tool = new TextTool();

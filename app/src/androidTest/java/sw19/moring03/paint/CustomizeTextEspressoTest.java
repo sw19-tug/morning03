@@ -25,9 +25,9 @@ public class CustomizeTextEspressoTest {
 
     @Rule
     public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class);
-    
+
     @Test
-    public void testSimpleTextInsert() {
+    public void testCustomizeTextInsert() {
         onView(withId(R.id.strokeWidthChooserButton)).perform(click());
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(60));
         onView(withId(R.id.strokeWidth)).perform(pressBack());
@@ -45,12 +45,8 @@ public class CustomizeTextEspressoTest {
 
         DrawingView view = activityRule.getActivity().findViewById(R.id.drawingView);
         List<Tools> pointsToDraw = view.getObjectsToPaint();
-        Tools tool = pointsToDraw.get(pointsToDraw.size()-1);
+        Tools tool = pointsToDraw.get(pointsToDraw.size() - 1);
         assertEquals(tool.getColor(), activityRule.getActivity().getChosenColor());
         assertEquals(tool.getStrokeWidth(), activityRule.getActivity().getStrokeWidth());
-
-
     }
-
-
 }

@@ -33,7 +33,7 @@ public class TextTool extends Tools {
             return false;
         }
 
-        if(!font.equals("")) {
+        if (!font.equals("")) {
             paint.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/" + font));
         }
 
@@ -47,7 +47,6 @@ public class TextTool extends Tools {
         if (points.size() > 0) {
             return;
         }
-
         super.addPoint(point);
     }
 
@@ -58,5 +57,4 @@ public class TextTool extends Tools {
     public void setFont(String font) {
         this.font = font;
     }
-
 }
