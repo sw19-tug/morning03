@@ -2,7 +2,6 @@ package sw19.moring03.paint.tools;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Typeface;
@@ -16,8 +15,6 @@ public class TextTool extends Tools {
 
     public TextTool() {
         points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
     }
 
     public TextTool(int col, int strkW, Context context) {
