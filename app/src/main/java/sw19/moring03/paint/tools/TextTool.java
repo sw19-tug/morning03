@@ -12,6 +12,8 @@ import java.util.ArrayList;
 public class TextTool extends Tools {
     private String text = "";
     private String font = "";
+    private int fontSize;
+    private float scaledSizeInPixels;
     private Context context;
 
     public TextTool() {
@@ -23,6 +25,9 @@ public class TextTool extends Tools {
     public TextTool(int col, int strkW, Context context) {
         points = new ArrayList<>();
         strokeWidth = strkW;
+        fontSize = strokeWidth * 3;
+        strokeWidth = 0;
+        scaledSizeInPixels = 17 * context.getResources().getDisplayMetrics().scaledDensity;
         color = col;
         this.context = context;
     }
@@ -37,7 +42,8 @@ public class TextTool extends Tools {
             paint.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/" + font));
         }
 
-        paint.setTextSize(60);
+        paint.setTextSize(scaledSizeInPixels + fontSize);
+        paint.setStyle(Paint.Style.FILL);
         canvas.drawText(this.text, points.get(0).x, points.get(0).y, paint);
         return true;
     }
