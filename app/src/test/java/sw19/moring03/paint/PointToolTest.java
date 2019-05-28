@@ -13,6 +13,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import sw19.moring03.paint.tools.PointTool;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PointToolTest {
@@ -49,5 +50,12 @@ public class PointToolTest {
 
         Mockito.verify(canvas, Mockito.times(expectedPoints)).drawCircle(Mockito.anyFloat(),
                 Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+    }
+
+    @Test
+    public void testInvalidOval() {
+        PointTool tool = new PointTool();
+
+        assertFalse(tool.draw(canvas, paint));
     }
 }

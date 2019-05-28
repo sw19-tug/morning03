@@ -24,8 +24,7 @@ public class TextTool extends Tools {
 
     public TextTool(int col, int strkW, Context context) {
         points = new ArrayList<>();
-        strokeWidth = strkW;
-        fontSize = strokeWidth * 3;
+        fontSize = strkW * 3;
         strokeWidth = 0;
         scaledSizeInPixels = 17 * context.getResources().getDisplayMetrics().scaledDensity;
         color = col;
