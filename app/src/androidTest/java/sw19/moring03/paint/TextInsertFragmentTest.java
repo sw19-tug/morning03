@@ -50,6 +50,7 @@ public class TextInsertFragmentTest {
         onView(withId(R.id.editText)).perform(typeText("Hello World"));
         onView(withId(R.id.editText)).check(matches(withText("Hello World")));
     }
+
     @Test
     public void testTextInsertCancel () {
         onView(withId(R.id.toolChooserButton)).perform(click());

@@ -1,6 +1,7 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
@@ -32,7 +33,9 @@ public class CircleTest {
 
     @Test
     public void testCircleSimple() {
-        CircleTool tool = new CircleTool();
+        CircleTool tool = new CircleTool(Color.BLACK, 10);
+        assertEquals(Color.BLACK, tool.getColor());
+        assertEquals(10, tool.getStrokeWidth());
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));

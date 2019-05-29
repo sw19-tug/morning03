@@ -1,6 +1,7 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
@@ -32,7 +33,9 @@ public class OvalTest {
 
     @Test
     public void testOvalSimple() {
-        OvalTool tool = new OvalTool();
+        OvalTool tool = new OvalTool(Color.BLACK, 10);
+        assertEquals(Color.BLACK, tool.getColor());
+        assertEquals(10, tool.getStrokeWidth());
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));

@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import sw19.moring03.paint.tools.EraseTool;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -35,5 +36,15 @@ public class EraseTest {
 
         assertTrue(tool.draw(canvas, paint));
         assertEquals(tmpColor, paint.getColor());
+    }
+
+    @Test
+    public void testInvalidPointCount() {
+        EraseTool tool = new EraseTool(10);
+        assertEquals(10, tool.getStrokeWidth());
+
+        assertFalse(tool.draw(canvas, paint));
+        tool.addPoint(new PointF(10, 10));
+        assertFalse(tool.draw(canvas, paint));
     }
 }

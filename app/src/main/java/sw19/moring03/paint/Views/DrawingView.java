@@ -76,6 +76,7 @@ public class DrawingView extends View {
             for (Tools tool : objectsToPaint) {
                 paint.setStrokeWidth(tool.getStrokeWidth());
                 paint.setColor(tool.getColor());
+
                 tool.draw(canvas, paint);
             }
         }
@@ -85,12 +86,6 @@ public class DrawingView extends View {
         PointF point = new PointF(x, y);
 
         if (objectsToPaint.size() != 0) {
-            Tools currentTool = objectsToPaint.get(objectsToPaint.size() - 1);
-
-            if ((currentTool instanceof PointTool) && ((PointTool) currentTool).getPointCount() > 0) {
-                return;
-            }
-
             objectsToPaint.get(objectsToPaint.size() - 1).addPoint(point);
         }
     }
@@ -133,13 +128,17 @@ public class DrawingView extends View {
                 TextInsertFragment textFragment = new TextInsertFragment();
                 textFragment.show(((MainActivity) getContext()).getSupportFragmentManager(), "textInsertFragment");
 
-                objectsToPaint.add(new TextTool());
+                objectsToPaint.add(new TextTool(getColor(), strokeWidth, getContext()));
                 break;
         }
     }
 
-    public void addTextToView(String text) {
+    public void addTextToTool(String text) {
         ((TextTool)objectsToPaint.get(objectsToPaint.size() - 1)).setText(text);
+    }
+
+    public void addFontToTool(String font) {
+        ((TextTool)objectsToPaint.get(objectsToPaint.size() - 1)).setFont(font);
     }
 
     public Bitmap getCurrentBitmap() {
