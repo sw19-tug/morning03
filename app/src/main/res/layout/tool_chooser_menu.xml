@@ -89,6 +89,19 @@
         android:gravity="start|center_vertical"
         android:onClick="chooseNewTool"
         android:text="@string/drawFillButton" />
+    <Button
+        android:id="@+id/sprayCanButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableStart="@drawable/ic_spray_can_icon"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:drawablePadding="15dp"
+        android:gravity="start|center_vertical"
+        android:onClick="chooseNewTool"
+        android:text="@string/drawSprayCan" />
 
     <Button
         android:id="@+id/eraserButton"

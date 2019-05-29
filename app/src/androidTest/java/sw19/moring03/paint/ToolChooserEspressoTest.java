@@ -29,7 +29,8 @@ public class ToolChooserEspressoTest {
                 {R.id.toolChooserButton, R.id.drawPathButton, Tool.DRAW_PATH, R.id.toolChooserMenu},
                 {R.id.toolChooserButton, R.id.drawFillButton, Tool.FILL, R.id.toolChooserMenu},
                 {R.id.toolChooserButton, R.id.eraserButton, Tool.ERASER, R.id.toolChooserMenu},
-                {R.id.toolChooserButton, R.id.drawTextButton, Tool.DRAW_TEXT, R.id.toolChooserMenu}
+                {R.id.toolChooserButton, R.id.drawTextButton, Tool.DRAW_TEXT, R.id.toolChooserMenu},
+                {R.id.toolChooserButton, R.id.sprayCanButton, Tool.SPRAY_CAN, R.id.toolChooserMenu}
         });
     }
 

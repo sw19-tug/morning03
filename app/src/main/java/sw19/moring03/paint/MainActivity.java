@@ -209,6 +209,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivityForResult(takePicture, CAMERA_REQUEST);
                 }
                 break;
+            case R.id.sprayCanButton:
+                setChosenTool(Tool.SPRAY_CAN);
+                break;
         }
 
         toolChooserMenu.dismiss();
@@ -267,6 +270,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case DRAW_POINT:
                 menuItem.setIcon(R.drawable.ic_point_icon);
+                break;
+            case SPRAY_CAN:
+                menuItem.setIcon(R.drawable.ic_spray_can_icon);
                 break;
             case DRAW_RECTANGLE:
                 menuItem.setIcon(R.drawable.ic_rectangle_icon);
