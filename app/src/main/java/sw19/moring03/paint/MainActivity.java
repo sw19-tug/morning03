@@ -280,11 +280,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.dasheddotedLine:
                 lineEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
-                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_more_horiz_black_24dp);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_linear_scale_black_24dp);
                 break;
             case R.id.dotedLine:
                 lineEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
-                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_linear_scale_black_24dp);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_more_horiz_black_24dp);
                 break;
             default:
                 break;
