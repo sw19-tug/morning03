@@ -1,8 +1,5 @@
 package sw19.moring03.paint;
 
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static org.junit.Assert.assertEquals;
-
 import android.graphics.DashPathEffect;
 import android.graphics.PathEffect;
 import android.support.test.rule.ActivityTestRule;
@@ -12,12 +9,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import sw19.moring03.paint.Views.DrawingView;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static sw19.moring03.paint.util.Interaction.touchAt;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class LineTypeTouchTest {

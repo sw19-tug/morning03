@@ -16,7 +16,6 @@ import sw19.moring03.paint.R;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-
 public class PhotoToolTest {
     private Canvas canvas;
     private Paint paint;
