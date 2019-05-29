@@ -16,7 +16,6 @@
         android:title="@string/undo_button"
         app:showAsAction="always" />
 
-
     <item
         android:id="@+id/strokeWidthChooserButton"
         android:title="@string/stroke_width_display"
@@ -39,7 +38,5 @@
         android:icon="@drawable/ic_save_icon"
         android:title="@string/saveButton"
         app:showAsAction="always" />
-
-
 
 </menu>

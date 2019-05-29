@@ -9,11 +9,11 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.EraseTool;
+import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import sw19.moring03.paint.utils.PointF;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EraseTest {

@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
-import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.LineTool;
+import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

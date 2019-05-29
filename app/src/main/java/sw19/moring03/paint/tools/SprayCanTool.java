@@ -3,10 +3,11 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import sw19.moring03.paint.utils.PointF;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import sw19.moring03.paint.utils.PointF;
 
 public class SprayCanTool extends Tools {
 

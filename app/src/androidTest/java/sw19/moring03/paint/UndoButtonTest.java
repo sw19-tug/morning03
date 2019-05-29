@@ -19,10 +19,12 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertEquals;
 import static sw19.moring03.paint.util.Interaction.changeValueOfStrokeWidthSeekBar;
 import static sw19.moring03.paint.util.Interaction.touchAt;
-import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class UndoButtonTest {
@@ -32,39 +34,36 @@ public class UndoButtonTest {
 
     @Test
     public void testButtonVisibility() {
-        onView(withId(R.id.undoButton)).check(doesNotExist());
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
-
+        onView(withId(R.id.undoButton)).check(matches((isEnabled())));
         onView(withId(R.id.undoButton)).perform(click());
     }
 
     @Test
     public void testUndoLastObject() {
-        onView(withId(R.id.undoButton)).check(doesNotExist());
 
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
+        onView(withId(R.id.undoButton)).check(matches((isEnabled())));
         onView(withId(R.id.undoButton)).perform(click());
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         List<Tools> pointsToDraw = view.getObjectsToPaint();
 
         assertEquals(pointsToDraw.size(),0);
-        onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 
     @Test
     public void testUndoToolIcon() {
         Drawable expectedIcon = launchActivityRule.getActivity().getResources().getDrawable(R.drawable.ic_line_icon);
 
-        onView(withId(R.id.undoButton)).check(doesNotExist());
-
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(swipeLeft());
+        onView(withId(R.id.undoButton)).check(matches((isEnabled())));
         onView(withId(R.id.undoButton)).perform(click());
 
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
@@ -72,8 +71,6 @@ public class UndoButtonTest {
         Drawable currentIcon = toolChooser.getItemData().getIcon();
 
         assertEquals(expectedIcon.getConstantState(),currentIcon.getConstantState());
-
-        onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 
     public void testUndoStrokeWidth() {

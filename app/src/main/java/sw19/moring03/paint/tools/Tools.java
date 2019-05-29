@@ -3,9 +3,10 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
-import sw19.moring03.paint.utils.PointF;
 
 import java.util.List;
+
+import sw19.moring03.paint.utils.PointF;
 
 public abstract class Tools {
 
@@ -27,10 +28,12 @@ public abstract class Tools {
     public int getStrokeWidth() {
         return strokeWidth;
     }
+
     public int getColor() {
         return color;
     }
 
-    public PathEffect getPathEffect() {return pathEffect;    }
-
+    public PathEffect getPathEffect() {
+        return pathEffect;
+    }
 }

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Bitmap;
 import android.graphics.DashPathEffect;
 import android.graphics.PathEffect;
 import android.graphics.drawable.Drawable;
@@ -65,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
     public Menu getMenu() {
         return menu;
     }
-    public PathEffect getPathEffect()
-    {
+
+    public PathEffect getPathEffect() {
         return lineEffect;
     }
 
@@ -99,10 +98,14 @@ public class MainActivity extends AppCompatActivity {
         setToolIcon();
         setStrokeWidth(strokeWidth);
         DrawingView view = findViewById(R.id.drawingView);
+        MenuItem backButton = menu.findItem(R.id.undoButton);
+
         if (view.isAlreadyDrawn()) {
-            menu.findItem(R.id.undoButton).setVisible(true);
+            backButton.setEnabled(true);
+            backButton.getIcon().setAlpha(255);
         } else {
-            menu.findItem(R.id.undoButton).setVisible(false);
+            backButton.setEnabled(false);
+            backButton.getIcon().setAlpha(40);
         }
 
         menu.findItem(R.id.lineTypeChooserButton).setVisible(visible);
@@ -381,9 +384,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void chooseNewColor(View view) {
         switch (view.getId()) {
-            case R.id.whiteButton:
-                setChosenColor(R.color.white);
-                break;
             case R.id.yellowButton:
                 setChosenColor(R.color.yellow);
                 break;
@@ -398,9 +398,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.magentaButton:
                 setChosenColor(R.color.magenta);
-                break;
-            case R.id.turkisButton:
-                setChosenColor(R.color.turkis);
                 break;
             case R.id.lightBlueButton:
                 setChosenColor(R.color.lightBlue);

@@ -24,16 +24,6 @@
         android:paddingRight="10dp"
         android:paddingTop="15dp">
 
-        <Button
-            android:id="@+id/whiteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:background="@color/white"
-            android:onClick="chooseNewColor"
-            style="?android:attr/buttonBarButtonStyle"
-            />
 
         <Button
             android:id="@+id/yellowButton"
@@ -67,14 +57,6 @@
             android:onClick="chooseNewColor"
             style="?android:attr/buttonBarButtonStyle"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
 
         <Button
             android:id="@+id/magentaButton"
@@ -98,13 +80,22 @@
             style="?android:attr/buttonBarButtonStyle"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
         <Button
-            android:id="@+id/turkisButton"
+            android:id="@+id/darkBlueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:background="@color/turkis"
+            android:background="@color/darkBlue"
             android:onClick="chooseNewColor"
             style="?android:attr/buttonBarButtonStyle"
             />
@@ -116,26 +107,6 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:background="@color/lightBlue"
-            android:onClick="chooseNewColor"
-            style="?android:attr/buttonBarButtonStyle"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp">
-
-        <Button
-            android:id="@+id/darkBlueButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:background="@color/darkBlue"
             android:onClick="chooseNewColor"
             style="?android:attr/buttonBarButtonStyle"
             />
@@ -295,7 +266,7 @@
         android:id="@+id/currentColor"
         style="?android:attr/buttonBarButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:background="@color/black"
         />

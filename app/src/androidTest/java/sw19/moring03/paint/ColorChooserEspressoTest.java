@@ -24,13 +24,11 @@ public class ColorChooserEspressoTest {
     @Parameterized.Parameters(name = "{0}")
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {R.id.colorChooserButton, R.id.whiteButton, R.color.white, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.yellowButton, R.color.yellow, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.orangeButton, R.color.orange, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.redButton, R.color.red, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.purpleButton, R.color.purple, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.magentaButton, R.color.magenta, R.id.colorChooserMenu},
-                {R.id.colorChooserButton, R.id.turkisButton, R.color.turkis, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.lightBlueButton, R.color.lightBlue, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.lightGreenButton, R.color.lightGreen, R.id.colorChooserMenu},
                 {R.id.colorChooserButton, R.id.darkBlueButton, R.color.darkBlue, R.id.colorChooserMenu},
