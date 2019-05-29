@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import sw19.moring03.paint.utils.PointF;
 import android.util.DisplayMetrics;
 
 import org.junit.Before;

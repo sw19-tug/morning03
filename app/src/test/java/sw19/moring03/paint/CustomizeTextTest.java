@@ -3,7 +3,7 @@ package sw19.moring03.paint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import sw19.moring03.paint.utils.PointF;
 import android.graphics.Typeface;
 
 import org.junit.Before;

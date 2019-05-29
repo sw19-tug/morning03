@@ -62,6 +62,7 @@ public class StrokeWidthTest {
     public void testStrokeWidthPointFalse() {
         int pointStrokeWidth = 0;
         PointTool tool = new PointTool(Color.BLACK, pointStrokeWidth);
+
         pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 

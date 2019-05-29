@@ -3,7 +3,7 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import sw19.moring03.paint.utils.PointF;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,6 @@ public class PointTool extends Tools {
         if (points.size() > 0) {
             return;
         }
-
         super.addPoint(point);
     }
 }

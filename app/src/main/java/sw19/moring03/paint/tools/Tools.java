@@ -2,7 +2,7 @@ package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import sw19.moring03.paint.utils.PointF;
 
 import java.util.List;
 
@@ -25,7 +25,6 @@ public abstract class Tools {
     public int getStrokeWidth() {
         return strokeWidth;
     }
-
     public int getColor() {
         return color;
     }
