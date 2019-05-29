@@ -267,8 +267,6 @@ public class MainActivity extends AppCompatActivity {
     public void chooseLineType(View view) {
         MenuItem menuItem = menu.findItem(R.id.toolChooserButton);
 
-        menuItem.setIcon(R.drawable.ic_line_icon);
-
         switch (view.getId()) {
             case R.id.dashedLine:
                 lineEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
