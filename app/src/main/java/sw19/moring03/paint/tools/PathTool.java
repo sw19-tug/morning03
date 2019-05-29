@@ -30,8 +30,7 @@ public class PathTool extends Tools {
     public void addPoint(PointF point) {
         if (path.isEmpty()) {
             path.moveTo(point.x, point.y);
-        }
-        else {
+        } else {
             path.lineTo(point.x, point.y);
         }
         super.addPoint(point);
