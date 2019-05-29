@@ -4,15 +4,15 @@
     tools:context="com.example.bar.MainActivity">
 
     <item
-        android:id="@+id/strokeWidthChooserButton"
-        android:title="@string/stroke_width_display"
+        android:id="@+id/lineTypeChooserButton"
+        android:icon="@drawable/ic_remove_black_24dp"
+        android:title="@string/lineTypeChooserButton"
+        android:visible="false"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/lineTypeChooserButton"
-        android:icon="@drawable/ic_border_color_black_24dp"
-        android:title="@string/lineTypeChooserButton"
-        android:visible="false"
+        android:id="@+id/strokeWidthChooserButton"
+        android:title="@string/stroke_width_display"
         app:showAsAction="always" />
 
     <item

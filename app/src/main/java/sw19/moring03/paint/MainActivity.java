@@ -272,15 +272,19 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.dashedLine:
                 lineEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_power_input_black_24dp);
                 break;
             case R.id.solidLine:
                 lineEffect = new PathEffect();
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_remove_black_24dp);
                 break;
             case R.id.dasheddotedLine:
                 lineEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_more_horiz_black_24dp);
                 break;
             case R.id.dotedLine:
                 lineEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_linear_scale_black_24dp);
                 break;
             default:
                 break;
