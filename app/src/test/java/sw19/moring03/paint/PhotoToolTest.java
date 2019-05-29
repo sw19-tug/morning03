@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
@@ -52,7 +53,7 @@ public class PhotoToolTest {
         PhotoTool photoTool = new PhotoTool(image);
         photoTool.draw(canvas, paint);
 
-        LineTool tool = new LineTool(Color.BLACK, 5);
+        LineTool tool = new LineTool(Color.BLACK, 5, new PathEffect());
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));

@@ -3,7 +3,9 @@ package sw19.moring03.paint.tools;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import android.graphics.Rect;
+
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class PhotoTool extends Tools {
     public PhotoTool(Bitmap image) {
         points = new ArrayList<>();
         newImage = image;
+        pathEffect = new PathEffect();
     }
 
     @Override

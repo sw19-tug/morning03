@@ -2,7 +2,6 @@ package sw19.moring03.paint;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +13,7 @@ import sw19.moring03.paint.tools.EraseTool;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import sw19.moring03.paint.utils.PointF;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EraseTest {

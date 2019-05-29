@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.DashPathEffect;
+import android.graphics.PathEffect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +29,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.Fragments.LineTypeChooserBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -42,18 +46,28 @@ public class MainActivity extends AppCompatActivity {
     private ToolChooserMenuBottomSheetDialog toolChooserMenu;
     private ColorChooserMenuBottomSheetDialog colorChooserMenu;
     private StrokeWidthChooserMenuBottomSheetDialog strokeWidthChooserMenu;
+    private LineTypeChooserBottomSheetDialog lineTypeChooserMenu;
+
     private Tool chosenTool = Tool.DRAW_POINT;
     @ColorInt private int chosenColor;
     private int strokeWidth = 5;
     private Menu menu;
     private String lastSavedImageURI;
+    private boolean visible = false;
+    private int lineID = 0;
 
     public ColorChooserMenuBottomSheetDialog getColorChooserMenu() {
         return colorChooserMenu;
     }
+    private PathEffect lineEffect;
+
 
     public Menu getMenu() {
         return menu;
+    }
+    public PathEffect getPathEffect()
+    {
+        return lineEffect;
     }
 
     @Override
@@ -69,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         strokeWidthChooserMenu = new StrokeWidthChooserMenuBottomSheetDialog();
 
         chosenColor = getResources().getColor(R.color.black);
+        lineTypeChooserMenu = new LineTypeChooserBottomSheetDialog();
     }
 
     @Override
@@ -89,6 +104,26 @@ public class MainActivity extends AppCompatActivity {
         } else {
             menu.findItem(R.id.undoButton).setVisible(false);
         }
+
+        menu.findItem(R.id.lineTypeChooserButton).setVisible(visible);
+
+        switch (lineID) {
+            case R.id.dashedLine:
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_power_input_black_24dp);
+                break;
+            case R.id.solidLine:
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_remove_black_24dp);
+                break;
+            case R.id.dasheddotedLine:
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_linear_scale_black_24dp);
+                break;
+            case R.id.dotedLine:
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_more_horiz_black_24dp);
+                break;
+            default:
+                break;
+        }
+
         return true;
     }
 
@@ -127,6 +162,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.undoButton:
                 ((DrawingView)findViewById(R.id.drawingView)).removeLastElementFromPaintList();
+                return true;
+            case R.id.lineTypeChooserButton:
+                lineTypeChooserMenu.show(getSupportFragmentManager(), "lineTypeChooserMenu");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -178,29 +216,37 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         switch (view.getId()) {
             case R.id.drawPointButton:
+                visible = false;
                 setChosenTool(Tool.DRAW_POINT);
                 break;
             case R.id.drawLineButton:
+                visible = true;
                 setChosenTool(Tool.DRAW_LINE);
                 break;
             case R.id.drawFillButton:
+                visible = false;
                 setChosenTool(Tool.FILL);
                 break;
             case R.id.drawShapesButton:
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
                 fragment.show(manager, "ShapeChooserFragment");
+                visible = true;
                 break;
             case R.id.eraserButton:
+                visible = false;
                 setChosenTool(Tool.ERASER);
                 break;
             case R.id.drawPathButton:
+                visible = true;
                 setChosenTool(Tool.DRAW_PATH);
                 break;
             case R.id.takePhoto:
+                visible = false;
                 pickFromGallery();
                 break;
             case R.id.drawTextButton:
                 setChosenTool(Tool.DRAW_TEXT);
+                visible = false;
                 break;
             case R.id.cameraButton:
                 setChosenTool(Tool.TAKE_PHOTO);
@@ -208,11 +254,15 @@ public class MainActivity extends AppCompatActivity {
                 if (takePicture.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePicture, CAMERA_REQUEST);
                 }
+                visible = false;
                 break;
             case R.id.sprayCanButton:
                 setChosenTool(Tool.SPRAY_CAN);
+                visible = false;
                 break;
         }
+
+        menu.findItem(R.id.lineTypeChooserButton).setVisible(visible);
 
         toolChooserMenu.dismiss();
         setToolIcon();
@@ -300,6 +350,33 @@ public class MainActivity extends AppCompatActivity {
     public void setChosenColorInt(int colorInt) {
         this.chosenColor = colorInt;
         setColorToIconTint();
+    }
+
+    public void chooseLineType(View view) {
+        lineID = view.getId();
+
+        switch (view.getId()) {
+            case R.id.dashedLine:
+                lineEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_power_input_black_24dp);
+                break;
+            case R.id.solidLine:
+                lineEffect = new PathEffect();
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_remove_black_24dp);
+                break;
+            case R.id.dasheddotedLine:
+                lineEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_linear_scale_black_24dp);
+                break;
+            case R.id.dotedLine:
+                lineEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
+                menu.findItem(R.id.lineTypeChooserButton).setIcon(R.drawable.ic_more_horiz_black_24dp);
+                break;
+            default:
+                break;
+        }
+
+       lineTypeChooserMenu.dismiss();
     }
 
     public void chooseNewColor(View view) {

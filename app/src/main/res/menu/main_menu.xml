@@ -4,10 +4,19 @@
     tools:context="com.example.bar.MainActivity">
 
     <item
+        android:id="@+id/lineTypeChooserButton"
+        android:icon="@drawable/ic_remove_black_24dp"
+        android:title="@string/lineTypeChooserButton"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/undoButton"
         android:icon="@drawable/ic_undo_black_24dp"
         android:title="@string/undo_button"
         app:showAsAction="always" />
+
+
     <item
         android:id="@+id/strokeWidthChooserButton"
         android:title="@string/stroke_width_display"

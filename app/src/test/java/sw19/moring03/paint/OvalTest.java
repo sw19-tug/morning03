@@ -3,6 +3,7 @@ package sw19.moring03.paint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
@@ -33,7 +34,7 @@ public class OvalTest {
 
     @Test
     public void testOvalSimple() {
-        OvalTool tool = new OvalTool(Color.BLACK, 10);
+        OvalTool tool = new OvalTool(Color.BLACK, 10, new PathEffect());
         assertEquals(Color.BLACK, tool.getColor());
         assertEquals(10, tool.getStrokeWidth());
 

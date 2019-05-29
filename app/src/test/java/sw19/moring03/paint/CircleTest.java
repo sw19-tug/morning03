@@ -3,6 +3,7 @@ package sw19.moring03.paint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
@@ -33,7 +34,7 @@ public class CircleTest {
 
     @Test
     public void testCircleSimple() {
-        CircleTool tool = new CircleTool(Color.BLACK, 10);
+        CircleTool tool = new CircleTool(Color.BLACK, 10, new PathEffect());
         assertEquals(Color.BLACK, tool.getColor());
         assertEquals(10, tool.getStrokeWidth());
 

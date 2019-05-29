@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import sw19.moring03.paint.utils.PointF;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
@@ -78,6 +79,7 @@ public class DrawingView extends View {
                 paint.setStrokeWidth(tool.getStrokeWidth());
                 paint.setColor(tool.getColor());
 
+                paint.setPathEffect(tool.getPathEffect());
                 tool.draw(canvas, paint);
             }
         }
@@ -94,6 +96,7 @@ public class DrawingView extends View {
     public void selectTool() {
         Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
         int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
+        PathEffect effect = ((MainActivity)getContext()).getPathEffect();
 
         switch (chosenTool) {
             case FILL:
@@ -106,10 +109,10 @@ public class DrawingView extends View {
                 objectsToPaint.add(new EraseTool(strokeWidth));
                 break;
             case DRAW_LINE:
-                objectsToPaint.add(new LineTool(getColor(), strokeWidth));
+                objectsToPaint.add(new LineTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_PATH:
-                objectsToPaint.add(new PathTool(getColor(), strokeWidth));
+                objectsToPaint.add(new PathTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_POINT:
                 objectsToPaint.add(new PointTool(getColor(), strokeWidth));
@@ -118,13 +121,13 @@ public class DrawingView extends View {
                 objectsToPaint.add(new SprayCanTool(getColor(), strokeWidth));
                 break;
             case DRAW_CIRCLE:
-                objectsToPaint.add(new CircleTool(getColor(), strokeWidth));
+                objectsToPaint.add(new CircleTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_RECTANGLE:
-                objectsToPaint.add(new RectangleTool(getColor(), strokeWidth));
+                objectsToPaint.add(new RectangleTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_OVAL:
-                objectsToPaint.add(new OvalTool(getColor(), strokeWidth));
+                objectsToPaint.add(new OvalTool(getColor(), strokeWidth, effect));
                 break;
             case TAKE_PHOTO:
                 objectsToPaint.add(new PhotoTool(((MainActivity) getContext()).newPhoto));

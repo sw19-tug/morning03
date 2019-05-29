@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="spinnerItems">
+        <item>Solid Line</item>
+        <item>Dashed Line</item>
+        <item>Doted Line</item>
+        <item>Dashed-Doted Line</item>
+    </string-array>
 
 </resources>
