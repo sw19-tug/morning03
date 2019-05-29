@@ -176,26 +176,33 @@ public class MainActivity extends AppCompatActivity {
     public void chooseNewTool(View view) {
         switch (view.getId()) {
             case R.id.drawPointButton:
+                menu.findItem(R.id.lineTypeChooserButton).setVisible(false);
                 setChosenTool(Tool.DRAW_POINT);
                 break;
             case R.id.drawLineButton:
+                menu.findItem(R.id.lineTypeChooserButton).setVisible(true);
                 setChosenTool(Tool.DRAW_LINE);
                 break;
             case R.id.drawFillButton:
+                menu.findItem(R.id.lineTypeChooserButton).setVisible(false);
                 setChosenTool(Tool.FILL);
                 break;
             case R.id.drawShapesButton:
+                menu.findItem(R.id.lineTypeChooserButton).setVisible(true);
                 FragmentManager manager = getSupportFragmentManager();
                 ShapeChooserFragment fragment = new ShapeChooserFragment();
                 fragment.show(manager, "ShapeChooserFragment");
                 break;
             case R.id.eraserButton:
+                menu.findItem(R.id.lineTypeChooserButton).setVisible(false);
                 setChosenTool(Tool.ERASER);
                 break;
             case R.id.drawPathButton:
+                menu.findItem(R.id.lineTypeChooserButton).setVisible(true);
                 setChosenTool(Tool.DRAW_PATH);
                 break;
             case R.id.takePhoto:
+                menu.findItem(R.id.lineTypeChooserButton).setVisible(false);
                 pickFromGallery();
                 break;
         }
@@ -259,10 +266,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void chooseLineType(View view) {
         MenuItem menuItem = menu.findItem(R.id.toolChooserButton);
-
-        if(getChosenTool() == Tool.DRAW_POINT) {
-            setChosenTool(Tool.DRAW_LINE);
-        }
 
         menuItem.setIcon(R.drawable.ic_line_icon);
 
