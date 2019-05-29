@@ -18,4 +18,8 @@
     <string name="choose_stroke_width_for_drawing_tool">Choose Stroke Width for Drawing Tool</string>
     <string name="stroke_width_display">5pt</string>
     <string name="choose_line_type">Choose the line type</string>
+    <string name="dashed">Dashed Line</string>
+    <string name="solid">Solid Line</string>
+    <string name="dasheddoted">Dashed-Doted Line</string>
+    <string name="doted">Doted Line</string>
 </resources>

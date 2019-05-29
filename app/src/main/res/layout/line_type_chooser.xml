@@ -20,32 +20,56 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableStart="@drawable/ic_power_input_black_24dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:drawablePadding="15dp"
+        android:gravity="start|center_vertical"
         android:onClick="chooseLineType"
-        android:text="Dashed Line" />
+        android:text="@string/dashed" />
 
     <Button
         android:id="@+id/dotedLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableStart="@drawable/ic_more_horiz_black_24dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:drawablePadding="15dp"
+        android:gravity="start|center_vertical"
         android:onClick="chooseLineType"
-        android:text="Doted Line" />
+        android:text="@string/doted" />
 
     <Button
         android:id="@+id/solidLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableStart="@drawable/ic_remove_black_24dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:drawablePadding="15dp"
+        android:gravity="start|center_vertical"
         android:onClick="chooseLineType"
-        android:text="Solid Line" />
+        android:text="@string/solid" />
 
     <Button
         android:id="@+id/dasheddotedLine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableStart="@drawable/ic_linear_scale_black_24dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:drawablePadding="15dp"
+        android:gravity="start|center_vertical"
         android:onClick="chooseLineType"
-        android:text="Dashed-doted Line" />
+        android:text="@string/dasheddoted" />
 
 </LinearLayout>
 
