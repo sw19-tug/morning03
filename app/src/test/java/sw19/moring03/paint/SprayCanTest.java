@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.SprayCanTool;
 
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,5 +30,11 @@ public class SprayCanTest {
         SprayCanTool tool = new SprayCanTool();
         tool.addPoint(new PointF(5, 5));
         assertTrue(tool.draw(canvas, paint));
+    }
+
+    @Test
+    public void falsePointDrawTest() {
+        SprayCanTool tool = new SprayCanTool();
+        assertFalse(tool.draw(canvas, paint));
     }
 }

@@ -10,9 +10,9 @@ import java.util.Random;
 
 public class SprayCanTool extends Tools {
 
-    static Random rn;
-    static final int RADIUS_SCALE = 5;
-    int distance;
+    private Random random;
+    private static final int RADIUS_SCALE = 5;
+    private int distance;
 
     public SprayCanTool() {
         points = new ArrayList<>();
@@ -29,7 +29,7 @@ public class SprayCanTool extends Tools {
     }
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        rn = new Random(277713);
+        random = new Random(277713);
         if (points != null && points.size() < 1) {
             return false;
         }
@@ -54,8 +54,8 @@ public class SprayCanTool extends Tools {
         int x;
         int y;
         do {
-            x = rn.nextInt(2 * distance) - distance + (int)middle.x;
-            y = rn.nextInt(2 * distance) - distance + (int)middle.y;
+            x = random.nextInt(2 * distance) - distance + (int)middle.x;
+            y = random.nextInt(2 * distance) - distance + (int)middle.y;
         } while (!isInCircle(middle, x, y));
 
         return new PointF(x, y);
