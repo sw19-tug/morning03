@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
+import sw19.moring03.paint.Fragments.StickerChooserFragment;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Tool chosenTool = Tool.DRAW_POINT;
     @ColorInt private int chosenColor;
     private int strokeWidth = 5;
+    private int stickerToDraw;
     private Menu menu;
     private String lastSavedImageURI;
 
@@ -166,6 +168,14 @@ public class MainActivity extends AppCompatActivity {
         this.chosenTool = chosenTool;
     }
 
+    public int getStickerToDraw() {
+        return stickerToDraw;
+    }
+
+    public void setStickerToDraw(int stickerToDraw) {
+        this.stickerToDraw = stickerToDraw;
+    }
+
     private void pickFromGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -177,6 +187,10 @@ public class MainActivity extends AppCompatActivity {
     public void chooseNewTool(View view) {
         FragmentManager manager = getSupportFragmentManager();
         switch (view.getId()) {
+            case R.id.drawStickerButton:
+                StickerChooserFragment stickerFragment = new StickerChooserFragment();
+                stickerFragment.show(manager, "ShapeChooserFragment");
+                break;
             case R.id.drawPointButton:
                 setChosenTool(Tool.DRAW_POINT);
                 break;
@@ -255,6 +269,9 @@ public class MainActivity extends AppCompatActivity {
         switch (getChosenTool()) {
             case DRAW_LINE:
                 menuItem.setIcon(R.drawable.ic_line_icon);
+                break;
+            case DRAW_STICKER:
+                menuItem.setIcon(R.drawable.ic_sticker_icon);
                 break;
             case DRAW_CIRCLE:
                 menuItem.setIcon(R.drawable.ic_circle_icon);

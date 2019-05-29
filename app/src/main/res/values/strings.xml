@@ -5,6 +5,7 @@
     <string name="colorChooserButton">Choose Color for Drawing Tool</string>
     <string name="saveButton">Save current drawing</string>
     <string name="shapeChooserFragment">Choose Shape</string>
+    <string name="stickerChooserFragment">Choose Sticker</string>
     <string name="insertTextFragment">Insert Text</string>
     <string name="drawPointButton">Point</string>
     <string name="drawLineButton">Line</string>
@@ -25,4 +26,5 @@
     <string name="green">G:</string>
     <string name="value">0</string>
     <string name="undo_button">Undo</string>
+    <string name="drawStickerButton">Emojis/Stickers</string>
 </resources>

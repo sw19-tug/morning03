@@ -21,12 +21,17 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class IconChooserTest {
+public class StickerChooserTest {
 
     @Parameterized.Parameters(name = "{0}")
     public static Iterable<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {R.id.toolChooserButton, R.id.drawIconButton, "smiley face", Tool.DRAW_ICON, R.drawable.emoji1},
+                {R.id.toolChooserButton, R.id.drawStickerButton, "happy", Tool.DRAW_STICKER, R.drawable.happy},
+                {R.id.toolChooserButton, R.id.drawStickerButton, "sunglasses", Tool.DRAW_STICKER, R.drawable.sunglasses},
+                {R.id.toolChooserButton, R.id.drawStickerButton, "thumbs up", Tool.DRAW_STICKER, R.drawable.thumbsup},
+                {R.id.toolChooserButton, R.id.drawStickerButton, "star", Tool.DRAW_STICKER, R.drawable.star},
+                {R.id.toolChooserButton, R.id.drawStickerButton, "blossom", Tool.DRAW_STICKER, R.drawable.blossom},
+                {R.id.toolChooserButton, R.id.drawStickerButton, "peach", Tool.DRAW_STICKER, R.drawable.peach}
         });
     }
 
@@ -34,7 +39,7 @@ public class IconChooserTest {
     public @IdRes int menuButtonId;
 
     @Parameterized.Parameter(1)
-    public @IdRes int drawIconButtonId;
+    public @IdRes int drawStickerButtonId;
 
     @Parameterized.Parameter(2)
     public @IdRes String selectedOptionInDialog;
@@ -43,7 +48,7 @@ public class IconChooserTest {
     public @IdRes Tool selectedTool;
 
     @Parameterized.Parameter(4)
-    public @IdRes int selectedIcon;
+    public @IdRes int selectedSticker;
 
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -54,35 +59,35 @@ public class IconChooserTest {
     }
 
     @Test
-    public void testIconChooserButtonVisibility() {
+    public void testStickerChooserButtonVisibility() {
         onView(withId(menuButtonId)).perform(click());
-        onView(withId(drawIconButtonId)).check(matches(isDisplayed()));
+        onView(withId(drawStickerButtonId)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testIconChooserDialogVisibility() {
+    public void testStickerChooserDialogVisibility() {
         onView(withId(menuButtonId)).perform(click());
-        onView(withId(drawIconButtonId)).perform(click());
-        onView(withText(R.string.iconChooserFragment)).check(matches(isDisplayed()));
+        onView(withId(drawStickerButtonId)).perform(click());
+        onView(withText(R.string.stickerChooserFragment)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testIconAvailable() {
+    public void testStickerAvailable() {
         onView(withId(menuButtonId)).perform(click());
-        onView(withId(drawIconButtonId)).perform(click());
+        onView(withId(drawStickerButtonId)).perform(click());
         onView(withText(selectedOptionInDialog)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testIconSelected() {
+    public void testStickerSelected() {
         onView(withId(menuButtonId)).perform(click());
-        onView(withId(drawIconButtonId)).perform(click());
+        onView(withId(drawStickerButtonId)).perform(click());
         onView(withText(selectedOptionInDialog)).perform(click());
         Tool chosenTool = activityTestRule.getActivity().getChosenTool();
-        int chosenIcon = activityTestRule.getActivity().getIconToDraw();
+        int chosenSticker = activityTestRule.getActivity().getStickerToDraw();
 
         assertEquals(selectedTool, chosenTool);
-        assertEquals(selectedIcon, chosenIcon);
+        assertEquals(selectedSticker, chosenSticker);
     }
 
 

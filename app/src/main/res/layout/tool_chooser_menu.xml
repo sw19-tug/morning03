@@ -17,6 +17,21 @@
         />
 
     <Button
+        android:id="@+id/drawStickerButton"
+        android:text="@string/drawStickerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:drawableStart="@drawable/ic_sticker_icon"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:drawablePadding="15dp"
+        android:gravity="start|center_vertical"
+        android:onClick="chooseNewTool"
+        />
+
+    <Button
         android:id="@+id/drawPointButton"
         android:text="@string/drawPointButton"
         android:layout_width="match_parent"
