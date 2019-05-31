@@ -31,6 +31,8 @@ public abstract class Tools {
         return color;
     }
 
-    public PathEffect getPathEffect() {return pathEffect;    }
+    public PathEffect getPathEffect() {
+        return pathEffect;
+    }
 
 }

@@ -2,6 +2,8 @@ package sw19.moring03.paint;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
+
 import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
@@ -49,8 +51,6 @@ public class PathTest {
 
     @Test
     public void testDrawPath() {
-        final int expectedDrawnLines = 2;
-
         PathTool tool = new PathTool();
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
@@ -60,8 +60,7 @@ public class PathTest {
 
         tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedDrawnLines)).drawLine(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(1)).drawPath(Mockito.any(Path.class), Mockito.any(Paint.class));
     }
 
     @Test

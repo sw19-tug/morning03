@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.graphics.Rect;
 
-
 import java.util.ArrayList;
 
 public class PhotoTool extends Tools {

@@ -13,8 +13,6 @@ import sw19.moring03.paint.tools.PointTool;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import sw19.moring03.paint.utils.PointF;
-
 @RunWith(MockitoJUnitRunner.class)
 public class StrokeWidthTest {
 

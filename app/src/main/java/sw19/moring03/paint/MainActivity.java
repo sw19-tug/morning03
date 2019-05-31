@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Bitmap;
 import android.graphics.DashPathEffect;
 import android.graphics.PathEffect;
 import android.graphics.drawable.Drawable;
@@ -55,18 +54,17 @@ public class MainActivity extends AppCompatActivity {
     private String lastSavedImageURI;
     private boolean visible = false;
     private int lineID = 0;
+    private PathEffect lineEffect;
 
     public ColorChooserMenuBottomSheetDialog getColorChooserMenu() {
         return colorChooserMenu;
     }
-    private PathEffect lineEffect;
-
 
     public Menu getMenu() {
         return menu;
     }
-    public PathEffect getPathEffect()
-    {
+
+    public PathEffect getPathEffect() {
         return lineEffect;
     }
 

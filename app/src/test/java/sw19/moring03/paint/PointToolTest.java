@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-
 import sw19.moring03.paint.tools.PointTool;
 
 import static junit.framework.TestCase.assertTrue;
