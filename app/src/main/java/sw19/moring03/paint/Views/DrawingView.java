@@ -5,6 +5,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
+
+import sw19.moring03.paint.tools.HeartTool;
+import sw19.moring03.paint.tools.TriangleTool;
 import sw19.moring03.paint.utils.PointF;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
@@ -137,6 +140,16 @@ public class DrawingView extends View {
                 textFragment.show(((MainActivity) getContext()).getSupportFragmentManager(), "textInsertFragment");
 
                 objectsToPaint.add(new TextTool(getColor(), strokeWidth, getContext()));
+                break;
+            case DRAW_TRIANGLE:
+                objectsToPaint.add(new TriangleTool(getColor(), strokeWidth));
+                break;
+            case DRAW_HEART:
+                objectsToPaint.add(new HeartTool(getColor(), strokeWidth));
+                break;
+            case DRAW_STAR:
+                break;
+            case DRAW_TREE:
                 break;
         }
     }

@@ -334,6 +334,18 @@ public class MainActivity extends AppCompatActivity {
             case DRAW_TEXT:
                 menuItem.setIcon(R.drawable.ic_text);
                 break;
+            case DRAW_STAR:
+                menuItem.setIcon(R.drawable.ic_star_icon);
+                break;
+            case DRAW_TREE:
+                menuItem.setIcon(R.drawable.ic_tree_icon);
+                break;
+            case DRAW_HEART:
+                menuItem.setIcon(R.drawable.ic_heart_icon);
+                break;
+            case DRAW_TRIANGLE:
+                menuItem.setIcon(R.drawable.ic_triangle_icon);
+                break;
         }
     }
 

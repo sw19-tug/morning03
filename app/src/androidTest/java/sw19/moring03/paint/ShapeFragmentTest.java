@@ -38,6 +38,10 @@ public class ShapeFragmentTest {
         onView(withText("Circle")).check(matches(isDisplayed()));
         onView(withText("Rectangle")).check(matches(isDisplayed()));
         onView(withText("Oval")).check(matches(isDisplayed()));
+        onView(withText("Triangle")).check(matches(isDisplayed()));
+        onView(withText("Heart")).check(matches(isDisplayed()));
+        onView(withText("Star")).check(matches(isDisplayed()));
+        onView(withText("Tree")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -67,6 +71,46 @@ public class ShapeFragmentTest {
         onView(withText("Oval")).perform(click());
 
         assertEquals(Tool.DRAW_OVAL, activityTestRule.getActivity().getChosenTool());
+        onView(withId(R.id.toolChooserButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testTriangleToolSelected() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
+        onView(withText("Triangle")).perform(click());
+
+        assertEquals(Tool.DRAW_TRIANGLE, activityTestRule.getActivity().getChosenTool());
+        onView(withId(R.id.toolChooserButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testHeartToolSelected() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
+        onView(withText("Heart")).perform(click());
+
+        assertEquals(Tool.DRAW_HEART, activityTestRule.getActivity().getChosenTool());
+        onView(withId(R.id.toolChooserButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testStarToolSelected() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
+        onView(withText("Star")).perform(click());
+
+        assertEquals(Tool.DRAW_STAR, activityTestRule.getActivity().getChosenTool());
+        onView(withId(R.id.toolChooserButton)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testTreeToolSelected() {
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
+        onView(withText("Tree")).perform(click());
+
+        assertEquals(Tool.DRAW_TREE, activityTestRule.getActivity().getChosenTool());
         onView(withId(R.id.toolChooserButton)).check(matches(isDisplayed()));
     }
 

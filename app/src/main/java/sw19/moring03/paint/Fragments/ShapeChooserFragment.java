@@ -17,12 +17,21 @@ import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.utils.Tool;
 
+import static sw19.moring03.paint.utils.Tool.DRAW_HEART;
+import static sw19.moring03.paint.utils.Tool.DRAW_STAR;
+import static sw19.moring03.paint.utils.Tool.DRAW_TREE;
+import static sw19.moring03.paint.utils.Tool.DRAW_TRIANGLE;
+
 public class ShapeChooserFragment extends DialogFragment {
 
     final Item[] shapeTypes = {
             new Item("Circle", R.drawable.ic_circle_icon),
             new Item("Rectangle", R.drawable.ic_rectangle_icon),
             new Item("Oval", R.drawable.ic_oval_icon),
+            new Item("Triangle", R.drawable.ic_triangle_icon),
+            new Item("Heart", R.drawable.ic_heart_icon),
+            new Item("Star", R.drawable.ic_star_icon),
+            new Item("Tree", R.drawable.ic_tree_icon)
     };
 
     @NonNull
@@ -50,6 +59,18 @@ public class ShapeChooserFragment extends DialogFragment {
                                     break;
                                 case "Oval":
                                     activity.setChosenTool(Tool.DRAW_OVAL);
+                                    break;
+                                case "Triangle":
+                                    activity.setChosenTool(DRAW_TRIANGLE);
+                                    break;
+                                case "Heart":
+                                    activity.setChosenTool(DRAW_HEART);
+                                    break;
+                                case "Star":
+                                    activity.setChosenTool(DRAW_STAR);
+                                    break;
+                                case "Tree":
+                                    activity.setChosenTool(DRAW_TREE);
                                     break;
                             }
 
