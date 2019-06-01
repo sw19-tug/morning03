@@ -5,13 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
+
+import sw19.moring03.paint.utils.DrawingObjectManager;
 import sw19.moring03.paint.utils.PointF;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.Fragments.TextInsertFragment;
@@ -33,7 +34,7 @@ import sw19.moring03.paint.utils.Tool;
 
 public class DrawingView extends View {
     private Paint paint;
-    private List<Tools> objectsToPaint;
+    public DrawingObjectManager drawingObjectManager;
 
     public DrawingView(Context c, AttributeSet attributeSet) {
         super(c, attributeSet);
@@ -42,7 +43,7 @@ public class DrawingView extends View {
         paint.setColor(getResources().getColor(R.color.black));
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(((MainActivity)getContext()).getStrokeWidth());
-        objectsToPaint = new ArrayList<>();
+        drawingObjectManager = new DrawingObjectManager();
     }
 
     @Override
@@ -57,10 +58,11 @@ public class DrawingView extends View {
             case MotionEvent.ACTION_DOWN:
                 selectTool();
                 addPoint(xCoord, yCoord);
-                if (objectsToPaint.size() == 1) {
+                if (drawingObjectManager.getObjectsToPaint().size() == 1) {
                     ((MainActivity) getContext()).invalidateOptionsMenu();
                 }
                 invalidate();
+                performClick();
                 break;
             case MotionEvent.ACTION_MOVE:
                 addPoint(xCoord, yCoord);
@@ -71,9 +73,14 @@ public class DrawingView extends View {
     }
 
     @Override
+    public boolean performClick() {
+        return super.performClick();
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        List<Tools> objectsToPaint = drawingObjectManager.getObjectsToPaint();
         if (objectsToPaint != null) {
             for (Tools tool : objectsToPaint) {
                 paint.setStrokeWidth(tool.getStrokeWidth());
@@ -87,10 +94,7 @@ public class DrawingView extends View {
 
     private void addPoint(float x, float y) {
         PointF point = new PointF(x, y);
-
-        if (objectsToPaint.size() != 0) {
-            objectsToPaint.get(objectsToPaint.size() - 1).addPoint(point);
-        }
+        drawingObjectManager.addPoint(point);
     }
 
     public void selectTool() {
@@ -103,50 +107,42 @@ public class DrawingView extends View {
                 Bitmap bitmap = getCurrentBitmap();
                 int[] frameBuffer = new int[bitmap.getWidth() * bitmap.getHeight()];
                 bitmap.getPixels(frameBuffer, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
-                objectsToPaint.add(new FillTool(getColor(), frameBuffer, bitmap.getWidth(), bitmap.getHeight()));
+                drawingObjectManager.addTool(new FillTool(getColor(), frameBuffer, bitmap.getWidth(), bitmap.getHeight()));
                 break;
             case ERASER:
-                objectsToPaint.add(new EraseTool(strokeWidth));
+                drawingObjectManager.addTool(new EraseTool(strokeWidth));
                 break;
             case DRAW_LINE:
-                objectsToPaint.add(new LineTool(getColor(), strokeWidth, effect));
+                drawingObjectManager.addTool(new LineTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_PATH:
-                objectsToPaint.add(new PathTool(getColor(), strokeWidth, effect));
+                drawingObjectManager.addTool(new PathTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_POINT:
-                objectsToPaint.add(new PointTool(getColor(), strokeWidth));
+                drawingObjectManager.addTool(new PointTool(getColor(), strokeWidth));
                 break;
             case SPRAY_CAN:
-                objectsToPaint.add(new SprayCanTool(getColor(), strokeWidth));
+                drawingObjectManager.addTool(new SprayCanTool(getColor(), strokeWidth));
                 break;
             case DRAW_CIRCLE:
-                objectsToPaint.add(new CircleTool(getColor(), strokeWidth, effect));
+                drawingObjectManager.addTool(new CircleTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_RECTANGLE:
-                objectsToPaint.add(new RectangleTool(getColor(), strokeWidth, effect));
+                drawingObjectManager.addTool(new RectangleTool(getColor(), strokeWidth, effect));
                 break;
             case DRAW_OVAL:
-                objectsToPaint.add(new OvalTool(getColor(), strokeWidth, effect));
+                drawingObjectManager.addTool(new OvalTool(getColor(), strokeWidth, effect));
                 break;
             case TAKE_PHOTO:
-                objectsToPaint.add(new PhotoTool(((MainActivity) getContext()).newPhoto));
+                drawingObjectManager.addTool(new PhotoTool(((MainActivity) getContext()).newPhoto));
                 break;
             case DRAW_TEXT:
                 TextInsertFragment textFragment = new TextInsertFragment();
                 textFragment.show(((MainActivity) getContext()).getSupportFragmentManager(), "textInsertFragment");
 
-                objectsToPaint.add(new TextTool(getColor(), strokeWidth, getContext()));
+                drawingObjectManager.addTool(new TextTool(getColor(), strokeWidth, getContext()));
                 break;
         }
-    }
-
-    public void addTextToTool(String text) {
-        ((TextTool)objectsToPaint.get(objectsToPaint.size() - 1)).setText(text);
-    }
-
-    public void addFontToTool(String font) {
-        ((TextTool)objectsToPaint.get(objectsToPaint.size() - 1)).setFont(font);
     }
 
     public Bitmap getCurrentBitmap() {
@@ -162,24 +158,21 @@ public class DrawingView extends View {
         return ((MainActivity) getContext()).getChosenColor();
     }
 
-    @VisibleForTesting
-    public List<Tools> getObjectsToPaint() {
-        return objectsToPaint;
-    }
+    public void redoLastPaintObject() {
+        drawingObjectManager.addLastRemovedElementToPaintList();
+        invalidate();
 
-    public void removeLastElementFromPaintList() {
-        if (objectsToPaint != null && !objectsToPaint.isEmpty()) {
-            objectsToPaint.remove(objectsToPaint.size() - 1);
-            invalidate();
-
-            if (objectsToPaint.isEmpty()) {
-                ((MainActivity)getContext()).invalidateOptionsMenu();
-            }
+        if (!drawingObjectManager.isRedoPossible()) {
+            ((MainActivity)getContext()).invalidateOptionsMenu();
         }
     }
 
-    public boolean isAlreadyDrawn() {
-        return !objectsToPaint.isEmpty();
-    }
+    public void undoLastPaintObject() {
+        drawingObjectManager.removeLastElementFromPaintList();
+        invalidate();
 
+        if (!drawingObjectManager.isUndoPossible()) {
+            ((MainActivity)getContext()).invalidateOptionsMenu();
+        }
+    }
 }

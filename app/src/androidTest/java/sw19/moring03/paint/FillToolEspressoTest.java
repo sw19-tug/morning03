@@ -47,7 +47,7 @@ public class FillToolEspressoTest {
         onView(withId(R.id.drawingView)).perform(touchAt(15, 405));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         Tools fillTool = pointsToDraw.get(pointsToDraw.size() - 1);
 
@@ -83,9 +83,9 @@ public class FillToolEspressoTest {
         onView(withId(R.id.drawingView)).perform(touchAt(60, 450));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        Tools wholeBoxFill = view.getObjectsToPaint().get(1);
+        Tools wholeBoxFill = view.drawingObjectManager.getObjectsToPaint().get(1);
         assertEquals(expectedPointsWholeFill, wholeBoxFill.getPoints().size());
-        Tools upperPartFill = view.getObjectsToPaint().get(3);
+        Tools upperPartFill = view.drawingObjectManager.getObjectsToPaint().get(3);
         assertEquals(expectedPointsPartialFill, upperPartFill.getPoints().size());
     }
 
@@ -105,7 +105,7 @@ public class FillToolEspressoTest {
         onView(withId(R.id.drawingView)).perform(touchAt(60, 450));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        Tools wholeBoxFill = view.getObjectsToPaint().get(view.getObjectsToPaint().size() - 1);
+        Tools wholeBoxFill = view.drawingObjectManager.getObjectsToPaint().get(view.drawingObjectManager.getObjectsToPaint().size() - 1);
         assertEquals(expectedPointsFill, wholeBoxFill.getPoints().size());
     }
 
@@ -124,7 +124,7 @@ public class FillToolEspressoTest {
         onView(withId(R.id.drawingView)).perform(touchAt(80, 430));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        Tools wholeBoxFill = view.getObjectsToPaint().get(view.getObjectsToPaint().size() - 1);
+        Tools wholeBoxFill = view.drawingObjectManager.getObjectsToPaint().get(view.drawingObjectManager.getObjectsToPaint().size() - 1);
         assertEquals(expectedPointsFill, wholeBoxFill.getPoints().size());
     }
 

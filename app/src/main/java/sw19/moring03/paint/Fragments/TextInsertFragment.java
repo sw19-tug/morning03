@@ -79,8 +79,8 @@ public class TextInsertFragment extends DialogFragment {
     @Override
     public void onStop() {
         DrawingView view = ((MainActivity) getContext()).findViewById(R.id.drawingView);
-        view.addTextToTool(insertedText);
-        view.addFontToTool(font);
+        view.drawingObjectManager.addTextToTool(insertedText);
+        view.drawingObjectManager.addFontToTool(font);
 
         super.onStop();
     }

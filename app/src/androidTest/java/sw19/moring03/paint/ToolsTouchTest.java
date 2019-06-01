@@ -42,7 +42,7 @@ public class ToolsTouchTest {
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         Tools lastTool = pointsToDraw.get(pointsToDraw.size() - 1);
 
@@ -66,7 +66,7 @@ public class ToolsTouchTest {
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         Tools firstTool = pointsToDraw.get(0);
         Tools secondTool = pointsToDraw.get(pointsToDraw.size() - 1);
@@ -90,7 +90,7 @@ public class ToolsTouchTest {
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         Tools firstTool = pointsToDraw.get(0);
         Tools secondTool = pointsToDraw.get(pointsToDraw.size() - 1);

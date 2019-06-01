@@ -50,7 +50,7 @@ public class UndoButtonTest {
         onView(withId(R.id.undoButton)).perform(click());
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         assertEquals(pointsToDraw.size(),0);
         onView(withId(R.id.undoButton)).check(doesNotExist());
