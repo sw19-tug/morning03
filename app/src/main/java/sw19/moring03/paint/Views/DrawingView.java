@@ -2,6 +2,7 @@ package sw19.moring03.paint.Views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -18,6 +19,7 @@ import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.tools.CircleTool;
 import sw19.moring03.paint.tools.EraseTool;
+import sw19.moring03.paint.tools.StickerTool;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.PathTool;
@@ -28,8 +30,8 @@ import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
 
-
 public class DrawingView extends View {
+
     private Paint paint;
     private List<Tools> objectsToPaint;
 
@@ -96,11 +98,15 @@ public class DrawingView extends View {
     }
 
     public void selectTool() {
-        Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
-        int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
+        MainActivity activity = (MainActivity)getContext();
+        Tool chosenTool = activity.getChosenTool();
+        int strokeWidth = activity.getStrokeWidth();
 
         switch (chosenTool) {
             case FILL:
+                break;
+            case DRAW_STICKER:
+                objectsToPaint.add(new StickerTool(BitmapFactory.decodeResource(activity.getResources(), activity.getStickerToDraw())));
                 break;
             case ERASER:
                 objectsToPaint.add(new EraseTool(strokeWidth));

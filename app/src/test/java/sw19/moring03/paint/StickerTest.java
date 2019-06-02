@@ -1,39 +1,27 @@
 package sw19.moring03.paint;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.support.test.rule.ActivityTestRule;
-
-import junit.framework.TestCase;
+import android.graphics.Rect;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import sw19.moring03.paint.tools.StickerTool;
 
-import sw19.moring03.paint.tools.LineTool;
-import sw19.moring03.paint.tools.PhotoTool;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StickerTest {
+
     private Canvas canvas;
     private Paint paint;
-
-    @Rule
-    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void startUp() {
@@ -43,32 +31,48 @@ public class StickerTest {
 
     @Test
     public void testStickerSimple() {
-        Bitmap image = getBitmap();
+        Bitmap image = Mockito.mock(Bitmap.class);
         StickerTool tool = new StickerTool(image);
-        tool.addPoint(new PointF(10, 10), 5);
+
+        tool.addPoint(new PointF(10, 10));
+
         assertTrue(tool.draw(canvas, paint));
+    }
+
+    @Test
+    public void testNoPoint() {
+        Bitmap image = Mockito.mock(Bitmap.class);
+        StickerTool tool = new StickerTool(image);
+
+        assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
     public void testInvalidSticker() {
         StickerTool tool = new StickerTool(null);
-        assertTrue(tool.draw(canvas, paint));
+
+        tool.addPoint(new PointF(10, 10));
+
+        assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testDrawOnSticker() {
-        Bitmap image = getBitmap();
-        StickerTool stickerTool = new StickerTool(image);
-        stickerTool.addPoint(new PointF(10, 10), 5);
-        assertTrue(stickerTool.draw(canvas, paint));
+    public void testDrawStickerMultiplePoints() {
+        int expectedStickers = 1;
 
-        LineTool lineTool = new LineTool(Color.BLACK, 5);
-        lineTool.addPoint(new PointF(10, 10));
+        Bitmap image = Mockito.mock(Bitmap.class);
+        StickerTool tool = new StickerTool(image);
 
-        assertFalse(lineTool.draw(canvas, paint));
-    }
+        tool.addPoint(new PointF(10, 10));
+        tool.addPoint(new PointF(20, 20));
+        tool.addPoint(new PointF(30, 30));
+        tool.addPoint(new PointF(40, 40));
 
-    private Bitmap getBitmap() {
-        return BitmapFactory.decodeResource(activityTestRule.getActivity().getResources(), R.drawable.happy);
+        canvas = Mockito.mock(Canvas.class);
+
+        tool.draw(canvas, paint);
+
+        Mockito.verify(canvas, Mockito.times(expectedStickers)).drawBitmap(Mockito.any(Bitmap.class),
+                Mockito.any(Rect.class), Mockito.any(Rect.class), Mockito.any(Paint.class));
     }
 }
