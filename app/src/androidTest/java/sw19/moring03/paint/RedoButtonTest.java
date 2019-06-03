@@ -20,6 +20,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static sw19.moring03.paint.util.Interaction.changeValueOfStrokeWidthSeekBar;
 import static sw19.moring03.paint.util.Interaction.touchAt;
 import static org.junit.Assert.assertEquals;
 
@@ -49,7 +50,7 @@ public class RedoButtonTest {
         onView(withId(R.id.undoButton)).perform(click());
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToRedo();
 
         onView(withId(R.id.redoButton)).perform(click());
 
@@ -75,5 +76,31 @@ public class RedoButtonTest {
 
         onView(withId(R.id.redoButton)).perform(click());
         onView(withId(R.id.redoButton)).check(doesNotExist());
+    }
+
+    @Test
+    public void testRedoStrokeWidth() {
+        String expectedTitle = "5pt";
+
+        onView(withId(R.id.redoButton)).check(doesNotExist());
+
+        onView(withId(R.id.strokeWidthChooserButton)).perform(click());
+        onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(25));
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawLineButton)).perform(click());
+
+        onView(withId(R.id.drawingView)).perform(swipeLeft());
+        onView(withId(R.id.undoButton)).perform(click());
+        onView(withId(R.id.redoButton)).perform(click());
+
+        Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
+        ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.toolChooserButton);
+        String currentTitle = toolChooser.getItemData().getTitle().toString();
+
+        assertEquals(expectedTitle,currentTitle);
+
+        onView(withId(R.id.redoButton)).check(doesNotExist());
+
     }
 }
