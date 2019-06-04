@@ -1,6 +1,7 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import sw19.moring03.paint.utils.PointF;
 
@@ -11,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.SprayCanTool;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
@@ -27,7 +29,10 @@ public class SprayCanTest {
 
     @Test
     public void basicPointDrawTest() {
-        SprayCanTool tool = new SprayCanTool();
+        SprayCanTool tool = new SprayCanTool(Color.BLACK, 10);
+        assertEquals(Color.BLACK, tool.getColor());
+        assertEquals(10, tool.getStrokeWidth());
+
         tool.addPoint(new PointF(5, 5));
         assertTrue(tool.draw(canvas, paint));
     }
