@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PathEffect;
 
 import sw19.moring03.paint.tools.HeartTool;
+import sw19.moring03.paint.tools.StarTool;
 import sw19.moring03.paint.tools.TriangleTool;
 import sw19.moring03.paint.utils.PointF;
 import android.support.annotation.VisibleForTesting;
@@ -148,6 +149,7 @@ public class DrawingView extends View {
                 objectsToPaint.add(new HeartTool(getColor(), strokeWidth));
                 break;
             case DRAW_STAR:
+                objectsToPaint.add(new StarTool(getColor(), strokeWidth));
                 break;
             case DRAW_TREE:
                 break;
