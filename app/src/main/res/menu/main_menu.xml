@@ -4,11 +4,10 @@
     tools:context="com.example.bar.MainActivity">
 
     <item
-        android:id="@+id/lineTypeChooserButton"
-        android:icon="@drawable/ic_remove_black_24dp"
-        android:title="@string/lineTypeChooserButton"
-        android:visible="false"
-        app:showAsAction="always" />
+        android:id="@+id/redoButton"
+        android:icon="@drawable/ic_redo_black_24dp"
+        android:title="@string/redo_button"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/undoButton"
@@ -16,10 +15,16 @@
         android:title="@string/undo_button"
         app:showAsAction="always" />
 
-
     <item
         android:id="@+id/strokeWidthChooserButton"
         android:title="@string/stroke_width_display"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/lineTypeChooserButton"
+        android:icon="@drawable/ic_remove_black_24dp"
+        android:title="@string/lineTypeChooserButton"
+        android:visible="false"
         app:showAsAction="always" />
 
     <item
@@ -38,8 +43,6 @@
         android:id="@+id/saveButton"
         android:icon="@drawable/ic_save_icon"
         android:title="@string/saveButton"
-        app:showAsAction="always" />
-
-
+        app:showAsAction="ifRoom" />
 
 </menu>

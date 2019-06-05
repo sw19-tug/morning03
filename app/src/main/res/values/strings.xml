@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Paint</string>
-    <string name="toolIcon">Tool Icon</string>
     <string name="lineTypeChooserButton">Choose Line Type</string>
     <string name="toolChooserButton">Choose Drawing Tool</string>
     <string name="colorChooserButton">Choose Color for Drawing Tool</string>
@@ -20,7 +19,6 @@
     <string name="stroke_width">Choose Stroke Width</string>
     <string name="drawing_tool">Choose Drawing Tool</string>
     <string name="color">Choose Color</string>
-    <string name="choose_stroke_width_for_drawing_tool">Choose Stroke Width for Drawing Tool</string>
     <string name="stroke_width_display">5pt</string>
     <string name="choose_line_type">Choose the line type</string>
     <string name="dashed">Dashed Line</string>
@@ -33,5 +31,6 @@
     <string name="green">G:</string>
     <string name="value">0</string>
     <string name="undo_button">Undo</string>
+    <string name="redo_button">Redo</string>
     <string name="drawStickerButton">Emojis/Stickers</string>
 </resources>

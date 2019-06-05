@@ -1,6 +1,7 @@
 package sw19.moring03.paint;
 
 import android.graphics.drawable.Drawable;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.view.menu.ActionMenuItemView;
@@ -50,7 +51,7 @@ public class UndoButtonTest {
         onView(withId(R.id.undoButton)).perform(click());
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         assertEquals(pointsToDraw.size(),0);
         onView(withId(R.id.undoButton)).check(doesNotExist());
@@ -58,24 +59,24 @@ public class UndoButtonTest {
 
     @Test
     public void testUndoToolIcon() {
-        Drawable expectedIcon = launchActivityRule.getActivity().getResources().getDrawable(R.drawable.ic_line_icon);
+        Drawable expectedIcon = launchActivityRule.getActivity().getResources().getDrawable(R.drawable.ic_undo_black_24dp);
 
         onView(withId(R.id.undoButton)).check(doesNotExist());
 
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(swipeLeft());
-        onView(withId(R.id.undoButton)).perform(click());
-
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
-        ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.toolChooserButton);
+        ActionMenuItemView toolChooser = toolbar.findViewById(R.id.undoButton);
         Drawable currentIcon = toolChooser.getItemData().getIcon();
 
         assertEquals(expectedIcon.getConstantState(),currentIcon.getConstantState());
 
+        onView(withId(R.id.undoButton)).perform(click());
         onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 
+    @Test
     public void testUndoStrokeWidth() {
         String expectedTitle = "35pt";
 
@@ -84,6 +85,7 @@ public class UndoButtonTest {
         onView(withId(R.id.strokeWidthChooserButton)).perform(click());
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(35));
 
+        Espresso.pressBack();
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
 
@@ -91,8 +93,8 @@ public class UndoButtonTest {
         onView(withId(R.id.undoButton)).perform(click());
 
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
-        ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.toolChooserButton);
-        String currentTitle = toolChooser.getItemData().getTitle().toString();
+        ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.strokeWidthChooserButton);
+        String currentTitle = toolChooser.getItemData().getTitleCondensed().toString();
 
         assertEquals(expectedTitle,currentTitle);
 

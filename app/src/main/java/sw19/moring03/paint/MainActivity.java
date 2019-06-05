@@ -99,13 +99,20 @@ public class MainActivity extends AppCompatActivity {
         setToolIcon();
         setStrokeWidth(strokeWidth);
         DrawingView view = findViewById(R.id.drawingView);
-        if (view.isAlreadyDrawn()) {
+
+        menu.findItem(R.id.lineTypeChooserButton).setVisible(visible);
+
+        if (view.drawingObjectManager.isUndoPossible()) {
             menu.findItem(R.id.undoButton).setVisible(true);
         } else {
             menu.findItem(R.id.undoButton).setVisible(false);
         }
 
-        menu.findItem(R.id.lineTypeChooserButton).setVisible(visible);
+        if (view.drawingObjectManager.isRedoPossible()) {
+            menu.findItem(R.id.redoButton).setVisible(true);
+        } else {
+            menu.findItem(R.id.redoButton).setVisible(false);
+        }
 
         switch (lineID) {
             case R.id.dashedLine:
@@ -161,7 +168,10 @@ public class MainActivity extends AppCompatActivity {
                 tryPerformAction(saveCanvasToExtStorage);
                 return true;
             case R.id.undoButton:
-                ((DrawingView)findViewById(R.id.drawingView)).removeLastElementFromPaintList();
+                ((DrawingView)findViewById(R.id.drawingView)).undoLastPaintObject();
+                return true;
+            case R.id.redoButton:
+                ((DrawingView)findViewById(R.id.drawingView)).redoLastPaintObject();
                 return true;
             case R.id.lineTypeChooserButton:
                 lineTypeChooserMenu.show(getSupportFragmentManager(), "lineTypeChooserMenu");

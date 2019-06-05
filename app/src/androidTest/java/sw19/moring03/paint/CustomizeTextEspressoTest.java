@@ -44,7 +44,7 @@ public class CustomizeTextEspressoTest {
         onView(withId(R.id.editText)).check(matches(withText("Hello World")));
 
         DrawingView view = activityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
         Tools tool = pointsToDraw.get(pointsToDraw.size() - 1);
         assertEquals(tool.getColor(), activityRule.getActivity().getChosenColor());
         assertEquals(tool.getStrokeWidth(), activityRule.getActivity().getStrokeWidth());
