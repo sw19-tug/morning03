@@ -264,7 +264,6 @@ public class MainActivity extends AppCompatActivity {
                 visible = false;
                 break;
             case R.id.cameraButton:
-                setChosenTool(Tool.TAKE_PHOTO);
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePicture.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePicture, CAMERA_REQUEST);
@@ -289,11 +288,13 @@ public class MainActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             try {
                 newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                Tool tool = getChosenTool();
                 setChosenTool(Tool.TAKE_PHOTO);
 
                 findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
                         SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
                         MotionEvent.ACTION_DOWN, 0, 0, 0));
+                setChosenTool(tool);
 
             } catch (Exception ex) {
                 System.out.println("ERROR: Failed to load Bitmap");
@@ -304,13 +305,13 @@ public class MainActivity extends AppCompatActivity {
             Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
             try {
                 newPhoto = cameraPicture;
+                Tool tool = getChosenTool();
                 setChosenTool(Tool.TAKE_PHOTO);
-
 
                 findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
                         SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
                         MotionEvent.ACTION_DOWN, 0, 0, 0));
-
+                setChosenTool(tool);
             } catch (Exception e) {
                 System.out.println("ERROR: Failed to load Bitmap");
             }
