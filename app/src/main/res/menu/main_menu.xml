@@ -12,13 +12,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/undoButton"
-        android:icon="@drawable/ic_undo_black_24dp"
-        android:title="@string/undo_button"
-        app:showAsAction="always" />
-
-
-    <item
         android:id="@+id/strokeWidthChooserButton"
         android:title="@string/stroke_width_display"
         app:showAsAction="always" />
@@ -27,8 +20,7 @@
         android:id="@+id/toolChooserButton"
         android:icon="@drawable/ic_point_icon"
         android:title="@string/toolChooserButton"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/colorChooserButton"
@@ -47,5 +39,11 @@
         android:icon="@drawable/ic_share_icon"
         android:onClick="shareCanvas"
         android:title="@string/shareButton"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/undoButton"
+        android:icon="@drawable/ic_undo_black_24dp"
+        android:title="@string/undo_button"
         app:showAsAction="ifRoom" />
 </menu>
