@@ -11,6 +11,7 @@ import android.graphics.PathEffect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
@@ -19,13 +20,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.LineTypeChooserBottomSheetDialog;
@@ -452,5 +457,27 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode);
             }
         }
+    }
+
+    public void shareCanvas(MenuItem item) {
+        DrawingView view = findViewById(R.id.drawingView);
+        Bitmap currentBitmap = view.getCurrentBitmap();
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/jpeg");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        currentBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        long tempfileName = System.currentTimeMillis() / 1000;
+        File f = new File(Environment.getExternalStorageDirectory() + File.separator
+                + tempfileName + ".jpg");
+        try {
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        share.putExtra(Intent.EXTRA_STREAM,
+                Uri.parse(Environment.getExternalStorageDirectory()+ File.separator+tempfileName+".jpg"));
+        startActivity(Intent.createChooser(share, "Share Image"));
     }
 }
