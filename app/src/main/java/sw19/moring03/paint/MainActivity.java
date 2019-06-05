@@ -1,5 +1,6 @@
 package sw19.moring03.paint;
 
+import android.support.v7.widget.Toolbar;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;

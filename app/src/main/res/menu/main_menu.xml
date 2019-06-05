@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -40,9 +41,11 @@
         android:icon="@drawable/ic_save_icon"
         android:title="@string/saveButton"
         app:showAsAction="ifRoom" />
+
     <item
         android:id="@+id/shareButton"
         android:icon="@drawable/ic_share_icon"
+        android:onClick="shareCanvas"
         android:title="@string/shareButton"
         app:showAsAction="ifRoom" />
 </menu>
