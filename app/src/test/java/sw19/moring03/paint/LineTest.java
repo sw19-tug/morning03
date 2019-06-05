@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -85,7 +84,7 @@ public class LineTest {
         }
 
         assertEquals(2, tool.getPoints().size());
-        assertEquals((int)addedPoints.get(0).x, (int)tool.getPoints().get(0).x);
-        assertEquals((int)addedPoints.get(3).x, (int)tool.getPoints().get(1).x);
+        assertEquals((int) addedPoints.get(0).x, (int) tool.getPoints().get(0).x);
+        assertEquals((int) addedPoints.get(3).x, (int) tool.getPoints().get(1).x);
     }
 }

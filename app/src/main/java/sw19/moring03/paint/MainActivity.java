@@ -99,12 +99,11 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         this.menu = menu;
 
-        if(menu instanceof MenuBuilder){
+        if (menu instanceof MenuBuilder) {
 
             MenuBuilder menuBuilder = (MenuBuilder) menu;
             menuBuilder.setOptionalIconsVisible(true);
         }
-
 
 
         return true;
@@ -177,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 tryPerformAction(saveCanvasToExtStorage);
                 return true;
             case R.id.undoButton:
-                ((DrawingView)findViewById(R.id.drawingView)).removeLastElementFromPaintList();
+                ((DrawingView) findViewById(R.id.drawingView)).removeLastElementFromPaintList();
                 return true;
             case R.id.lineTypeChooserButton:
                 lineTypeChooserMenu.show(getSupportFragmentManager(), "lineTypeChooserMenu");
@@ -392,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-       lineTypeChooserMenu.dismiss();
+        lineTypeChooserMenu.dismiss();
     }
 
     public void chooseNewColor(View view) {
@@ -467,7 +466,7 @@ public class MainActivity extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 saveCanvas();
             } else {
-                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
             }
         }
     }
@@ -490,7 +489,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         share.putExtra(Intent.EXTRA_STREAM,
-                Uri.parse(Environment.getExternalStorageDirectory()+ File.separator+tempfileName+".jpg"));
+                Uri.parse(Environment.getExternalStorageDirectory() + File.separator + tempfileName + ".jpg"));
         startActivity(Intent.createChooser(share, "Share Image"));
     }
 }
