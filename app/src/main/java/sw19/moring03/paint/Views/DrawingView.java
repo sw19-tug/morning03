@@ -32,6 +32,7 @@ import sw19.moring03.paint.tools.StickerTool;
 import sw19.moring03.paint.tools.SprayCanTool;
 import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
+import sw19.moring03.paint.utils.PointF;
 import sw19.moring03.paint.utils.Tool;
 
 public class DrawingView extends View {

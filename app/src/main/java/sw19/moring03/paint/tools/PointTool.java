@@ -4,9 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
-import sw19.moring03.paint.utils.PointF;
 
 import java.util.ArrayList;
+
+import sw19.moring03.paint.utils.PointF;
 
 public class PointTool extends Tools {
 

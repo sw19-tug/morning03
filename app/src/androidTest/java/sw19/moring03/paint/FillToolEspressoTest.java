@@ -128,6 +128,35 @@ public class FillToolEspressoTest {
         assertEquals(expectedPointsFill, wholeBoxFill.getPoints().size());
     }
 
+    @Test
+    public void testDoubleFill() {
+        final int expectedPoints = 0;
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
+        onView(withText("Rectangle")).perform(click());
+
+        assertEquals(Tool.DRAW_RECTANGLE, launchActivityRule.getActivity().getChosenTool());
+
+        onView(withId(R.id.drawingView)).perform(swipe(10, 400, 20, 410));
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawFillButton)).perform(click());
+
+        assertEquals(Tool.FILL, launchActivityRule.getActivity().getChosenTool());
+
+        onView(withId(R.id.drawingView)).perform(touchAt(15, 405));
+        onView(withId(R.id.drawingView)).perform(touchAt(15, 405));
+
+        DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
+
+        Tools fillTool = pointsToDraw.get(pointsToDraw.size() - 1);
+
+        assertEquals(expectedPoints, fillTool.getPoints().size());
+    }
+
+
     //@Test
     public void testOutOfMemoryFill() {
         onView(withId(R.id.toolChooserButton)).perform(click());

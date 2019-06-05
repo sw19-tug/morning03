@@ -4,8 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-import sw19.moring03.paint.utils.PointF;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.tools.PathTool;
+import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
