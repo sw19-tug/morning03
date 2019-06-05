@@ -19,6 +19,7 @@ import static android.support.test.espresso.Espresso.openActionBarOverflowOrOpti
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
 public class SaveEspressoTest {
@@ -38,10 +39,18 @@ public class SaveEspressoTest {
 
     @Test
     public void testImageSaved() throws IOException {
-        onView(withId(R.id.saveButton)).perform(click());
-        Uri imageURI = Uri.parse(activityTestRule.getActivity().getLastSavedImageURI());
-        Bitmap image = MediaStore.Images.Media.getBitmap(activityTestRule.getActivity().getContentResolver(), imageURI);
-        //assertNull(image);
+        try {
+            onView(withId(R.id.saveButton)).perform(click());
+            Uri imageURI = Uri.parse(activityTestRule.getActivity().getLastSavedImageURI());
+            Bitmap image = MediaStore.Images.Media.getBitmap(activityTestRule.getActivity().getContentResolver(), imageURI);
+            assertNotNull(image);
+        } catch (NoMatchingViewException e) {
+            openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+            onView(withText(R.string.saveButton)).perform(click());
+            Uri imageURI = Uri.parse(activityTestRule.getActivity().getLastSavedImageURI());
+            Bitmap image = MediaStore.Images.Media.getBitmap(activityTestRule.getActivity().getContentResolver(), imageURI);
+            assertNotNull(image);
+        }
 
     }
 }
