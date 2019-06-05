@@ -29,9 +29,9 @@ public class HeartTool extends Tools {
             return false;
         }
 
-        float distance = (float)getDistance()/2;
+        float distance = (float)getDistance() / 2;
 
-        PointF secondPoint = new PointF(points.get(0).x, points.get(0).y + distance*2);
+        PointF secondPoint = new PointF(points.get(0).x, points.get(0).y + distance * 2);
         PointF thirdPoint = new PointF(points.get(0).x + distance,points.get(0).y + distance);
         PointF fourthPoint = new PointF(points.get(0).x - distance,points.get(0).y + distance);
 
@@ -41,7 +41,7 @@ public class HeartTool extends Tools {
         path.lineTo(secondPoint.x, secondPoint.y);
         path.lineTo(fourthPoint.x, fourthPoint.y);
 
-        PointF earMiddlePoint = new PointF((secondPoint.x + thirdPoint.x)/2,(secondPoint.y + thirdPoint.y)/2);
+        PointF earMiddlePoint = new PointF((secondPoint.x + thirdPoint.x) / 2,(secondPoint.y + thirdPoint.y) / 2);
         float radiusEars = (float)Math.sqrt(Math.pow(thirdPoint.x - secondPoint.x,2) + Math.pow(thirdPoint.y - secondPoint.y,2)) / 2;
 
         canvas.save();
@@ -50,7 +50,7 @@ public class HeartTool extends Tools {
         canvas.drawPath(path, paint);
 
         canvas.drawCircle(earMiddlePoint.x, earMiddlePoint.y, radiusEars, paint);
-        earMiddlePoint = new PointF((secondPoint.x + fourthPoint.x)/2,(secondPoint.y + fourthPoint.y)/2);
+        earMiddlePoint = new PointF((secondPoint.x + fourthPoint.x) / 2,(secondPoint.y + fourthPoint.y) / 2);
         canvas.drawCircle(earMiddlePoint.x, earMiddlePoint.y, radiusEars, paint);
 
         paint.setStyle(Paint.Style.STROKE);
@@ -84,7 +84,7 @@ public class HeartTool extends Tools {
 
         double tmp = points.get(0).y - points.get(1).y;
 
-        double angle = Math.asin(tmp/distance);
+        double angle = Math.asin(tmp / distance);
 
         return (float)angle;
     }

@@ -11,12 +11,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import sw19.moring03.paint.tools.HeartTool;
-import sw19.moring03.paint.tools.OvalTool;
-import sw19.moring03.paint.tools.TriangleTool;
 import sw19.moring03.paint.utils.PointF;
 
 import static junit.framework.TestCase.assertEquals;

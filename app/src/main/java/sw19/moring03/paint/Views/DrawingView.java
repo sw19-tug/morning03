@@ -2,10 +2,12 @@ package sw19.moring03.paint.Views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 
+import sw19.moring03.paint.tools.ChristmasTreeTool;
 import sw19.moring03.paint.tools.HeartTool;
 import sw19.moring03.paint.tools.StarTool;
 import sw19.moring03.paint.tools.TriangleTool;
@@ -152,6 +154,8 @@ public class DrawingView extends View {
                 objectsToPaint.add(new StarTool(getColor(), strokeWidth));
                 break;
             case DRAW_TREE:
+                Bitmap tree = BitmapFactory.decodeResource(getResources(), R.drawable.christmas);
+                objectsToPaint.add(new ChristmasTreeTool(tree));
                 break;
         }
     }

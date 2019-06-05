@@ -7,7 +7,6 @@ import android.graphics.Path;
 
 import java.util.ArrayList;
 
-import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.utils.PointF;
 
 public class TriangleTool extends Tools {

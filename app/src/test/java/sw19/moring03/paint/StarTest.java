@@ -3,7 +3,6 @@ package sw19.moring03.paint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import sw19.moring03.paint.tools.HeartTool;
 import sw19.moring03.paint.tools.StarTool;
 import sw19.moring03.paint.utils.PointF;
 
@@ -44,7 +42,7 @@ public class StarTest {
     }
 
     @Test
-    public void testInvalidHeart() {
+    public void testInvalidStar() {
         StarTool tool = new StarTool();
         tool.addPoint(new PointF(10, 10));
 
@@ -52,7 +50,7 @@ public class StarTest {
     }
 
     @Test
-    public void testDrawHeart() {
+    public void testDrawStar() {
         int expectedLines = 5;
 
         StarTool tool = new StarTool();

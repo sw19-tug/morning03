@@ -3,15 +3,14 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 
 import java.util.ArrayList;
 
 import sw19.moring03.paint.utils.PointF;
 
 public class StarTool extends Tools {
-    private final float CORNERS = 5.0f;
-    private final float GOLDENRATIO = 1.618f;
+    private final float corners = 5.0f;
+    private final float goldenratio = 1.618f;
 
     public StarTool() {
         points = new ArrayList<>();
@@ -35,15 +34,15 @@ public class StarTool extends Tools {
 
         PointF tmp = new PointF(points.get(0).x + halfDist, points.get(0).y);
         //https://www.mathsisfun.com/geometry/pentagram.html
-        float b = (float)getDistance() / GOLDENRATIO;
-        float c = b / GOLDENRATIO;
-        float d = c / GOLDENRATIO;
-        float x = (float)Math.sqrt(Math.pow(c, 2) - Math.pow(d/2,2));
+        float b = (float)getDistance() / goldenratio;
+        float c = b / goldenratio;
+        float d = c / goldenratio;
+        float x = (float)Math.sqrt(Math.pow(c, 2) - Math.pow(d / 2,2));
 
         canvas.save();
-        for (int corners = 1; corners <= CORNERS; corners++) {
+        for (int corners = 1; corners <= this.corners; corners++) {
             canvas.translate(halfDist, -x);
-            canvas.rotate(360/CORNERS, points.get(0).x, points.get(0).y);
+            canvas.rotate(360 / this.corners, points.get(0).x, points.get(0).y);
             canvas.drawLine(points.get(0).x, points.get(0).y,tmp.x + halfDist, tmp.y,paint);
         }
         canvas.restore();

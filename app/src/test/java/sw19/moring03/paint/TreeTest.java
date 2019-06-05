@@ -1,9 +1,9 @@
 package sw19.moring03.paint;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.Rect;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,51 +11,50 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import sw19.moring03.paint.tools.TriangleTool;
+import sw19.moring03.paint.tools.ChristmasTreeTool;
 import sw19.moring03.paint.utils.PointF;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.isNull;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TriangleTest {
+public class TreeTest {
     private Canvas canvas;
     private Paint paint;
+    private Bitmap tree;
 
     @Before
     public void startUp() {
         canvas = new Canvas();
         paint = new Paint();
+        tree = Mockito.mock(Bitmap.class);
     }
 
     @Test
-    public void testTriangleSimple() {
-        TriangleTool tool = new TriangleTool(Color.BLACK, 10);
-        assertEquals(Color.BLACK, tool.getColor());
-        assertEquals(10, tool.getStrokeWidth());
+    public void testTreeSimple() {
 
+        ChristmasTreeTool tool = new ChristmasTreeTool(tree);
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
         tool.addPoint(new PointF(60, 60));
-        tool.addPoint(new PointF(90, 90));
 
         assertTrue(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testInvalidTriangle() {
-        TriangleTool tool = new TriangleTool();
+    public void testInvalidTree() {
+        ChristmasTreeTool tool = new ChristmasTreeTool(tree);
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testDrawTriangle() {
-        int expectedTriangles = 1;
+    public void testDrawTree() {
+        int expectedCalls = 1;
 
-        TriangleTool tool = new TriangleTool();
+        ChristmasTreeTool tool = new ChristmasTreeTool(tree);
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
@@ -64,7 +63,6 @@ public class TriangleTest {
 
         tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedTriangles)).drawPath(Mockito.any(Path.class), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(expectedCalls)).drawBitmap(Mockito.any(Bitmap.class), (Rect)isNull(), Mockito.any(Rect.class), (Paint)isNull());
     }
-
 }

@@ -1,12 +1,9 @@
 package sw19.moring03.paint;
 
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.graphics.Paint;
 import android.graphics.PathEffect;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import sw19.moring03.paint.tools.PathTool;
