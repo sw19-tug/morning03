@@ -26,19 +26,22 @@
         android:id="@+id/toolChooserButton"
         android:icon="@drawable/ic_point_icon"
         android:title="@string/toolChooserButton"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        />
 
     <item
         android:id="@+id/colorChooserButton"
         android:icon="@drawable/ic_color_lens_black_24dp"
         android:title="@string/colorChooserButton"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/saveButton"
         android:icon="@drawable/ic_save_icon"
         android:title="@string/saveButton"
         app:showAsAction="always" />
+
+   
 
 
 
