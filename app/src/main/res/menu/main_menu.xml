@@ -42,12 +42,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/shareButton"
-        android:icon="?attr/actionModeShareDrawable"
+        android:icon="@drawable/ic_share_icon"
         android:title="@string/shareButton"
         app:showAsAction="ifRoom" />
-
-   
-
-
-
 </menu>
