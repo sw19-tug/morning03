@@ -17,9 +17,9 @@ import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
 import sw19.moring03.paint.utils.Tool;
 
+import static sw19.moring03.paint.utils.Tool.DRAW_CHRISTMAS_TREE;
 import static sw19.moring03.paint.utils.Tool.DRAW_HEART;
 import static sw19.moring03.paint.utils.Tool.DRAW_STAR;
-import static sw19.moring03.paint.utils.Tool.DRAW_TREE;
 import static sw19.moring03.paint.utils.Tool.DRAW_TRIANGLE;
 
 public class ShapeChooserFragment extends DialogFragment {
@@ -70,7 +70,7 @@ public class ShapeChooserFragment extends DialogFragment {
                                     activity.setChosenTool(DRAW_STAR);
                                     break;
                                 case "Tree":
-                                    activity.setChosenTool(DRAW_TREE);
+                                    activity.setChosenTool(DRAW_CHRISTMAS_TREE);
                                     break;
                             }
 

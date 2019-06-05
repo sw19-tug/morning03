@@ -1,7 +1,6 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
@@ -11,12 +10,6 @@ import sw19.moring03.paint.utils.PointF;
 public class StarTool extends Tools {
     private final float corners = 5.0f;
     private final float goldenratio = 1.618f;
-
-    public StarTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-    }
 
     public StarTool(int col, int strkW) {
         points = new ArrayList<>();
@@ -34,16 +27,16 @@ public class StarTool extends Tools {
 
         PointF tmp = new PointF(points.get(0).x + halfDist, points.get(0).y);
         //https://www.mathsisfun.com/geometry/pentagram.html
-        float b = (float)getDistance() / goldenratio;
-        float c = b / goldenratio;
-        float d = c / goldenratio;
-        float x = (float)Math.sqrt(Math.pow(c, 2) - Math.pow(d / 2,2));
+        float distanceStartToPeakEnd = (float)getDistance() / goldenratio;
+        float distanceStartToPeakStart = distanceStartToPeakEnd / goldenratio;
+        float peakWidth = distanceStartToPeakStart / goldenratio;
+        float peakHeight = (float)Math.sqrt(Math.pow(distanceStartToPeakStart, 2) - Math.pow(peakWidth / 2, 2));
 
         canvas.save();
         for (int corners = 1; corners <= this.corners; corners++) {
-            canvas.translate(halfDist, -x);
+            canvas.translate(halfDist, -peakHeight);
             canvas.rotate(360 / this.corners, points.get(0).x, points.get(0).y);
-            canvas.drawLine(points.get(0).x, points.get(0).y,tmp.x + halfDist, tmp.y,paint);
+            canvas.drawLine(points.get(0).x, points.get(0).y, tmp.x + halfDist, tmp.y, paint);
         }
         canvas.restore();
 
@@ -63,7 +56,7 @@ public class StarTool extends Tools {
         PointF firstPoint = points.get(0);
         PointF secondPoint = points.get(1);
 
-        return Math.sqrt(Math.pow(firstPoint.x - secondPoint.x,2) + Math.pow(firstPoint.y - secondPoint.y,2));
+        return Math.sqrt(Math.pow(firstPoint.x - secondPoint.x, 2) + Math.pow(firstPoint.y - secondPoint.y, 2));
 
     }
 

@@ -45,7 +45,7 @@ public class TriangleTest {
 
     @Test
     public void testInvalidTriangle() {
-        TriangleTool tool = new TriangleTool();
+        TriangleTool tool = new TriangleTool(Color.BLACK, 10);
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -55,7 +55,7 @@ public class TriangleTest {
     public void testDrawTriangle() {
         int expectedTriangles = 1;
 
-        TriangleTool tool = new TriangleTool();
+        TriangleTool tool = new TriangleTool(Color.BLACK, 10);
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));

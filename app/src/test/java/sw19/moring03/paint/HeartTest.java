@@ -44,7 +44,7 @@ public class HeartTest {
 
     @Test
     public void testInvalidHeart() {
-        HeartTool tool = new HeartTool();
+        HeartTool tool = new HeartTool(Color.BLACK, 10);
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -53,9 +53,9 @@ public class HeartTest {
     @Test
     public void testDrawHeart() {
         int expectedPaths = 1;
-        int expecetedCircles = 2;
+        int expectedCircles = 2;
 
-        HeartTool tool = new HeartTool();
+        HeartTool tool = new HeartTool(Color.BLACK, 10);
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
@@ -65,16 +65,16 @@ public class HeartTest {
         tool.draw(canvas, paint);
 
         Mockito.verify(canvas, Mockito.times(expectedPaths)).drawPath(Mockito.any(Path.class), Mockito.any(Paint.class));
-        Mockito.verify(canvas, Mockito.times(expecetedCircles)).drawCircle(Mockito.anyFloat(), Mockito.anyFloat(),
+        Mockito.verify(canvas, Mockito.times(expectedCircles)).drawCircle(Mockito.anyFloat(), Mockito.anyFloat(),
                 Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 
     @Test
     public void testDrawInvertedHeart() {
         int expectedPaths = 1;
-        int expecetedCircles = 2;
+        int expectedCircles = 2;
 
-        HeartTool tool = new HeartTool();
+        HeartTool tool = new HeartTool(Color.BLACK, 10);
 
         tool.addPoint(new PointF(30, 30));
         tool.addPoint(new PointF(10, 10));
@@ -84,7 +84,7 @@ public class HeartTest {
         tool.draw(canvas, paint);
 
         Mockito.verify(canvas, Mockito.times(expectedPaths)).drawPath(Mockito.any(Path.class), Mockito.any(Paint.class));
-        Mockito.verify(canvas, Mockito.times(expecetedCircles)).drawCircle(Mockito.anyFloat(), Mockito.anyFloat(),
+        Mockito.verify(canvas, Mockito.times(expectedCircles)).drawCircle(Mockito.anyFloat(), Mockito.anyFloat(),
                 Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 }

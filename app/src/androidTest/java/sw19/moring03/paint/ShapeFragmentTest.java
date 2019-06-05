@@ -110,7 +110,7 @@ public class ShapeFragmentTest {
         onView(withId(R.id.drawShapesButton)).perform(click());
         onView(withText("Tree")).perform(click());
 
-        assertEquals(Tool.DRAW_TREE, activityTestRule.getActivity().getChosenTool());
+        assertEquals(Tool.DRAW_CHRISTMAS_TREE, activityTestRule.getActivity().getChosenTool());
         onView(withId(R.id.toolChooserButton)).check(matches(isDisplayed()));
     }
 

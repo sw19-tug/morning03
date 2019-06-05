@@ -43,7 +43,7 @@ public class StarTest {
 
     @Test
     public void testInvalidStar() {
-        StarTool tool = new StarTool();
+        StarTool tool = new StarTool(Color.BLACK, 10);
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -53,7 +53,7 @@ public class StarTest {
     public void testDrawStar() {
         int expectedLines = 5;
 
-        StarTool tool = new StarTool();
+        StarTool tool = new StarTool(Color.BLACK, 10);
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));

@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import sw19.moring03.paint.utils.PointF;
 
 public class ChristmasTreeTool extends Tools {
-    private Bitmap tree;
+    private Bitmap christmasTree;
 
     public ChristmasTreeTool(Bitmap tree) {
         points = new ArrayList<>();
         strokeWidth = 5;
         color = Color.BLACK;
-        this.tree = tree;
+        this.christmasTree = tree;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ChristmasTreeTool extends Tools {
             destination.top = (int)points.get(0).y;
         }
 
-        canvas.drawBitmap(tree,null, destination, null);
+        canvas.drawBitmap(christmasTree, null, destination, null);
 
         return true;
     }
@@ -62,7 +62,7 @@ public class ChristmasTreeTool extends Tools {
         PointF firstPoint = points.get(0);
         PointF secondPoint = points.get(1);
 
-        return Math.sqrt(Math.pow(firstPoint.x - secondPoint.x,2) + Math.pow(firstPoint.y - secondPoint.y,2));
+        return Math.sqrt(Math.pow(firstPoint.x - secondPoint.x, 2) + Math.pow(firstPoint.y - secondPoint.y, 2));
 
     }
 

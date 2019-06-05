@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.isNull;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TreeTest {
+public class ChristmasTreeTest {
     private Canvas canvas;
     private Paint paint;
     private Bitmap tree;

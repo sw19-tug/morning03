@@ -337,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
             case DRAW_STAR:
                 menuItem.setIcon(R.drawable.ic_star_icon);
                 break;
-            case DRAW_TREE:
+            case DRAW_CHRISTMAS_TREE:
                 menuItem.setIcon(R.drawable.ic_tree_icon);
                 break;
             case DRAW_HEART:

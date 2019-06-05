@@ -153,7 +153,7 @@ public class DrawingView extends View {
             case DRAW_STAR:
                 objectsToPaint.add(new StarTool(getColor(), strokeWidth));
                 break;
-            case DRAW_TREE:
+            case DRAW_CHRISTMAS_TREE:
                 Bitmap tree = BitmapFactory.decodeResource(getResources(), R.drawable.christmas);
                 objectsToPaint.add(new ChristmasTreeTool(tree));
                 break;
