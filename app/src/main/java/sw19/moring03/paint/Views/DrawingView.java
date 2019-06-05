@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
-import sw19.moring03.paint.utils.PointF;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -29,6 +28,7 @@ import sw19.moring03.paint.tools.RectangleTool;
 import sw19.moring03.paint.tools.SprayCanTool;
 import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
+import sw19.moring03.paint.utils.PointF;
 import sw19.moring03.paint.utils.Tool;
 
 public class DrawingView extends View {

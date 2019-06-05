@@ -2,7 +2,6 @@ package sw19.moring03.paint;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import sw19.moring03.paint.utils.PointF;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.tools.LineTool;
+import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
