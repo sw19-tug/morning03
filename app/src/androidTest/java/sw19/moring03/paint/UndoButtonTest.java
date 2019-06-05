@@ -20,9 +20,9 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertEquals;
 import static sw19.moring03.paint.util.Interaction.changeValueOfStrokeWidthSeekBar;
 import static sw19.moring03.paint.util.Interaction.touchAt;
-import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class UndoButtonTest {

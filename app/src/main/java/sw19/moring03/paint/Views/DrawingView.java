@@ -2,6 +2,7 @@ package sw19.moring03.paint.Views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
@@ -26,12 +27,14 @@ import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PhotoTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
+import sw19.moring03.paint.tools.StickerTool;
 import sw19.moring03.paint.tools.SprayCanTool;
 import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.Tool;
 
 public class DrawingView extends View {
+
     private Paint paint;
     private List<Tools> objectsToPaint;
 
@@ -78,7 +81,6 @@ public class DrawingView extends View {
             for (Tools tool : objectsToPaint) {
                 paint.setStrokeWidth(tool.getStrokeWidth());
                 paint.setColor(tool.getColor());
-
                 paint.setPathEffect(tool.getPathEffect());
                 tool.draw(canvas, paint);
             }
@@ -94,9 +96,10 @@ public class DrawingView extends View {
     }
 
     public void selectTool() {
-        Tool chosenTool = ((MainActivity) getContext()).getChosenTool();
-        int strokeWidth = ((MainActivity)getContext()).getStrokeWidth();
-        PathEffect effect = ((MainActivity)getContext()).getPathEffect();
+        MainActivity activity = (MainActivity)getContext();
+        Tool chosenTool = activity.getChosenTool();
+        int strokeWidth = activity.getStrokeWidth();
+        PathEffect effect = activity.getPathEffect();
 
         switch (chosenTool) {
             case FILL:
@@ -104,6 +107,9 @@ public class DrawingView extends View {
                 int[] frameBuffer = new int[bitmap.getWidth() * bitmap.getHeight()];
                 bitmap.getPixels(frameBuffer, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
                 objectsToPaint.add(new FillTool(getColor(), frameBuffer, bitmap.getWidth(), bitmap.getHeight()));
+                break;
+            case DRAW_STICKER:
+                objectsToPaint.add(new StickerTool(BitmapFactory.decodeResource(activity.getResources(), activity.getStickerToDraw())));
                 break;
             case ERASER:
                 objectsToPaint.add(new EraseTool(strokeWidth));
