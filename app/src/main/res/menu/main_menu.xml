@@ -7,7 +7,7 @@
         android:id="@+id/redoButton"
         android:icon="@drawable/ic_redo_black_24dp"
         android:title="@string/redo_button"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/undoButton"
@@ -43,6 +43,6 @@
         android:id="@+id/saveButton"
         android:icon="@drawable/ic_save_icon"
         android:title="@string/saveButton"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
 </menu>

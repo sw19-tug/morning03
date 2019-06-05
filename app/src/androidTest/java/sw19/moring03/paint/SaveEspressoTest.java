@@ -3,6 +3,7 @@ package sw19.moring03.paint;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -17,6 +18,7 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
@@ -27,12 +29,14 @@ public class SaveEspressoTest {
 
     @Test
     public void testSaveButtonExists() {
-        onView(withId(R.id.saveButton)).check(matches(isDisplayed()));
+        Espresso.openActionBarOverflowOrOptionsMenu(activityTestRule.getActivity());
+        onView(withText("Save current drawing")).check(matches(isDisplayed()));
     }
 
     @Test
     public void testImageSaved() throws IOException {
-        onView(withId(R.id.saveButton)).perform(click());
+        Espresso.openActionBarOverflowOrOptionsMenu(activityTestRule.getActivity());
+        onView(withText("Save current drawing")).perform(click());
 
         Uri imageURI = Uri.parse(activityTestRule.getActivity().getLastSavedImageURI());
 

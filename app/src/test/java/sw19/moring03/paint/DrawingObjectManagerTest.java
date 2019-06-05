@@ -31,9 +31,9 @@ public class DrawingObjectManagerTest {
     @Test
     public void testObjectsToRedoList() {
         List<Tools> expectedToolList = Arrays.asList(new PointTool(), new LineTool(), new PathTool());
-        for (Tools tool : expectedToolList) {
-            drawingObjectManager.addTool(tool);
-        }
+        drawingObjectManager.addTool(expectedToolList.get(0));
+        drawingObjectManager.addTool(expectedToolList.get(1));
+        drawingObjectManager.addTool(expectedToolList.get(2));
         assertEquals(expectedToolList, drawingObjectManager.getObjectsToPaint());
 
         drawingObjectManager.removeLastElementFromPaintList();
