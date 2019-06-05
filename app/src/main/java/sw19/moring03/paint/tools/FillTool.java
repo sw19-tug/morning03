@@ -34,6 +34,12 @@ public class FillTool extends Tools {
         if (points.size() == 1 && frameBuffer != null) {
             PointF start = points.remove(0);
             int scanColor = frameBuffer[(int)start.y * bufferWidth + (int)start.x];
+
+            if(getPixel(start.x, start.y) == color)
+            {
+                return true;
+            }
+
             scanlineFloodFillStack((int)start.x, (int)start.y, scanColor);
             this.frameBuffer = null;
         }

@@ -2,6 +2,7 @@ package sw19.moring03.paint;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -127,6 +128,35 @@ public class FillToolEspressoTest {
         Tools wholeBoxFill = view.getObjectsToPaint().get(view.getObjectsToPaint().size() - 1);
         assertEquals(expectedPointsFill, wholeBoxFill.getPoints().size());
     }
+
+    @Test
+    public void testDoubleFill() {
+        final int expectedPoints = 0;
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawShapesButton)).perform(click());
+        onView(withText("Rectangle")).perform(click());
+
+        assertEquals(Tool.DRAW_RECTANGLE, launchActivityRule.getActivity().getChosenTool());
+
+        onView(withId(R.id.drawingView)).perform(swipe(10, 400, 20, 410));
+
+        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.drawFillButton)).perform(click());
+
+        assertEquals(Tool.FILL, launchActivityRule.getActivity().getChosenTool());
+
+        onView(withId(R.id.drawingView)).perform(touchAt(15, 405));
+        onView(withId(R.id.drawingView)).perform(touchAt(15, 405));
+
+        DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
+        List<Tools> pointsToDraw = view.getObjectsToPaint();
+
+        Tools fillTool = pointsToDraw.get(pointsToDraw.size() - 1);
+
+        assertEquals(expectedPoints, fillTool.getPoints().size());
+    }
+
 
     //@Test
     public void testOutOfMemoryFill() {
