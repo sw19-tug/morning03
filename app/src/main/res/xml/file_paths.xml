@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <external-path name="my_images" path="Android/data/sw19.morning03.paint/files/Pictures" />
+    <cache-path name="shared_images" path="images/"/>
 </paths>
+

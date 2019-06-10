@@ -12,13 +12,13 @@ import android.graphics.PathEffect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.annotation.ColorInt;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
@@ -29,12 +29,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.LineTypeChooserBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ShapeChooserFragment;
@@ -42,6 +37,7 @@ import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Views.DrawingView;
 import sw19.moring03.paint.utils.ImageSaver;
+import sw19.moring03.paint.utils.ImageShare;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private LineTypeChooserBottomSheetDialog lineTypeChooserMenu;
 
     private Tool chosenTool = Tool.DRAW_POINT;
-    @ColorInt private int chosenColor;
+    @ColorInt
+    private int chosenColor;
     private int strokeWidth = 5;
     private Menu menu;
     private String lastSavedImageURI;
@@ -186,6 +183,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void shareCanvas(MenuItem item) {
+        DrawingView view = findViewById(R.id.drawingView);
+        Bitmap currentBitmap = view.getCurrentBitmap();
+
+        ImageShare imageShare = new ImageShare(view);
+
+        if (imageShare.shareImage(currentBitmap)) {
+            File imagePath = new File(view.getContext().getCacheDir(), "images");
+            File newFile = new File(imagePath, "image.png");
+            Uri contentUri = FileProvider.getUriForFile(view.getContext(), "sw19.morning03.paint.fileprovider", newFile);
+
+            if (contentUri != null) {
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+                shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+            }
+        } else {
+            Toast toastFail = Toast.makeText(getApplicationContext(), "Could not share Canvas!", Toast.LENGTH_SHORT);
+            toastFail.show();
+        }
+    }
+
     private void saveCanvas() {
         DrawingView view = findViewById(R.id.drawingView);
         Bitmap currentBitmap = view.getCurrentBitmap();
@@ -195,10 +217,10 @@ public class MainActivity extends AppCompatActivity {
             this.lastSavedImageURI = is.getSavedImageURI();
             Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
             toastSuccess.show();
+        } else {
+            Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
+            toastFail.show();
         }
-
-        Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
-        toastFail.show();
     }
 
     public int getStrokeWidth() {
@@ -470,27 +492,5 @@ public class MainActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
             }
         }
-    }
-
-    public void shareCanvas(MenuItem item) {
-        DrawingView view = findViewById(R.id.drawingView);
-        Bitmap currentBitmap = view.getCurrentBitmap();
-        Intent share = new Intent(Intent.ACTION_SEND);
-        share.setType("image/jpeg");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        currentBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        long tempfileName = System.currentTimeMillis() / 1000;
-        File f = new File(Environment.getExternalStorageDirectory() + File.separator
-                + tempfileName + ".jpg");
-        try {
-            f.createNewFile();
-            FileOutputStream fo = new FileOutputStream(f);
-            fo.write(bytes.toByteArray());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        share.putExtra(Intent.EXTRA_STREAM,
-                Uri.parse(Environment.getExternalStorageDirectory() + File.separator + tempfileName + ".jpg"));
-        startActivity(Intent.createChooser(share, "Share Image"));
     }
 }
