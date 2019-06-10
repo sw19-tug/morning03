@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void saveCanvas() {
+    public void saveCanvas() {
         DrawingView view = findViewById(R.id.drawingView);
         Bitmap currentBitmap = view.getCurrentBitmap();
         ImageSaver is = new ImageSaver(getContentResolver());

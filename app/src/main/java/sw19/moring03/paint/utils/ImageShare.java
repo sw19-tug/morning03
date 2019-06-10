@@ -20,8 +20,8 @@ public class ImageShare {
         }
         try {
             File cachePath = new File(view.getContext().getCacheDir(), "images");
-            cachePath.mkdirs(); // don't forget to make the directory
-            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); // overwrites this image every time
+            cachePath.mkdirs();
+            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); 
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             stream.close();
             return true;
