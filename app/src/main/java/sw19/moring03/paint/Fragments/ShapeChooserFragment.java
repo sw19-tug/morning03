@@ -103,6 +103,7 @@ public class ShapeChooserFragment extends DialogFragment {
                 int padding = (int)(10 * getResources().getDisplayMetrics().density + 0.5f);
                 tv.setCompoundDrawablePadding(padding);
 
+
                 return view;
             }
         };

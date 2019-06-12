@@ -23,30 +23,34 @@ public class StickerTool extends Tools {
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        if (points.size() != 1 || iconToDraw == null) {
+        if (points.size() != 2 || iconToDraw == null) {
             return false;
         }
 
         int x = (int)points.get(0).x;
         int y = (int)points.get(0).y;
 
-        int iconWidth = iconToDraw.getWidth();
-        int iconHeight = iconToDraw.getHeight();
+        Rect dst = new Rect(x - (int)getHalfDistance() , y - (int)getHalfDistance(), x + (int)getHalfDistance(), y + (int)getHalfDistance());
 
-        Rect src = new Rect(0, 0, iconWidth, iconHeight);
-        Rect dst = new Rect(x - iconWidth / 2 , y - iconHeight / 2, x + iconWidth / 2, y + iconHeight / 2);
-
-        canvas.drawBitmap(iconToDraw, src, dst, paint);
+        canvas.drawBitmap(iconToDraw, null, dst, null);
 
         return true;
     }
 
     @Override
     public void addPoint(PointF point) {
-        if (this.getPoints().size() > 0) {
-            return;
+        if (points.size() == 2) {
+            points.remove(1);
         }
 
         super.addPoint(point);
+    }
+
+    private double getHalfDistance() {
+        PointF firstPoint = points.get(0);
+        PointF secondPoint = points.get(1);
+
+        return Math.sqrt(Math.pow(firstPoint.x - secondPoint.x, 2) + Math.pow(firstPoint.y - secondPoint.y, 2)) / 2;
+
     }
 }

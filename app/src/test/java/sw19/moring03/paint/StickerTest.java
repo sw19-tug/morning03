@@ -16,6 +16,7 @@ import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.isNull;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StickerTest {
@@ -35,6 +36,7 @@ public class StickerTest {
         StickerTool tool = new StickerTool(image);
 
         tool.addPoint(new PointF(10, 10));
+        tool.addPoint(new PointF(20, 20));
 
         assertTrue(tool.draw(canvas, paint));
     }
@@ -50,7 +52,6 @@ public class StickerTest {
     @Test
     public void testInvalidSticker() {
         StickerTool tool = new StickerTool(null);
-
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -73,6 +74,6 @@ public class StickerTest {
         tool.draw(canvas, paint);
 
         Mockito.verify(canvas, Mockito.times(expectedStickers)).drawBitmap(Mockito.any(Bitmap.class),
-                Mockito.any(Rect.class), Mockito.any(Rect.class), Mockito.any(Paint.class));
+                (Rect)isNull(), Mockito.any(Rect.class), (Paint) isNull());
     }
 }
