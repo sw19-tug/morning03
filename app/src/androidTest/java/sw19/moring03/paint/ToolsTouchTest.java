@@ -85,7 +85,7 @@ public class ToolsTouchTest {
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(15));
         onView(withId(R.id.strokeWidth)).perform(ViewActions.pressBack());
 
-        assertEquals(15, launchActivityRule.getActivity().getStrokeWidth());
+        assertEquals(16, launchActivityRule.getActivity().getStrokeWidth());
 
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
 
@@ -96,7 +96,7 @@ public class ToolsTouchTest {
         Tools secondTool = pointsToDraw.get(pointsToDraw.size() - 1);
 
         assertEquals(5, firstTool.getStrokeWidth());
-        assertEquals(15, secondTool.getStrokeWidth());
+        assertEquals(16, secondTool.getStrokeWidth());
     }
 
 }

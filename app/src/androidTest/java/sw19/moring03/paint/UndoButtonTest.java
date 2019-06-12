@@ -78,7 +78,7 @@ public class UndoButtonTest {
 
     @Test
     public void testUndoStrokeWidth() {
-        String expectedTitle = "35pt";
+        String expectedTitle = "36pt";
 
         onView(withId(R.id.undoButton)).check(doesNotExist());
 

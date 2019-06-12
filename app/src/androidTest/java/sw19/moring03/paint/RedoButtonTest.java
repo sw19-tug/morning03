@@ -67,7 +67,7 @@ public class RedoButtonTest {
 
     @Test
     public void testRedoStrokeWidth() {
-        String expectedTitle = "25pt";
+        String expectedTitle = "26pt";
 
         onView(withId(R.id.redoButton)).check(doesNotExist());
 
@@ -88,7 +88,7 @@ public class RedoButtonTest {
         ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.strokeWidthChooserButton);
         String currentTitle = toolChooser.getItemData().getTitle().toString();
 
-        assertEquals(expectedTitle,currentTitle);
+        assertEquals(expectedTitle, currentTitle);
 
         openActionBarOverflowOrOptionsMenu(launchActivityRule.getActivity());
 

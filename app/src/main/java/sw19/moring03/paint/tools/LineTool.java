@@ -3,6 +3,7 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PathEffect;
 
 import java.util.ArrayList;
@@ -39,7 +40,11 @@ public class LineTool extends Tools {
 
         paint.setPathEffect(pathEffect);
 
-        canvas.drawLine(xStart, yStart, xEnd, yEnd, paint);
+        Path path = new Path();
+        path.moveTo(xStart, yStart);
+        path.lineTo(xEnd, yEnd);
+
+        canvas.drawPath(path, paint);
 
         return true;
     }

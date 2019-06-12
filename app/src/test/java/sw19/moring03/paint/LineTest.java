@@ -2,6 +2,7 @@ package sw19.moring03.paint;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -65,8 +66,7 @@ public class LineTest {
 
         tools.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(expectedLines)).drawPath(Mockito.any(Path.class), Mockito.any(Paint.class));
     }
 
     @Test

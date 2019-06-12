@@ -37,7 +37,7 @@ public class StrokeWidthTest {
         onView(withId(R.id.strokeWidthChooserButton)).perform(click());
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(expectedStrokeWidth));
 
-        assertEquals(expectedStrokeWidth, launchActivityRule.getActivity().getStrokeWidth());
+        assertEquals(expectedStrokeWidth + 1, launchActivityRule.getActivity().getStrokeWidth());
     }
 
 }
