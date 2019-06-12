@@ -67,7 +67,7 @@ public class RedoButtonTest {
 
     @Test
     public void testRedoStrokeWidth() {
-        String expectedTitle = "26pt";
+        String expectedTitle = "25pt";
 
         onView(withId(R.id.redoButton)).check(doesNotExist());
 
