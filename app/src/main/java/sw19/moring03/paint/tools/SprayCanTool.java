@@ -1,7 +1,6 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
@@ -14,13 +13,6 @@ public class SprayCanTool extends Tools {
     private Random random;
     private static final int RADIUS_SCALE = 5;
     private int distance;
-
-    public SprayCanTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-        distance = strokeWidth * RADIUS_SCALE;
-    }
 
     public SprayCanTool(int col, int strkW) {
         points = new ArrayList<>();

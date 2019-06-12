@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PathEffect;
 
 import java.util.ArrayList;
 
@@ -12,14 +11,6 @@ import sw19.moring03.paint.utils.PointF;
 
 public class EraseTool extends Tools {
     private Path path;
-
-    public EraseTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-        pathEffect = new PathEffect();
-        path = new Path();
-    }
 
     public EraseTool(int strkW) {
         points = new ArrayList<>();

@@ -28,7 +28,7 @@ public class EraseTest {
 
     @Test
     public void testSimpleErase() {
-        EraseTool tool = new EraseTool();
+        EraseTool tool = new EraseTool(10);
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
 

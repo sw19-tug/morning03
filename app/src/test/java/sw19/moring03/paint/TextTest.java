@@ -28,15 +28,26 @@ public class TextTest {
     private Canvas canvas;
     private Paint paint;
 
+    private Context context;
+    private Resources res;
+    private DisplayMetrics metrics;
+
     @Before
     public void startUp() {
         canvas = new Canvas();
         paint = new Paint();
+
+        context = Mockito.mock(Context.class);
+        res = Mockito.mock(Resources.class);
+        metrics = Mockito.mock(DisplayMetrics.class);
+
+        when(context.getResources()).thenReturn(res);
+        when(res.getDisplayMetrics()).thenReturn(metrics);
     }
 
     @Test
     public void testText() {
-        TextTool tool = new TextTool();
+        TextTool tool = new TextTool(Color.BLACK, 10, context);
         tool.addPoint(new PointF(15, 15));
 
         assertTrue(tool.draw(canvas, paint));
@@ -44,14 +55,14 @@ public class TextTest {
 
     @Test
     public void testNoPoint() {
-        TextTool tool = new TextTool();
+        TextTool tool = new TextTool(Color.BLACK, 10, context);
 
         assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
     public void testOnlyOnePoint() {
-        TextTool tool = new TextTool();
+        TextTool tool = new TextTool(Color.BLACK, 10, context);
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(25, 25));
         tool.addPoint(new PointF(35, 35));
@@ -63,7 +74,7 @@ public class TextTest {
     public void testDrawText() {
         int expected = 1;
 
-        TextTool tool = new TextTool();
+        TextTool tool = new TextTool(Color.BLACK, 10, context);
         tool.addPoint(new PointF(10, 10));
 
         canvas = mock(Canvas.class);
@@ -78,12 +89,6 @@ public class TextTest {
     public void testTypeFace() {
         int expected = 1;
 
-        Context context = mock(Context.class);
-        Resources res = mock(Resources.class);
-        DisplayMetrics metrics = mock(DisplayMetrics.class);
-
-        when(context.getResources()).thenReturn(res);
-        when(res.getDisplayMetrics()).thenReturn(metrics);
         metrics.scaledDensity = 40.5f;
 
         TextTool tool = new TextTool(Color.BLACK, 10, context);

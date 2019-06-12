@@ -1,6 +1,7 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -32,10 +33,7 @@ public class LineTestWithLineType {
 
     @Test
     public void testPathLineSimple() {
-        pathEffect = new DashPathEffect(new float[]{20, 25, 20, 25}, 0);
-        paint.setPathEffect(pathEffect);
-
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(Color.BLACK, 10, new PathEffect());
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
@@ -47,10 +45,7 @@ public class LineTestWithLineType {
 
     @Test
     public void testPathInvalidLine() {
-        pathEffect = new DashPathEffect(new float[]{5, 10, 5, 10}, 0);
-        paint.setPathEffect(pathEffect);
-
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -63,7 +58,7 @@ public class LineTestWithLineType {
 
         int expectedLines = 1;
 
-        LineTool tools = new LineTool();
+        LineTool tools = new LineTool(Color.BLACK, 10, new PathEffect());
 
         tools.addPoint(new PointF(10, 10));
         tools.addPoint(new PointF(20, 20));

@@ -1,6 +1,7 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class PointToolTest {
 
     @Test
     public void basicPointDrawTest() {
-        PointTool ptool = new PointTool();
+        PointTool ptool = new PointTool(Color.BLACK, 10);
         ptool.addPoint(new PointF(5, 5));
         ptool.addPoint(new PointF(30, 30));
         assertTrue(ptool.draw(canvas, paint));
@@ -38,7 +39,7 @@ public class PointToolTest {
     public void testDrawMultiplePoints() {
         final int expectedPoints = 1;
 
-        PointTool tool = new PointTool();
+        PointTool tool = new PointTool(Color.BLACK, 10);
         tool.addPoint(new PointF(1, 1));
         tool.addPoint(new PointF(2, 2));
         tool.addPoint(new PointF(3, 3));
@@ -54,7 +55,7 @@ public class PointToolTest {
 
     @Test
     public void testInvalidOval() {
-        PointTool tool = new PointTool();
+        PointTool tool = new PointTool(Color.BLACK, 10);
 
         assertFalse(tool.draw(canvas, paint));
     }

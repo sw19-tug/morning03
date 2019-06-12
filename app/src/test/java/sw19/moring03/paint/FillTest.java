@@ -30,7 +30,7 @@ public class FillTest {
 
     @Test
     public void testNumberOfPoints() {
-        FillTool tool = new FillTool();
+        FillTool tool = new FillTool(Color.BLACK, null, 10, 10);
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(20, 20));
 
@@ -39,7 +39,7 @@ public class FillTest {
 
     @Test
     public void testInvalidFill() {
-        FillTool tool = new FillTool();
+        FillTool tool = new FillTool(Color.BLACK, null, 10, 10);
         assertFalse(tool.draw(canvas, paint));
     }
 

@@ -1,5 +1,8 @@
 package sw19.moring03.paint;
 
+import android.graphics.Color;
+import android.graphics.PathEffect;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +33,10 @@ public class DrawingObjectManagerTest {
 
     @Test
     public void testObjectsToRedoList() {
-        List<Tools> expectedToolList = Arrays.asList(new PointTool(), new LineTool(), new PathTool());
+        List<Tools> expectedToolList = Arrays.asList(
+                new PointTool(Color.BLACK, 10),
+                new LineTool(Color.BLACK, 10, new PathEffect()),
+                new PathTool(Color.BLACK, 10, new PathEffect()));
         drawingObjectManager.addTool(expectedToolList.get(0));
         drawingObjectManager.addTool(expectedToolList.get(1));
         drawingObjectManager.addTool(expectedToolList.get(2));
@@ -65,7 +71,7 @@ public class DrawingObjectManagerTest {
     @Test
     public void testAddPointToTool() {
         PointF expectedPoint = new PointF(10, 10);
-        drawingObjectManager.addTool(new PointTool());
+        drawingObjectManager.addTool(new PointTool(Color.BLACK, 10));
         drawingObjectManager.addPoint(expectedPoint);
         PointTool pointTool = (PointTool) drawingObjectManager.getObjectsToPaint().get(0);
         assertEquals(expectedPoint, pointTool.getPoints().get(0));
