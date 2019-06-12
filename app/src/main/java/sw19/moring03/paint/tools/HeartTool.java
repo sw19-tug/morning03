@@ -64,11 +64,7 @@ public class HeartTool extends Tools {
         PointF firstPoint = points.get(0);
         PointF secondPoint = points.get(1);
 
-        if (firstPoint.y > secondPoint.y) {
-            return - Math.sqrt(Math.pow(firstPoint.x - secondPoint.x, 2) + Math.pow(firstPoint.y - secondPoint.y, 2));
-        } else {
-            return Math.sqrt(Math.pow(firstPoint.x - secondPoint.x, 2) + Math.pow(firstPoint.y - secondPoint.y, 2));
-        }
+        return - Math.sqrt(Math.pow(firstPoint.x - secondPoint.x, 2) + Math.pow(firstPoint.y - secondPoint.y, 2));
     }
 
     private float calculateRotation() {

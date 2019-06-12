@@ -42,8 +42,11 @@ public class TextTool extends Tools {
         }
 
         paint.setTextSize(scaledSizeInPixels + fontSize);
+        paint.setStyle(Paint.Style.FILL);
 
         canvas.drawText(this.text, points.get(0).x, points.get(0).y, paint);
+
+        paint.setStyle(Paint.Style.STROKE);
         return true;
     }
 

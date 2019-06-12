@@ -33,6 +33,11 @@ public class StarTool extends Tools {
         float peakHeight = (float)Math.sqrt(Math.pow(distanceStartToPeakStart, 2) - Math.pow(peakWidth / 2, 2));
 
         canvas.save();
+
+        if (points.get(0).x > points.get(1).x) {
+            canvas.translate( - (points.get(0).x - points.get(1).x), 0);
+        }
+
         for (int corners = 1; corners <= this.corners; corners++) {
             canvas.translate(halfDist, -peakHeight);
             canvas.rotate(360 / this.corners, points.get(0).x, points.get(0).y);
