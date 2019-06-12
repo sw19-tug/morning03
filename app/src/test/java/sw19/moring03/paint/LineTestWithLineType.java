@@ -3,6 +3,7 @@ package sw19.moring03.paint;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PathEffect;
 
 import org.junit.Before;
@@ -56,7 +57,7 @@ public class LineTestWithLineType {
     }
 
     @Test
-    public void testpathDrawLine() {
+    public void testPathDrawLine() {
         pathEffect = new DashPathEffect(new float[]{5, 10, 20, 10}, 0);
         paint.setPathEffect(pathEffect);
 
@@ -73,7 +74,6 @@ public class LineTestWithLineType {
 
         tools.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedLines)).drawLine(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(expectedLines)).drawPath(Mockito.any(Path.class), Mockito.any(Paint.class));
     }
 }

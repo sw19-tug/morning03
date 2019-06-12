@@ -30,6 +30,9 @@ public class StrokeWidthChooserMenuBottomSheetDialog extends BottomSheetDialogFr
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                if (progressValue == 0) {
+                    progressValue = 1;
+                }
                 strokeWidth = progressValue;
                 ((MainActivity)getContext()).setStrokeWidth(strokeWidth);
 
