@@ -47,7 +47,6 @@ public class UndoButtonTest {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
-        onView(withId(R.id.undoButton)).check(matches((isEnabled())));
         onView(withId(R.id.undoButton)).perform(click());
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
@@ -63,7 +62,6 @@ public class UndoButtonTest {
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(swipeLeft());
-        onView(withId(R.id.undoButton)).check(matches((isEnabled())));
         onView(withId(R.id.undoButton)).perform(click());
 
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);

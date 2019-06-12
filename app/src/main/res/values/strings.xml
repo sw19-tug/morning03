@@ -26,7 +26,7 @@
     <string name="solid">Solid Line</string>
     <string name="dasheddoted">Dashed-Doted Line</string>
     <string name="doted">Doted Line</string>
-    <string name="take_photo">Gallery</string>
+    <string name="gallery">Gallery</string>
     <string name="red_slider_label">R:</string>
     <string name="blue">B:</string>
     <string name="green">G:</string>
