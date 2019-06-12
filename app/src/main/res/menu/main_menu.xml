@@ -5,16 +5,16 @@
     tools:context="com.example.bar.MainActivity">
 
     <item
-        android:id="@+id/redoButton"
-        android:icon="@drawable/ic_redo_black_24dp"
-        android:title="@string/redo_button"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/undoButton"
         android:icon="@drawable/ic_undo_black_24dp"
         android:title="@string/undo_button"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/redoButton"
+        android:icon="@drawable/ic_redo_black_24dp"
+        android:title="@string/redo_button"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/strokeWidthChooserButton"

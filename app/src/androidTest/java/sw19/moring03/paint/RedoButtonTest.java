@@ -69,8 +69,6 @@ public class RedoButtonTest {
     public void testRedoStrokeWidth() {
         String expectedTitle = "25pt";
 
-        onView(withId(R.id.redoButton)).check(doesNotExist());
-
         onView(withId(R.id.strokeWidthChooserButton)).perform(click());
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(25));
 
@@ -91,9 +89,6 @@ public class RedoButtonTest {
         assertEquals(expectedTitle, currentTitle);
 
         openActionBarOverflowOrOptionsMenu(launchActivityRule.getActivity());
-
-        onView(withText("Redo")).check(doesNotExist());
-
     }
 
     @Test
@@ -131,6 +126,5 @@ public class RedoButtonTest {
 
         assertEquals(2, pointsToDraw.size());
         assertEquals(1, pointsToRedo.size());
-
     }
 }

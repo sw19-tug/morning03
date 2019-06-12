@@ -115,19 +115,24 @@ public class MainActivity extends AppCompatActivity {
         setToolIcon();
         setStrokeWidth(strokeWidth);
         DrawingView view = findViewById(R.id.drawingView);
-
+        MenuItem backButton = menu.findItem(R.id.undoButton);
+        MenuItem redoButton = menu.findItem(R.id.redoButton);
         menu.findItem(R.id.lineTypeChooserButton).setVisible(visible);
 
         if (view.drawingObjectManager.isUndoPossible()) {
-            menu.findItem(R.id.undoButton).setVisible(true);
+            backButton.setEnabled(true);
+            backButton.getIcon().setAlpha(255);
         } else {
-            menu.findItem(R.id.undoButton).setVisible(false);
+            backButton.setEnabled(false);
+            backButton.getIcon().setAlpha(40);
         }
 
         if (view.drawingObjectManager.isRedoPossible()) {
-            menu.findItem(R.id.redoButton).setVisible(true);
+            redoButton.setEnabled(true);
+            redoButton.getIcon().setAlpha(255);
         } else {
-            menu.findItem(R.id.redoButton).setVisible(false);
+            redoButton.setEnabled(false);
+            redoButton.getIcon().setAlpha(40);
         }
 
         switch (lineID) {
@@ -304,7 +309,7 @@ public class MainActivity extends AppCompatActivity {
                 visible = true;
                 setChosenTool(Tool.DRAW_PATH);
                 break;
-            case R.id.takePhoto:
+            case R.id.galleryButton:
                 visible = false;
                 pickFromGallery();
                 break;
@@ -461,9 +466,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void chooseNewColor(View view) {
         switch (view.getId()) {
-            case R.id.whiteButton:
-                setChosenColor(R.color.white);
-                break;
             case R.id.yellowButton:
                 setChosenColor(R.color.yellow);
                 break;
@@ -478,9 +480,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.magentaButton:
                 setChosenColor(R.color.magenta);
-                break;
-            case R.id.turkisButton:
-                setChosenColor(R.color.turkis);
                 break;
             case R.id.lightBlueButton:
                 setChosenColor(R.color.lightBlue);

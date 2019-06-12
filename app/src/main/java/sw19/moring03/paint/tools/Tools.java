@@ -28,6 +28,7 @@ public abstract class Tools {
     public int getStrokeWidth() {
         return strokeWidth;
     }
+
     public int getColor() {
         return color;
     }
@@ -35,5 +36,4 @@ public abstract class Tools {
     public PathEffect getPathEffect() {
         return pathEffect;
     }
-
 }

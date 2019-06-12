@@ -19,7 +19,8 @@ import sw19.moring03.paint.tools.Tools;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.swipeLeft;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 import static sw19.moring03.paint.util.Interaction.changeValueOfStrokeWidthSeekBar;
@@ -33,7 +34,6 @@ public class UndoButtonTest {
 
     @Test
     public void testSimpleUndo() {
-        onView(withId(R.id.undoButton)).check(doesNotExist());
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
@@ -41,14 +41,12 @@ public class UndoButtonTest {
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
         assertEquals(pointsToDraw.size(), 0);
-        onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 
     @Test
     public void testUndoToolIcon() {
         Drawable expectedIcon = launchActivityRule.getActivity().getResources().getDrawable(R.drawable.ic_undo_black_24dp);
 
-        onView(withId(R.id.undoButton)).check(doesNotExist());
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(swipeLeft());
@@ -59,14 +57,11 @@ public class UndoButtonTest {
 
         assertEquals(expectedIcon.getConstantState(), currentIcon.getConstantState());
         onView(withId(R.id.undoButton)).perform(click());
-        onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 
     @Test
     public void testUndoStrokeWidth() {
         String expectedTitle = "35pt";
-
-        onView(withId(R.id.undoButton)).check(doesNotExist());
 
         onView(withId(R.id.strokeWidthChooserButton)).perform(click());
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(35));
@@ -83,13 +78,10 @@ public class UndoButtonTest {
         String currentTitle = toolChooser.getItemData().getTitleCondensed().toString();
 
         assertEquals(expectedTitle, currentTitle);
-
-        onView(withId(R.id.undoButton)).check(doesNotExist());
-
     }
 
     @Test
     public void testButtonVisibility() {
-        onView(withId(R.id.undoButton)).check(doesNotExist());
+        onView(withId(R.id.undoButton)).check(matches(isDisplayed()));
     }
 }

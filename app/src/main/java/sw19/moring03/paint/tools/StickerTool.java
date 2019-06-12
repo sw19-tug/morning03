@@ -4,10 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import sw19.moring03.paint.utils.PointF;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
+
+import sw19.moring03.paint.utils.PointF;
 
 public class StickerTool extends Tools {
 

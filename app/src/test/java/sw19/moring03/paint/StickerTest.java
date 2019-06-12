@@ -3,7 +3,6 @@ package sw19.moring03.paint;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import sw19.moring03.paint.utils.PointF;
 import android.graphics.Rect;
 
 import org.junit.Before;
@@ -13,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.StickerTool;
+import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
