@@ -32,28 +32,15 @@ public class UndoButtonTest {
     public ActivityTestRule<MainActivity> launchActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void testButtonVisibility() {
+    public void testSimpleUndo() {
         onView(withId(R.id.undoButton)).check(doesNotExist());
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawPointButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
-
         onView(withId(R.id.undoButton)).perform(click());
-    }
-
-    @Test
-    public void testUndoLastObject() {
-        onView(withId(R.id.undoButton)).check(doesNotExist());
-
-        onView(withId(R.id.toolChooserButton)).perform(click());
-        onView(withId(R.id.drawPointButton)).perform(click());
-        onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
-        onView(withId(R.id.undoButton)).perform(click());
-
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
         List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
-
-        assertEquals(pointsToDraw.size(),0);
+        assertEquals(pointsToDraw.size(), 0);
         onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 
@@ -62,16 +49,15 @@ public class UndoButtonTest {
         Drawable expectedIcon = launchActivityRule.getActivity().getResources().getDrawable(R.drawable.ic_undo_black_24dp);
 
         onView(withId(R.id.undoButton)).check(doesNotExist());
-
         onView(withId(R.id.toolChooserButton)).perform(click());
         onView(withId(R.id.drawLineButton)).perform(click());
         onView(withId(R.id.drawingView)).perform(swipeLeft());
+
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
         ActionMenuItemView toolChooser = toolbar.findViewById(R.id.undoButton);
         Drawable currentIcon = toolChooser.getItemData().getIcon();
 
-        assertEquals(expectedIcon.getConstantState(),currentIcon.getConstantState());
-
+        assertEquals(expectedIcon.getConstantState(), currentIcon.getConstantState());
         onView(withId(R.id.undoButton)).perform(click());
         onView(withId(R.id.undoButton)).check(doesNotExist());
     }
@@ -93,12 +79,17 @@ public class UndoButtonTest {
         onView(withId(R.id.undoButton)).perform(click());
 
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
-        ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.strokeWidthChooserButton);
+        ActionMenuItemView toolChooser = toolbar.findViewById(R.id.strokeWidthChooserButton);
         String currentTitle = toolChooser.getItemData().getTitleCondensed().toString();
 
-        assertEquals(expectedTitle,currentTitle);
+        assertEquals(expectedTitle, currentTitle);
 
         onView(withId(R.id.undoButton)).check(doesNotExist());
 
+    }
+
+    @Test
+    public void testButtonVisibility() {
+        onView(withId(R.id.undoButton)).check(doesNotExist());
     }
 }

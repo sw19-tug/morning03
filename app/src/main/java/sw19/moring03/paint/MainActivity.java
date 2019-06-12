@@ -1,6 +1,7 @@
 package sw19.moring03.paint;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,8 +18,10 @@ import android.support.annotation.ColorInt;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -26,6 +29,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import java.io.File;
 
 import sw19.moring03.paint.Fragments.ColorChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.LineTypeChooserBottomSheetDialog;
@@ -35,6 +40,7 @@ import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Views.DrawingView;
 import sw19.moring03.paint.utils.ImageSaver;
+import sw19.moring03.paint.utils.ImageShare;
 import sw19.moring03.paint.utils.Tool;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private LineTypeChooserBottomSheetDialog lineTypeChooserMenu;
 
     private Tool chosenTool = Tool.DRAW_POINT;
-    @ColorInt private int chosenColor;
+    @ColorInt
+    private int chosenColor;
     private int strokeWidth = 5;
     private int stickerToDraw;
     private Menu menu;
@@ -86,10 +93,19 @@ public class MainActivity extends AppCompatActivity {
         lineTypeChooserMenu = new LineTypeChooserBottomSheetDialog();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.main_menu, menu);
         this.menu = menu;
+
+        if (menu instanceof MenuBuilder) {
+
+            MenuBuilder menuBuilder = (MenuBuilder) menu;
+            menuBuilder.setOptionalIconsVisible(true);
+        }
+
 
         return true;
     }
@@ -135,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
         switch (requestCode) {
             case saveCanvasToExtStorage:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -168,10 +185,10 @@ public class MainActivity extends AppCompatActivity {
                 tryPerformAction(saveCanvasToExtStorage);
                 return true;
             case R.id.undoButton:
-                ((DrawingView)findViewById(R.id.drawingView)).undoLastPaintObject();
+                ((DrawingView) findViewById(R.id.drawingView)).undoLastPaintObject();
                 return true;
             case R.id.redoButton:
-                ((DrawingView)findViewById(R.id.drawingView)).redoLastPaintObject();
+                ((DrawingView) findViewById(R.id.drawingView)).redoLastPaintObject();
                 return true;
             case R.id.lineTypeChooserButton:
                 lineTypeChooserMenu.show(getSupportFragmentManager(), "lineTypeChooserMenu");
@@ -181,7 +198,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void saveCanvas() {
+    public void shareCanvas(MenuItem item) {
+        DrawingView view = findViewById(R.id.drawingView);
+        Bitmap currentBitmap = view.getCurrentBitmap();
+
+        ImageShare imageShare = new ImageShare(view);
+
+        if (imageShare.shareImage(currentBitmap)) {
+            File imagePath = new File(view.getContext().getCacheDir(), "images");
+            File newFile = new File(imagePath, "image.png");
+            Uri contentUri = FileProvider.getUriForFile(view.getContext(), "sw19.morning03.paint.fileprovider", newFile);
+
+            if (contentUri != null) {
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+                shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+            }
+        } else {
+            Toast toastFail = Toast.makeText(getApplicationContext(), "Could not share Canvas!", Toast.LENGTH_SHORT);
+            toastFail.show();
+        }
+    }
+
+    public void saveCanvas() {
         DrawingView view = findViewById(R.id.drawingView);
         Bitmap currentBitmap = view.getCurrentBitmap();
         ImageSaver is = new ImageSaver(getContentResolver());
@@ -190,10 +232,10 @@ public class MainActivity extends AppCompatActivity {
             this.lastSavedImageURI = is.getSavedImageURI();
             Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
             toastSuccess.show();
+        } else {
+            Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
+            toastFail.show();
         }
-
-        Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
-        toastFail.show();
     }
 
     public int getStrokeWidth() {
@@ -271,7 +313,6 @@ public class MainActivity extends AppCompatActivity {
                 visible = false;
                 break;
             case R.id.cameraButton:
-                setChosenTool(Tool.TAKE_PHOTO);
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePicture.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(takePicture, CAMERA_REQUEST);
@@ -296,11 +337,13 @@ public class MainActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             try {
                 newPhoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                Tool tool = getChosenTool();
                 setChosenTool(Tool.TAKE_PHOTO);
 
                 findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
                         SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
                         MotionEvent.ACTION_DOWN, 0, 0, 0));
+                setChosenTool(tool);
 
             } catch (Exception ex) {
                 System.out.println("ERROR: Failed to load Bitmap");
@@ -311,13 +354,13 @@ public class MainActivity extends AppCompatActivity {
             Bitmap cameraPicture = (Bitmap) data.getExtras().get("data");
             try {
                 newPhoto = cameraPicture;
+                Tool tool = getChosenTool();
                 setChosenTool(Tool.TAKE_PHOTO);
-
 
                 findViewById(R.id.drawingView).dispatchTouchEvent(MotionEvent.obtain(
                         SystemClock.uptimeMillis(), SystemClock.uptimeMillis(),
                         MotionEvent.ACTION_DOWN, 0, 0, 0));
-
+                setChosenTool(tool);
             } catch (Exception e) {
                 System.out.println("ERROR: Failed to load Bitmap");
             }
@@ -413,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-       lineTypeChooserMenu.dismiss();
+        lineTypeChooserMenu.dismiss();
     }
 
     public void chooseNewColor(View view) {
@@ -488,7 +531,7 @@ public class MainActivity extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 saveCanvas();
             } else {
-                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, requestCode);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
             }
         }
     }

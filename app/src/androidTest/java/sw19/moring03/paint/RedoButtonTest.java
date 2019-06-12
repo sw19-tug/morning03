@@ -22,9 +22,9 @@ import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.junit.Assert.assertEquals;
 import static sw19.moring03.paint.util.Interaction.changeValueOfStrokeWidthSeekBar;
 import static sw19.moring03.paint.util.Interaction.touchAt;
-import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class RedoButtonTest {
@@ -60,7 +60,7 @@ public class RedoButtonTest {
 
         onView(withText("Redo")).perform(click());
 
-        assertEquals(pointsToDraw.size(),0);
+        assertEquals(pointsToDraw.size(), 0);
 
         onView(withText("Redo")).check(doesNotExist());
     }
@@ -85,10 +85,10 @@ public class RedoButtonTest {
         onView(withText("Redo")).perform(click());
 
         Toolbar toolbar = launchActivityRule.getActivity().findViewById(R.id.toolbar);
-        ActionMenuItemView toolChooser  = toolbar.findViewById(R.id.strokeWidthChooserButton);
+        ActionMenuItemView toolChooser = toolbar.findViewById(R.id.strokeWidthChooserButton);
         String currentTitle = toolChooser.getItemData().getTitle().toString();
 
-        assertEquals(expectedTitle,currentTitle);
+        assertEquals(expectedTitle, currentTitle);
 
         openActionBarOverflowOrOptionsMenu(launchActivityRule.getActivity());
 
