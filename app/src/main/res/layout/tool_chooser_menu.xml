@@ -170,7 +170,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/takePhoto"
+            android:id="@+id/galleryButton"
             android:text="@string/take_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

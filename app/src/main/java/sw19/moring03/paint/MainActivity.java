@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                 visible = true;
                 setChosenTool(Tool.DRAW_PATH);
                 break;
-            case R.id.takePhoto:
+            case R.id.galleryButton:
                 visible = false;
                 pickFromGallery();
                 break;
