@@ -6,9 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
-
-import sw19.moring03.paint.utils.DrawingObjectManager;
-import sw19.moring03.paint.utils.PointF;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -19,19 +16,24 @@ import java.util.List;
 import sw19.moring03.paint.Fragments.TextInsertFragment;
 import sw19.moring03.paint.MainActivity;
 import sw19.moring03.paint.R;
+import sw19.moring03.paint.tools.ChristmasTreeTool;
 import sw19.moring03.paint.tools.CircleTool;
 import sw19.moring03.paint.tools.EraseTool;
 import sw19.moring03.paint.tools.FillTool;
+import sw19.moring03.paint.tools.HeartTool;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.OvalTool;
 import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PhotoTool;
 import sw19.moring03.paint.tools.PointTool;
 import sw19.moring03.paint.tools.RectangleTool;
-import sw19.moring03.paint.tools.StickerTool;
 import sw19.moring03.paint.tools.SprayCanTool;
+import sw19.moring03.paint.tools.StarTool;
+import sw19.moring03.paint.tools.StickerTool;
 import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
+import sw19.moring03.paint.tools.TriangleTool;
+import sw19.moring03.paint.utils.DrawingObjectManager;
 import sw19.moring03.paint.utils.PointF;
 import sw19.moring03.paint.utils.Tool;
 
@@ -148,6 +150,19 @@ public class DrawingView extends View {
                 textFragment.show(((MainActivity) getContext()).getSupportFragmentManager(), "textInsertFragment");
 
                 drawingObjectManager.addTool(new TextTool(getColor(), strokeWidth, getContext()));
+                break;
+            case DRAW_TRIANGLE:
+                drawingObjectManager.addTool(new TriangleTool(getColor(), strokeWidth));
+                break;
+            case DRAW_HEART:
+                drawingObjectManager.addTool(new HeartTool(getColor(), strokeWidth));
+                break;
+            case DRAW_STAR:
+                drawingObjectManager.addTool(new StarTool(getColor(), strokeWidth));
+                break;
+            case DRAW_CHRISTMAS_TREE:
+                Bitmap tree = BitmapFactory.decodeResource(getResources(), R.drawable.christmas);
+                drawingObjectManager.addTool(new ChristmasTreeTool(tree));
                 break;
         }
     }

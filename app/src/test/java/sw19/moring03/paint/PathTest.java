@@ -49,6 +49,13 @@ public class PathTest {
     }
 
     @Test
+    public void testNoPoint() {
+        PathTool tool = new PathTool();
+
+        assertFalse(tool.draw(canvas, paint));
+    }
+
+    @Test
     public void testDrawPath() {
         PathTool tool = new PathTool();
         tool.addPoint(new PointF(10, 10));
