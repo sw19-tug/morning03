@@ -39,6 +39,7 @@ import sw19.moring03.paint.Fragments.StickerChooserFragment;
 import sw19.moring03.paint.Fragments.StrokeWidthChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Fragments.ToolChooserMenuBottomSheetDialog;
 import sw19.moring03.paint.Views.DrawingView;
+import sw19.moring03.paint.utils.BitmapCompressor;
 import sw19.moring03.paint.utils.ImageSaver;
 import sw19.moring03.paint.utils.ImageShare;
 import sw19.moring03.paint.utils.Tool;
@@ -207,22 +208,15 @@ public class MainActivity extends AppCompatActivity {
         DrawingView view = findViewById(R.id.drawingView);
         Bitmap currentBitmap = view.getCurrentBitmap();
 
-        ImageShare imageShare = new ImageShare(view);
+        File cachePath = new File(this.getCacheDir(), "images");
+        BitmapCompressor compressor = new BitmapCompressor();
+        File image = compressor.compressBitmapToPNG(cachePath, currentBitmap);
 
-        if (imageShare.shareImage(currentBitmap)) {
-            File imagePath = new File(view.getContext().getCacheDir(), "images");
-            File newFile = new File(imagePath, "image.png");
-            Uri contentUri = FileProvider.getUriForFile(view.getContext(), "sw19.morning03.paint.fileprovider", newFile);
+        ImageShare imageShare = new ImageShare();
+        Uri uri = FileProvider.getUriForFile(this, "sw19.morning03.paint.fileprovider", image);
 
-            if (contentUri != null) {
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
-                shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-                startActivity(Intent.createChooser(shareIntent, "Choose an app"));
-            }
-        } else {
+
+        if (!imageShare.shareImage(this, image, uri)) {
             Toast toastFail = Toast.makeText(getApplicationContext(), "Could not share Canvas!", Toast.LENGTH_SHORT);
             toastFail.show();
         }

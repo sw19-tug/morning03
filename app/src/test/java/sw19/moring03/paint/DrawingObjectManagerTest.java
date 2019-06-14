@@ -6,6 +6,7 @@ import android.graphics.PathEffect;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.List;
 import sw19.moring03.paint.tools.LineTool;
 import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.tools.PointTool;
+import sw19.moring03.paint.tools.TextTool;
 import sw19.moring03.paint.tools.Tools;
 import sw19.moring03.paint.utils.DrawingObjectManager;
 import sw19.moring03.paint.utils.PointF;
@@ -76,4 +78,36 @@ public class DrawingObjectManagerTest {
         PointTool pointTool = (PointTool) drawingObjectManager.getObjectsToPaint().get(0);
         assertEquals(expectedPoint, pointTool.getPoints().get(0));
     }
+
+    @Test
+    public void testAddTextToTextTool() {
+        final String expectedText = "hello";
+        TextTool tool = Mockito.mock(TextTool.class);
+        drawingObjectManager.addTool(tool);
+        drawingObjectManager.addTextToTool("hello");
+        Mockito.verify(tool, Mockito.times(1)).setText(expectedText);
+    }
+
+    @Test
+    public void testAddFontToTextTool() {
+        final String expectedFont = "bold";
+        TextTool tool = Mockito.mock(TextTool.class);
+        drawingObjectManager.addTool(tool);
+        drawingObjectManager.addFontToTool("bold");
+        Mockito.verify(tool, Mockito.times(1)).setFont(expectedFont);
+    }
+
+    @Test
+    public void testAddRedoLastUndoneElement() {
+        drawingObjectManager.addTool(new PointTool(Color.BLACK, 10));
+        drawingObjectManager.addTool(new PointTool(Color.RED, 5));
+        drawingObjectManager.removeLastElementFromPaintList();
+        assertEquals(1, drawingObjectManager.getObjectsToPaint().size());
+        assertEquals(1, drawingObjectManager.getObjectsToRedo().size());
+
+        drawingObjectManager.addLastRemovedElementToPaintList();
+        assertEquals(2, drawingObjectManager.getObjectsToPaint().size());
+        assertEquals(0, drawingObjectManager.getObjectsToRedo().size());
+    }
+
 }

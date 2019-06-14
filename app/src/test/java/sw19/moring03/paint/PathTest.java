@@ -86,4 +86,15 @@ public class PathTest {
         List<PointF> points = tool.getPoints();
         assertArrayEquals(expectedPoints.toArray(), points.toArray());
     }
+
+    @Test
+    public void testAddFirstPointToPath() {
+        PathTool tool = new PathTool(Color.BLACK, 10, new PathEffect());
+        tool.path = Mockito.mock(Path.class);
+        Mockito.when(tool.path.isEmpty()).thenReturn(true);
+        PointF firstPoint = new PointF(0, 0);
+        tool.addPoint(firstPoint);
+        Mockito.verify(tool.path, Mockito.times(1)).moveTo(firstPoint.x, firstPoint.y);
+        assertFalse(tool.draw(canvas, paint));
+    }
 }

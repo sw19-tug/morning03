@@ -1,33 +1,23 @@
 package sw19.moring03.paint.utils;
 
-import android.graphics.Bitmap;
-import android.view.View;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class ImageShare {
-    private View view;
 
-    public ImageShare(View view) {
-        this.view = view;
-    }
-
-    public Boolean shareImage(Bitmap bitmap) {
-        if (bitmap == null) {
-            return false;
-        }
-        try {
-            File cachePath = new File(view.getContext().getCacheDir(), "images");
-            cachePath.mkdirs();
-            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png"); 
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            stream.close();
+    public Boolean shareImage(Context context, File file, Uri uri) {
+        if (file != null) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            shareIntent.setType("image/png");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            context.startActivity(Intent.createChooser(shareIntent, "Choose an app"));
             return true;
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
             return false;
         }
     }

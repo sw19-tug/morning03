@@ -23,6 +23,5 @@ public class ShareEspressoTest {
         } catch (NoMatchingViewException e) {
             onView(withText(R.string.shareButton)).perform(click());
         }
-
     }
 }

@@ -11,6 +11,7 @@ public class ImageSaver {
 
     public ImageSaver(ContentResolver cr) {
         this.cr = cr;
+        this.savedImageURI = "";
     }
 
     public String getSavedImageURI() {
@@ -23,16 +24,7 @@ public class ImageSaver {
         }
 
         String filename = "CANVAS" + System.currentTimeMillis() / 1000 + ".jpg";
-        try {
-            savedImageURI = MediaStore.Images.Media.insertImage(cr,
-                    bitmap,
-                    filename,
-                    filename);
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        savedImageURI = MediaStore.Images.Media.insertImage(cr, bitmap, filename, filename);
+        return true;
     }
 }

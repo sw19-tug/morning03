@@ -65,4 +65,13 @@ public class ChristmasTreeTest {
 
         Mockito.verify(canvas, Mockito.times(expectedCalls)).drawBitmap(Mockito.any(Bitmap.class), (Rect)isNull(), Mockito.any(Rect.class), (Paint)isNull());
     }
+
+    @Test
+    public void testDrawTreeToLeft() {
+        ChristmasTreeTool tool = new ChristmasTreeTool(tree);
+        tool.addPoint(new PointF(30, 30));
+        tool.addPoint(new PointF(15, 15));
+
+        assertTrue(tool.draw(canvas, paint));
+    }
 }
