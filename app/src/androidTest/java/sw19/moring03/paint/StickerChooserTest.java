@@ -29,7 +29,7 @@ public class StickerChooserTest {
                 {R.id.toolChooserButton, R.id.drawStickerButton, "happy", Tool.DRAW_STICKER, R.drawable.happy},
                 {R.id.toolChooserButton, R.id.drawStickerButton, "sunglasses", Tool.DRAW_STICKER, R.drawable.sunglasses},
                 {R.id.toolChooserButton, R.id.drawStickerButton, "thumbs up", Tool.DRAW_STICKER, R.drawable.thumbsup},
-                {R.id.toolChooserButton, R.id.drawStickerButton, "star", Tool.DRAW_STICKER, R.drawable.star},
+                {R.id.toolChooserButton, R.id.drawStickerButton, "dragon", Tool.DRAW_STICKER, R.drawable.dragon},
                 {R.id.toolChooserButton, R.id.drawStickerButton, "blossom", Tool.DRAW_STICKER, R.drawable.blossom},
                 {R.id.toolChooserButton, R.id.drawStickerButton, "peach", Tool.DRAW_STICKER, R.drawable.peach}
         });

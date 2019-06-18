@@ -1,22 +1,13 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PathEffect;
 
 import java.util.ArrayList;
 
 import sw19.moring03.paint.utils.PointF;
 
 public class PointTool extends Tools {
-
-    public PointTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-        pathEffect = new PathEffect();
-    }
 
     public PointTool(int col, int strkW) {
         points = new ArrayList<>();

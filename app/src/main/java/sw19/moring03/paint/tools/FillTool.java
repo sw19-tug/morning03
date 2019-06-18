@@ -1,7 +1,6 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
@@ -15,12 +14,6 @@ public class FillTool extends Tools {
     private int bufferWidth;
     private int bufferHeight;
     private int scanColor;
-
-    public FillTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-    }
 
     public FillTool(int col, int[] frameBuffer, int bufferWidth, int bufferHeight) {
         points = new ArrayList<>();

@@ -46,7 +46,7 @@ public class CircleTest {
 
     @Test
     public void testInvalidCircle() {
-        CircleTool tool = new CircleTool();
+        CircleTool tool = new CircleTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -56,7 +56,7 @@ public class CircleTest {
     public void testDrawCircle() {
         int expectedCircles = 1;
 
-        CircleTool tool = new CircleTool();
+        CircleTool tool = new CircleTool(Color.BLACK, 10, new PathEffect());
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
@@ -80,7 +80,7 @@ public class CircleTest {
         addedPoints.add(new PointF(30, 30));
         addedPoints.add(new PointF(40, 40));
 
-        CircleTool tool = new CircleTool();
+        CircleTool tool = new CircleTool(Color.BLACK, 10, new PathEffect());
 
         for (int i = 0; i < addedPoints.size(); i++) {
             tool.addPoint(addedPoints.get(i));

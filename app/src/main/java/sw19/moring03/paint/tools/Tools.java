@@ -15,22 +15,22 @@ public abstract class Tools {
     protected int strokeWidth;
     protected PathEffect pathEffect;
 
-    public abstract boolean draw(Canvas canvas, Paint paint);
-
     public void addPoint(PointF point) {
         points.add(point);
     }
+
+    public abstract boolean draw(Canvas canvas, Paint paint);
 
     public List<PointF> getPoints() {
         return points;
     }
 
-    public int getStrokeWidth() {
-        return strokeWidth;
-    }
-
     public int getColor() {
         return color;
+    }
+
+    public int getStrokeWidth() {
+        return strokeWidth;
     }
 
     public PathEffect getPathEffect() {

@@ -1,25 +1,18 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
 
 import sw19.moring03.paint.utils.PointF;
 
 public class PathTool extends Tools {
-    private Path path;
-
-    public PathTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-        pathEffect = new PathEffect();
-        path = new Path();
-    }
+    @VisibleForTesting
+    public Path path;
 
     public PathTool(int col, int strkW, PathEffect effect) {
         points = new ArrayList<>();
@@ -41,12 +34,10 @@ public class PathTool extends Tools {
 
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-
         if (points == null || points.size() < 2) {
             return false;
         }
 
-        paint.setPathEffect(pathEffect);
         canvas.drawPath(path, paint);
 
         return true;

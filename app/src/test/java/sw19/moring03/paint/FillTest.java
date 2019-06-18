@@ -30,7 +30,7 @@ public class FillTest {
 
     @Test
     public void testNumberOfPoints() {
-        FillTool tool = new FillTool();
+        FillTool tool = new FillTool(Color.BLACK, null, 10, 10);
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(20, 20));
 
@@ -39,7 +39,7 @@ public class FillTest {
 
     @Test
     public void testInvalidFill() {
-        FillTool tool = new FillTool();
+        FillTool tool = new FillTool(Color.BLACK, null, 10, 10);
         assertFalse(tool.draw(canvas, paint));
     }
 
@@ -110,6 +110,21 @@ public class FillTest {
         tool.scanlineFloodFillStack(2, 2, 0);
 
         assertEquals(expectedPoints, tool.getPoints().size());
+    }
+
+    @Test
+    public void testFillWithSameColor() {
+        int[] frame = new int[] {
+                0, 1, 1, 1, 0,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
+                1, 0, 0, 0, 1,
+                0, 1, 1, 1, 0
+        };
+
+        FillTool tool = new FillTool(0, frame, 5, 5);
+        tool.addPoint(new PointF(2,2));
+        assertTrue(tool.draw(canvas, paint));
     }
 }
 

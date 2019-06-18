@@ -1,7 +1,6 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 
@@ -12,14 +11,6 @@ import sw19.moring03.paint.utils.PointF;
 public class CircleTool extends Tools {
 
     private float radius;
-
-    public CircleTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-        radius = 0;
-        pathEffect = new PathEffect();
-    }
 
     public CircleTool(int col, int strkW, PathEffect effect) {
         points = new ArrayList<>();
@@ -39,8 +30,6 @@ public class CircleTool extends Tools {
         PointF outerPoint = points.get(1);
 
         radius = (float)Math.sqrt(Math.pow((double)Math.abs(center.x - outerPoint.x), (double)2) + Math.pow((double)Math.abs(center.y - outerPoint.y), (double)2));
-
-        paint.setPathEffect(pathEffect);
 
         canvas.drawCircle(center.x, center.y, radius, paint);
 

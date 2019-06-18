@@ -66,4 +66,14 @@ public class StarTest {
                 Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
     }
 
+    @Test
+    public void testDrawStarToLeft() {
+        StarTool tool = new StarTool(Color.BLACK, 10);
+
+        tool.addPoint(new PointF(30, 30));
+        tool.addPoint(new PointF(15, 15));
+
+        assertTrue(tool.draw(canvas, paint));
+    }
+
 }

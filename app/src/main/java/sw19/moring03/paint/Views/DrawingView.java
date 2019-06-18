@@ -65,7 +65,7 @@ public class DrawingView extends View {
                 selectTool();
                 addPoint(xCoord, yCoord);
                 if (drawingObjectManager.getObjectsToPaint().size() == 1) {
-                    ((MainActivity) getContext()).invalidateOptionsMenu();
+                    ((MainActivity)getContext()).invalidateOptionsMenu();
                 }
                 invalidate();
                 performClick();
@@ -148,7 +148,6 @@ public class DrawingView extends View {
             case DRAW_TEXT:
                 TextInsertFragment textFragment = new TextInsertFragment();
                 textFragment.show(((MainActivity) getContext()).getSupportFragmentManager(), "textInsertFragment");
-
                 drawingObjectManager.addTool(new TextTool(getColor(), strokeWidth, getContext()));
                 break;
             case DRAW_TRIANGLE:

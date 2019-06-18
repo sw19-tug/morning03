@@ -39,7 +39,7 @@ public class SprayCanTest {
 
     @Test
     public void falsePointDrawTest() {
-        SprayCanTool tool = new SprayCanTool();
+        SprayCanTool tool = new SprayCanTool(Color.BLACK, 10);
         assertFalse(tool.draw(canvas, paint));
     }
 }

@@ -1,7 +1,9 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PathEffect;
 import android.graphics.Path;
 
 import org.junit.Before;
@@ -33,7 +35,7 @@ public class LineTest {
 
     @Test
     public void testLineSimple() {
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(Color.BLACK, 10, new PathEffect());
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
@@ -45,7 +47,7 @@ public class LineTest {
 
     @Test
     public void testInvalidLine() {
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -55,7 +57,7 @@ public class LineTest {
     public void testDrawLine() {
         int expectedLines = 1;
 
-        LineTool tools = new LineTool();
+        LineTool tools = new LineTool(Color.BLACK, 10, new PathEffect());
 
         tools.addPoint(new PointF(10, 10));
         tools.addPoint(new PointF(20, 20));
@@ -78,7 +80,8 @@ public class LineTest {
         addedPoints.add(new PointF(30, 30));
         addedPoints.add(new PointF(40, 40));
 
-        LineTool tool = new LineTool();
+        LineTool tool = new LineTool(Color.BLACK, 10, new PathEffect());
+
         for (int i = 0; i < addedPoints.size(); i++) {
             tool.addPoint(addedPoints.get(i));
         }

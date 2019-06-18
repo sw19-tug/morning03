@@ -48,7 +48,7 @@ public class RectangleTest {
 
     @Test
     public void testInvalidRectangle() {
-        RectangleTool tool = new RectangleTool();
+        RectangleTool tool = new RectangleTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -58,7 +58,7 @@ public class RectangleTest {
     public void testDrawRectangle() {
         int expectedRectangles = 1;
 
-        RectangleTool tool = new RectangleTool();
+        RectangleTool tool = new RectangleTool(Color.BLACK, 10, new PathEffect());
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
@@ -82,7 +82,7 @@ public class RectangleTest {
         addedPoints.add(new PointF(30, 30));
         addedPoints.add(new PointF(40, 40));
 
-        RectangleTool tool = new RectangleTool();
+        RectangleTool tool = new RectangleTool(Color.BLACK, 10, new PathEffect());
 
         for (int i = 0; i < addedPoints.size(); i++) {
             tool.addPoint(addedPoints.get(i));
