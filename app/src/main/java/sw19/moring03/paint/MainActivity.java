@@ -23,7 +23,6 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -65,14 +64,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean visible = false;
     private int lineID = 0;
     private PathEffect lineEffect;
-
-    public ColorChooserMenuBottomSheetDialog getColorChooserMenu() {
-        return colorChooserMenu;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
 
     public PathEffect getPathEffect() {
         return lineEffect;
@@ -157,19 +148,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
-        switch (requestCode) {
-            case saveCanvasToExtStorage:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("PERMISSION", "permission for FileStorage was granted.");
-                    saveCanvas();
-                } else {
-                    Log.w("PERMISSION", "permission for FileStorage was denied.");
-                }
-                break;
-            default:
-                Log.d("PERMISSON", "tried to retrieve an unknown request code.");
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == saveCanvasToExtStorage) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                saveCanvas();
+            } else {
+                Toast.makeText(getApplicationContext(), "Permission not granted!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -217,8 +202,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (!imageShare.shareImage(this, image, uri)) {
-            Toast toastFail = Toast.makeText(getApplicationContext(), "Could not share Canvas!", Toast.LENGTH_SHORT);
-            toastFail.show();
+            Toast.makeText(getApplicationContext(), "Could not share Canvas!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -229,11 +213,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (is.saveImage(currentBitmap)) {
             this.lastSavedImageURI = is.getSavedImageURI();
-            Toast toastSuccess = Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT);
-            toastSuccess.show();
+            Toast.makeText(getApplicationContext(), "Saved current canvas as picture!", Toast.LENGTH_SHORT).show();
         } else {
-            Toast toastFail = Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT);
-            toastFail.show();
+            Toast.makeText(getApplicationContext(), "Could not save Canvas!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -345,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
                 setChosenTool(tool);
 
             } catch (Exception ex) {
-                System.out.println("ERROR: Failed to load Bitmap");
+                Toast.makeText(getApplicationContext(), "Failed to load Image", Toast.LENGTH_SHORT).show();
             }
         } else if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST) {
             super.onActivityResult(requestCode, resultCode, data);
@@ -361,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
                         MotionEvent.ACTION_DOWN, 0, 0, 0));
                 setChosenTool(tool);
             } catch (Exception e) {
-                System.out.println("ERROR: Failed to load Bitmap");
+                Toast.makeText(getApplicationContext(), "Failed to load taken picture", Toast.LENGTH_SHORT).show();
             }
         }
     }

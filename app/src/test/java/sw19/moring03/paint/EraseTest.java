@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import sw19.moring03.paint.tools.EraseTool;
-import sw19.moring03.paint.tools.PathTool;
 import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertEquals;
