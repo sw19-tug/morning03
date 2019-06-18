@@ -51,6 +51,8 @@ public class ImageSaver {
                 cr.delete(url, null, null);
             }
         }
+
+        savedImageURI = url.toString();
         return true;
     }
 }
