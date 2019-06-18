@@ -1,24 +1,21 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import android.graphics.Path;
+import android.graphics.PathEffect;
 
 import java.util.ArrayList;
 
+import sw19.moring03.paint.utils.PointF;
+
 public class LineTool extends Tools {
 
-    public LineTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-    }
-
-    public LineTool(int col, int strkW) {
+    public LineTool(int col, int strkW, PathEffect effect) {
         points = new ArrayList<>();
         strokeWidth = strkW;
         color = col;
+        pathEffect = effect;
     }
 
     @Override
@@ -33,7 +30,13 @@ public class LineTool extends Tools {
         float xEnd = points.get(points.size() - 1).x;
         float yEnd = points.get(points.size() - 1).y;
 
-        canvas.drawLine(xStart, yStart, xEnd, yEnd, paint);
+        paint.setPathEffect(pathEffect);
+
+        Path path = new Path();
+        path.moveTo(xStart, yStart);
+        path.lineTo(xEnd, yEnd);
+
+        canvas.drawPath(path, paint);
 
         return true;
     }

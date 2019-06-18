@@ -1,5 +1,6 @@
 package sw19.moring03.paint;
 
+import android.support.annotation.ColorInt;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -28,44 +29,50 @@ public class ToolsTouchTest {
 
     @Test
     public void testColorSavedInTool() {
-        assertEquals(R.color.black, launchActivityRule.getActivity().getChosenColor());
+        @ColorInt int black = launchActivityRule.getActivity().getResources().getColor(R.color.black);
+        @ColorInt int yellow = launchActivityRule.getActivity().getResources().getColor(R.color.yellow);
+
+        assertEquals(black, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.colorChooserButton)).perform(click());
         onView(withId(R.id.yellowButton)).perform(click());
 
-        assertEquals(R.color.yellow, launchActivityRule.getActivity().getChosenColor());
+        assertEquals(yellow, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         Tools lastTool = pointsToDraw.get(pointsToDraw.size() - 1);
 
-        assertEquals(view.getResources().getColor(R.color.yellow), lastTool.getColor());
+        assertEquals(yellow, lastTool.getColor());
     }
 
     @Test
     public void testDifferentColorsForTools() {
-        assertEquals(R.color.black, launchActivityRule.getActivity().getChosenColor());
+        @ColorInt int black = launchActivityRule.getActivity().getResources().getColor(R.color.black);
+        @ColorInt int yellow = launchActivityRule.getActivity().getResources().getColor(R.color.yellow);
+
+        assertEquals(black, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
 
         onView(withId(R.id.colorChooserButton)).perform(click());
         onView(withId(R.id.yellowButton)).perform(click());
 
-        assertEquals(R.color.yellow, launchActivityRule.getActivity().getChosenColor());
+        assertEquals(yellow, launchActivityRule.getActivity().getChosenColor());
 
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         Tools firstTool = pointsToDraw.get(0);
         Tools secondTool = pointsToDraw.get(pointsToDraw.size() - 1);
 
-        assertEquals(view.getResources().getColor(R.color.black), firstTool.getColor());
-        assertEquals(view.getResources().getColor(R.color.yellow), secondTool.getColor());
+        assertEquals(black, firstTool.getColor());
+        assertEquals(yellow, secondTool.getColor());
     }
 
     @Test
@@ -74,7 +81,7 @@ public class ToolsTouchTest {
 
         onView(withId(R.id.drawingView)).perform(touchAt(400, 400));
 
-        onView(withId(R.id.toolChooserButton)).perform(click());
+        onView(withId(R.id.strokeWidthChooserButton)).perform(click());
         onView(withId(R.id.strokeWidth)).perform(changeValueOfStrokeWidthSeekBar(15));
         onView(withId(R.id.strokeWidth)).perform(ViewActions.pressBack());
 
@@ -83,7 +90,7 @@ public class ToolsTouchTest {
         onView(withId(R.id.drawingView)).perform(touchAt(450, 450));
 
         DrawingView view = launchActivityRule.getActivity().findViewById(R.id.drawingView);
-        List<Tools> pointsToDraw = view.getObjectsToPaint();
+        List<Tools> pointsToDraw = view.drawingObjectManager.getObjectsToPaint();
 
         Tools firstTool = pointsToDraw.get(0);
         Tools secondTool = pointsToDraw.get(pointsToDraw.size() - 1);

@@ -1,28 +1,23 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import android.graphics.PathEffect;
 
 import java.util.ArrayList;
+
+import sw19.moring03.paint.utils.PointF;
 
 public class CircleTool extends Tools {
 
     private float radius;
 
-    public CircleTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-        radius = 0;
-    }
-
-    public CircleTool(int col, int strkW) {
+    public CircleTool(int col, int strkW, PathEffect effect) {
         points = new ArrayList<>();
         strokeWidth = strkW;
         color = col;
         radius = 0;
+        pathEffect = effect;
     }
 
     @Override

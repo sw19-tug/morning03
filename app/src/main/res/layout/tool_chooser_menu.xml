@@ -4,74 +4,224 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
     <TextView
-        android:id="@+id/titelStrokeWidth"
+        android:id="@+id/titleTool"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="@string/stroke_width"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="15dp"
+        android:text="@string/drawing_tool"
         />
 
-    <SeekBar
-        android:id="@+id/strokeWidth"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:max="50"
-        />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/drawPointButton"
-        android:text="@string/drawPointButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="chooseNewTool"
-        />
+        <Button
+            android:id="@+id/drawPointButton"
+            android:text="@string/drawPointButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_point_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            />
 
-    <Button
-        android:id="@+id/drawLineButton"
-        android:text="@string/drawLineButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="chooseNewTool"
-        />
+        <Button
+            android:id="@+id/drawLineButton"
+            android:text="@string/drawLineButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_line_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            />
 
-    <Button
-        android:id="@+id/drawFillButton"
-        android:text="@string/drawFillButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="chooseNewTool"
-        />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/eraserButton"
-        android:text="@string/eraserButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="chooseNewTool"
-        />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/drawShapesButton"
-        android:text="@string/drawShapesButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="chooseNewTool"
-        />
+        <Button
+            android:id="@+id/drawPathButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_path_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            android:text="@string/path"
+            />
 
-    <Button
-        android:id="@+id/drawPathButton"
-        android:text="@string/path"
+        <Button
+            android:id="@+id/drawShapesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_shapes_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            android:text="@string/drawShapesButton"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="chooseNewTool"
-        />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/drawFillButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_fill_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            android:text="@string/drawFillButton"
+            />
+
+        <Button
+            android:id="@+id/sprayCanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_spray_can_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            android:text="@string/drawSprayCan"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/drawTextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_text"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            android:text="@string/drawTextButton"
+            />
+
+        <Button
+            android:id="@+id/eraserButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_eraser_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            android:text="@string/eraserButton"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/galleryButton"
+            android:text="@string/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_gallery_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            />
+
+        <Button
+            android:id="@+id/cameraButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_photo_camera_black_24dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            android:text="@string/drawCameraPicture"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/drawStickerButton"
+            android:text="@string/drawStickerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/ic_sticker_icon"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:drawablePadding="15dp"
+            android:gravity="start|center_vertical"
+            android:onClick="chooseNewTool"
+            />
+
+    </LinearLayout>
+
 </LinearLayout>
 

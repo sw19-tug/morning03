@@ -1,20 +1,21 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import android.graphics.PathEffect;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.tools.RectangleTool;
+import sw19.moring03.paint.utils.PointF;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -33,7 +34,9 @@ public class RectangleTest {
 
     @Test
     public void testRectangleSimple() {
-        RectangleTool tool = new RectangleTool();
+        RectangleTool tool = new RectangleTool(Color.BLACK, 10, new PathEffect());
+        assertEquals(Color.BLACK, tool.getColor());
+        assertEquals(10, tool.getStrokeWidth());
 
         tool.addPoint(new PointF(15, 15));
         tool.addPoint(new PointF(30, 30));
@@ -45,7 +48,7 @@ public class RectangleTest {
 
     @Test
     public void testInvalidRectangle() {
-        RectangleTool tool = new RectangleTool();
+        RectangleTool tool = new RectangleTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
@@ -55,7 +58,7 @@ public class RectangleTest {
     public void testDrawRectangle() {
         int expectedRectangles = 1;
 
-        RectangleTool tool = new RectangleTool();
+        RectangleTool tool = new RectangleTool(Color.BLACK, 10, new PathEffect());
 
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
@@ -79,7 +82,7 @@ public class RectangleTest {
         addedPoints.add(new PointF(30, 30));
         addedPoints.add(new PointF(40, 40));
 
-        RectangleTool tool = new RectangleTool();
+        RectangleTool tool = new RectangleTool(Color.BLACK, 10, new PathEffect());
 
         for (int i = 0; i < addedPoints.size(); i++) {
             tool.addPoint(addedPoints.get(i));

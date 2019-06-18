@@ -3,24 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:orientation="vertical"
-    android:layout_margin="20dp"
-    >
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titleColor"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="10dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="15dp"
+        android:text="@string/color"
+        />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp">
 
-        <Button
-            android:id="@+id/whiteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:background="@color/white"
-            android:onClick="chooseNewColor"
-            style="?android:attr/buttonBarButtonStyle"
-            />
 
         <Button
             android:id="@+id/yellowButton"
@@ -54,12 +57,6 @@
             android:onClick="chooseNewColor"
             style="?android:attr/buttonBarButtonStyle"
             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
 
         <Button
             android:id="@+id/magentaButton"
@@ -83,13 +80,22 @@
             style="?android:attr/buttonBarButtonStyle"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
         <Button
-            android:id="@+id/turkisButton"
+            android:id="@+id/darkBlueButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:background="@color/turkis"
+            android:background="@color/darkBlue"
             android:onClick="chooseNewColor"
             style="?android:attr/buttonBarButtonStyle"
             />
@@ -101,23 +107,6 @@
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:background="@color/lightBlue"
-            android:onClick="chooseNewColor"
-            style="?android:attr/buttonBarButtonStyle"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-
-        <Button
-            android:id="@+id/darkBlueButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:background="@color/darkBlue"
             android:onClick="chooseNewColor"
             style="?android:attr/buttonBarButtonStyle"
             />
@@ -155,4 +144,131 @@
             style="?android:attr/buttonBarButtonStyle"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/red"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/red_slider_label"
+            />
+
+        <SeekBar
+            android:id="@+id/redSlider"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="255"
+            android:progress="0"
+            />
+
+        <TextView
+            android:id="@+id/valueRed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/value"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/green"
+            />
+
+        <SeekBar
+            android:id="@+id/greenSlider"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="255"
+            android:progress="0"
+            />
+
+        <TextView
+            android:id="@+id/valueGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/value"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/blue"
+            />
+
+        <SeekBar
+            android:id="@+id/blueSlider"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="255"
+            android:progress="0"
+            />
+
+        <TextView
+            android:id="@+id/valueBlue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:paddingTop="15dp"
+            android:text="@string/value"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/currentColor"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:background="@color/black"
+        />
+
 </LinearLayout>

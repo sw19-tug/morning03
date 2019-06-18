@@ -1,8 +1,10 @@
 package sw19.moring03.paint;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
+import android.graphics.Path;
+import android.graphics.PathEffect;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sw19.moring03.paint.tools.PathTool;
+import sw19.moring03.paint.utils.PointF;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
@@ -32,7 +35,7 @@ public class PathTest {
 
     @Test
     public void testSimplePath() {
-        PathTool tool = new PathTool();
+        PathTool tool = new PathTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
 
@@ -41,17 +44,22 @@ public class PathTest {
 
     @Test
     public void testInvalidPath() {
-        PathTool tool = new PathTool();
+        PathTool tool = new PathTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
 
         assertFalse(tool.draw(canvas, paint));
     }
 
     @Test
-    public void testDrawPath() {
-        final int expectedDrawnLines = 2;
+    public void testNoPoint() {
+        PathTool tool = new PathTool(Color.BLACK, 10, new PathEffect());
 
-        PathTool tool = new PathTool();
+        assertFalse(tool.draw(canvas, paint));
+    }
+
+    @Test
+    public void testDrawPath() {
+        PathTool tool = new PathTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(new PointF(10, 10));
         tool.addPoint(new PointF(20, 20));
         tool.addPoint(new PointF(30, 30));
@@ -60,8 +68,7 @@ public class PathTest {
 
         tool.draw(canvas, paint);
 
-        Mockito.verify(canvas, Mockito.times(expectedDrawnLines)).drawLine(Mockito.anyFloat(),
-                Mockito.anyFloat(), Mockito.anyFloat(), Mockito.anyFloat(), Mockito.any(Paint.class));
+        Mockito.verify(canvas, Mockito.times(1)).drawPath(Mockito.any(Path.class), Mockito.any(Paint.class));
     }
 
     @Test
@@ -71,12 +78,23 @@ public class PathTest {
         expectedPoints.add(new PointF(20, 20));
         expectedPoints.add(new PointF(30, 30));
 
-        PathTool tool = new PathTool();
+        PathTool tool = new PathTool(Color.BLACK, 10, new PathEffect());
         tool.addPoint(expectedPoints.get(0));
         tool.addPoint(expectedPoints.get(1));
         tool.addPoint(expectedPoints.get(2));
 
         List<PointF> points = tool.getPoints();
         assertArrayEquals(expectedPoints.toArray(), points.toArray());
+    }
+
+    @Test
+    public void testAddFirstPointToPath() {
+        PathTool tool = new PathTool(Color.BLACK, 10, new PathEffect());
+        tool.path = Mockito.mock(Path.class);
+        Mockito.when(tool.path.isEmpty()).thenReturn(true);
+        PointF firstPoint = new PointF(0, 0);
+        tool.addPoint(firstPoint);
+        Mockito.verify(tool.path, Mockito.times(1)).moveTo(firstPoint.x, firstPoint.y);
+        assertFalse(tool.draw(canvas, paint));
     }
 }

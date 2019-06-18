@@ -1,19 +1,13 @@
 package sw19.moring03.paint.tools;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PointF;
 
 import java.util.ArrayList;
 
-public class PointTool extends Tools {
+import sw19.moring03.paint.utils.PointF;
 
-    public PointTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-    }
+public class PointTool extends Tools {
 
     public PointTool(int col, int strkW) {
         points = new ArrayList<>();
@@ -21,13 +15,9 @@ public class PointTool extends Tools {
         color = col;
     }
 
-    public int getPointCount() {
-        return points.size();
-    }
-
     @Override
     public boolean draw(Canvas canvas, Paint paint) {
-        if (points != null && points.size() < 1) {
+        if (points == null || points.size() < 1) {
             return false;
         }
 
@@ -40,10 +30,9 @@ public class PointTool extends Tools {
     }
 
     public void addPoint(PointF point) {
-        if (getPointCount() > 0) {
+        if (points.size() > 0) {
             return;
         }
-
         super.addPoint(point);
     }
 }

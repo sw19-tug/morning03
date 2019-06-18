@@ -3,21 +3,32 @@ package sw19.moring03.paint.tools;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
 
-public class EraseTool extends Tools {
+import sw19.moring03.paint.utils.PointF;
 
-    public EraseTool() {
-        points = new ArrayList<>();
-        strokeWidth = 5;
-        color = Color.BLACK;
-    }
+public class EraseTool extends Tools {
+    @VisibleForTesting
+    public Path path;
 
     public EraseTool(int strkW) {
         points = new ArrayList<>();
         color = Color.BLACK;
         strokeWidth = strkW;
+        path = new Path();
+    }
+
+    @Override
+    public void addPoint(PointF point) {
+        if (path.isEmpty()) {
+            path.moveTo(point.x, point.y);
+        } else {
+            path.lineTo(point.x, point.y);
+        }
+        super.addPoint(point);
     }
 
     @Override
@@ -32,9 +43,7 @@ public class EraseTool extends Tools {
         final int backgroundColor = Color.WHITE;
 
         paint.setColor(backgroundColor);
-        for (int i = 1; i < points.size(); i++) {
-            canvas.drawLine(points.get(i - 1).x, points.get(i - 1).y, points.get(i).x, points.get(i).y, paint);
-        }
+        canvas.drawPath(path, paint);
         paint.setColor(backUpColor);
         return true;
     }

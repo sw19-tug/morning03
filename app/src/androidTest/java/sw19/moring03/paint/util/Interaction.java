@@ -5,6 +5,7 @@ import android.support.test.espresso.action.GeneralClickAction;
 import android.support.test.espresso.action.GeneralSwipeAction;
 import android.support.test.espresso.action.Press;
 import android.support.test.espresso.action.Swipe;
+import android.support.test.espresso.action.Swiper;
 import android.support.test.espresso.action.Tap;
 import android.support.test.espresso.action.Tapper;
 
@@ -29,6 +30,18 @@ public final class Interaction {
         return actionWithAssertions(new GeneralSwipeAction(Swipe.SLOW,
                 new SeekBarCoordProvider(0), new SeekBarCoordProvider(pathWidth), Press.PINPOINT));
     }
+
+    public static ViewAction swipe(int xStart, int yStart, int xEnd, int yEnd) {
+        return swipe((float) xStart, (float) yStart, (float) xEnd, (float) yEnd);
+    }
+
+    public static ViewAction swipe(float xStart, float yStart, float xEnd, float yEnd) {
+        return swipe(xStart, yStart, xEnd, yEnd, Swipe.SLOW);
+    }
+
+    public static ViewAction swipe(float xStart, float yStart, float xEnd, float yEnd, Swiper swiper) {
+        return actionWithAssertions(new GeneralSwipeAction(swiper,
+                new CoordProvider(xStart, yStart),
+                new CoordProvider(xEnd, yEnd), Press.PINPOINT));
+    }
 }
-
-

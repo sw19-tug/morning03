@@ -18,7 +18,7 @@ public class StrokeWidthTest {
 
     @Test
     public void testStrokeWidthLine() {
-        LineTool tool = new LineTool(Color.BLACK, 5);
+        LineTool tool = new LineTool(Color.BLACK, 5, null);
 
         int lineStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
@@ -32,7 +32,7 @@ public class StrokeWidthTest {
 
     @Test
     public void testStrokeWidthPath() {
-        PathTool tool = new PathTool(Color.BLACK,5);
+        PathTool tool = new PathTool(Color.BLACK,5, null);
 
         int pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
@@ -62,6 +62,7 @@ public class StrokeWidthTest {
     public void testStrokeWidthPointFalse() {
         int pointStrokeWidth = 0;
         PointTool tool = new PointTool(Color.BLACK, pointStrokeWidth);
+
         pointStrokeWidth = tool.getStrokeWidth();
         boolean isInRange = false;
 
